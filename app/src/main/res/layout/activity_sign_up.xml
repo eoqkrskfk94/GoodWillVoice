@@ -50,8 +50,7 @@
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:entries="@array/출생년도"
-            android:spinnerMode="dialog"
-            android:prompt="@string/born_year"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
@@ -174,7 +173,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="등록하기"
-            android:onClick="@{() -> viewModel.signUpBtnClick()}"
+
+
+
+            android:onClick="@{() -> viewModel.signUpBtnClick(signUpBtn)}"
+
+
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

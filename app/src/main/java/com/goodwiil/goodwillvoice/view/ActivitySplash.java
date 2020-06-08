@@ -22,7 +22,7 @@ public class ActivitySplash extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         createBinding();
 
-        startActivity();
+        startApp();
 
     }
 
@@ -33,7 +33,7 @@ public class ActivitySplash extends AppCompatActivity{
 
     }
 
-    private void startActivity(){
+    private void startApp(){
         //if
         Intent intent = new Intent(this, ActivitySignUp.class);
         startActivity(intent);

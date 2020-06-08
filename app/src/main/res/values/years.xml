@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="출생년도">
+        <item>출생년도</item>
         <item>2020</item>
         <item>2019</item>
         <item>2018</item>
