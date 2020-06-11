@@ -1,11 +1,14 @@
 package com.goodwiil.goodwillvoice.model;
 
+
 public class User {
 
-    private int year;
-    private char gender;
-    private String career;
-    private String city;
+    private int year = 0;
+    private char gender = ' ';
+    private String career = " ";
+    private String city = " ";
+
+    public User() { }
 
     public User(int year, char gender, String career, String city) {
         this.year = year;

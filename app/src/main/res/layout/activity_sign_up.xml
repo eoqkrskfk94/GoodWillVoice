@@ -10,12 +10,16 @@
         <variable
             name="viewModel"
             type="com.goodwiil.goodwillvoice.viewModel.SignUpViewModel" />
+        <variable
+            name="model"
+            type="com.goodwiil.goodwillvoice.model.User" />
     </data>
 
 
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -50,7 +54,6 @@
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:entries="@array/출생년도"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
@@ -173,19 +176,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="등록하기"
-
-
-
-            android:onClick="@{() -> viewModel.signUpBtnClick(signUpBtn)}"
-
-
-
+            android:onClick="@{() -> viewModel.signUpBtnClick(signUpBtn, model,cl)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
             app:layout_constraintVertical_bias="1.0" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

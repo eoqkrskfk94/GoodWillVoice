@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.telephony.TelephonyManager;
 
-public class IncomingViewModel extends BroadcastReceiver {
+public class CallViewModel extends BroadcastReceiver {
 
 
     @Override

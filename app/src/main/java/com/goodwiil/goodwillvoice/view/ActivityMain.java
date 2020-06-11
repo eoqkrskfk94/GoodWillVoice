@@ -1,6 +1,7 @@
 package com.goodwiil.goodwillvoice.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 
@@ -12,5 +13,7 @@ public class ActivityMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //DataBindingUtil.inflate(infa0, R.layout., , )
     }
 }

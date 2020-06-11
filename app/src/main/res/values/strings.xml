@@ -12,4 +12,6 @@
 
 
     <string name="born_year">출생년도</string>
+    <string name="gender">성별</string>
+    <string name="career">직업</string>
 </resources>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.ActivitySignUpBinding;
+import com.goodwiil.goodwillvoice.model.User;
 import com.goodwiil.goodwillvoice.viewModel.SignUpViewModel;
 
 public class ActivitySignUp extends AppCompatActivity {
@@ -16,6 +17,7 @@ public class ActivitySignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         createBinding();
 
+
     }
 
 
@@ -23,6 +25,11 @@ public class ActivitySignUp extends AppCompatActivity {
     private void createBinding() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
         mBinding.setViewModel(new SignUpViewModel());
+        mBinding.setModel(new User());
+
+
+        System.out.println(getResources().getStringArray(R.array.출생년도)[mBinding.getModel().getYear()]);
+
 
     }
 }
