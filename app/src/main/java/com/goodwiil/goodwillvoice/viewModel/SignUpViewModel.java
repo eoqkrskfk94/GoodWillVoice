@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -11,6 +12,10 @@ import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.model.User;
 import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.view.ActivityMain;
+import com.goodwiil.goodwillvoice.view.ActivitySignUp;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.MutableLiveData;
@@ -18,10 +23,17 @@ import androidx.lifecycle.MutableLiveData;
 
 public class SignUpViewModel {
 
-    // This gets updated once spinner item selection changes
-    private MutableLiveData<Integer> spinnerSelectedPosition = new MutableLiveData<Integer>();
+    public void yearSpinner(ActivitySignUp view, Spinner spinner){
+        ArrayList<String> years = new ArrayList<>();
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        for (int i = 1900; i <= thisYear; i++) {
+            years.add(Integer.toString(i));
+        }
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getBaseContext(), R.layout.activity_sign_up, years);
+        spinner.setAdapter(adapter);
 
+    }
 
     public void signUpBtnClick(View view, ConstraintLayout cl){
 
@@ -30,8 +42,7 @@ public class SignUpViewModel {
         String gender = ((Spinner)cl.getChildAt(3)).getSelectedItem().toString();
         String career = ((Spinner)cl.getChildAt(4)).getSelectedItem().toString();
 
-        Log.i("info: " ,year + gender + career);
-        System.out.println(year + gender + career);
+
         if(year.equals("출생년도") || gender.equals("성별") || career.equals("직업")){
         //if(year.equals(R.string.born_year) || gender.equals(R.string.gender) || career.equals(R.string.career)){
             Toast.makeText(view.getContext(), "다시 입력해주세요.", Toast.LENGTH_SHORT).show();

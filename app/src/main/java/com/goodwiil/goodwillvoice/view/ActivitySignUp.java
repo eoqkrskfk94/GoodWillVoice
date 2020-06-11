@@ -18,6 +18,8 @@ public class ActivitySignUp extends AppCompatActivity {
         createBinding();
 
 
+
+
     }
 
 
@@ -26,6 +28,8 @@ public class ActivitySignUp extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
         mBinding.setViewModel(new SignUpViewModel());
         mBinding.setModel(new User());
+
+        //mBinding.getViewModel().yearSpinner(this,mBinding.yearSpinner);
 
 
     }

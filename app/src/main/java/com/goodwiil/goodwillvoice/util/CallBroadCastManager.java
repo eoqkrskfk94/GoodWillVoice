@@ -1,11 +1,11 @@
-package com.goodwiil.goodwillvoice.viewModel;
+package com.goodwiil.goodwillvoice.util;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.TelephonyManager;
 
-public class CallViewModel extends BroadcastReceiver {
+public class CallBroadCastManager extends BroadcastReceiver {
 
 
     @Override
