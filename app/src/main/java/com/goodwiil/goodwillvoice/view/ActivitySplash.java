@@ -18,8 +18,8 @@ public class ActivitySplash extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         createBinding();
 
-        startApp();
-        //mBinding.getViewModel().startApp(this);
+        mBinding.getViewModel().startApp(this);
+        finish();
 
     }
 
@@ -30,12 +30,7 @@ public class ActivitySplash extends AppCompatActivity{
 
     }
 
-    private void startApp(){
-        //if
-        Intent intent = new Intent(this, ActivitySignUp.class);
-        startActivity(intent);
-        finish();
-    }
+
 
 
 }

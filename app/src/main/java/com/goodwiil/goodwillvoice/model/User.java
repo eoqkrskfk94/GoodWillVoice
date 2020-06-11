@@ -3,33 +3,33 @@ package com.goodwiil.goodwillvoice.model;
 
 public class User {
 
-    private int year = 0;
-    private char gender = ' ';
-    private String career = " ";
-    private String city = " ";
+    private String year;
+    private String gender;
+    private String career;
+    private String city;
 
     public User() { }
 
-    public User(int year, char gender, String career, String city) {
+    public User(String year, String gender, String career, String city) {
         this.year = year;
         this.gender = gender;
         this.career = career;
         this.city = city;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

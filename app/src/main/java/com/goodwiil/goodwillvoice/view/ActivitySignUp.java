@@ -28,8 +28,5 @@ public class ActivitySignUp extends AppCompatActivity {
         mBinding.setModel(new User());
 
 
-        System.out.println(getResources().getStringArray(R.array.출생년도)[mBinding.getModel().getYear()]);
-
-
     }
 }

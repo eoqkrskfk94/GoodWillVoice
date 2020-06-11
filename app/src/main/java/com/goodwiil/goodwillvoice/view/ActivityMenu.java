@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.ActivityMenuBinding;
+import com.goodwiil.goodwillvoice.model.User;
+import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.viewModel.MenuViewModel;
 
 public class ActivityMenu extends AppCompatActivity {
@@ -23,6 +25,8 @@ public class ActivityMenu extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_menu);
         mBinding.setViewModel(new MenuViewModel());
     }
+
+
 
 
 
