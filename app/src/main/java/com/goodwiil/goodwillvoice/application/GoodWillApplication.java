@@ -12,6 +12,7 @@ public class GoodWillApplication extends Application {
         instance = this;
     }
 
+    // 앱 자체의 instance 받기
     public static Context getContext(){
         return instance;
     }
