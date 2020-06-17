@@ -21,7 +21,6 @@ public class CallBroadcastManager extends BroadcastReceiver {
 
         //전화가 울릴때
         if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)){
-            System.out.println("전화오고있다");
             ScreenManager.printToast(context, "INCOMMING CALL");
 
         }

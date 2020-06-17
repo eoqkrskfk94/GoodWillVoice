@@ -18,7 +18,12 @@ public class ActivityMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createBinding();
+
+        //현재 회원 등록 정보 화면에 출력하기
         getData();
+
+        //전화 상태 권한 받기
+        mBinding.getViewModel().checkPermission(this);
 
     }
 
