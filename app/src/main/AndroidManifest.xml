@@ -23,6 +23,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.ActivityMain" />
+
+        <receiver android:name=".util.CallBroadcastManager">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+
+
+
     </application>
 
 </manifest>

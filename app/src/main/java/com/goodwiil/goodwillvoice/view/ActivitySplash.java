@@ -1,6 +1,5 @@
 package com.goodwiil.goodwillvoice.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.goodwiil.goodwillvoice.R;
@@ -13,10 +12,12 @@ import androidx.databinding.DataBindingUtil;
 
 public class ActivitySplash extends AppCompatActivity{
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createBinding();
+
 
         mBinding.getViewModel().startApp(this);
         finish();
@@ -29,6 +30,7 @@ public class ActivitySplash extends AppCompatActivity{
         mBinding.setViewModel(new SplashViewModel());
 
     }
+
 
 
 
