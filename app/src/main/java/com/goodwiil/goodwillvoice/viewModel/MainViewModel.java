@@ -26,6 +26,7 @@ public class MainViewModel {
 
             if (chk == PackageManager.PERMISSION_DENIED) {
                 //권한 허용을여부를 확인하는 창을 띄운다
+
                 ActivityCompat.requestPermissions((Activity)context, permission_list, 0);
             }
         }
