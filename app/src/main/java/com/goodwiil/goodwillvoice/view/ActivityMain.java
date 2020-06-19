@@ -1,8 +1,13 @@
 package com.goodwiil.goodwillvoice.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.goodwiil.goodwillvoice.R;
@@ -23,7 +28,7 @@ public class ActivityMain extends AppCompatActivity {
         getData();
 
         //전화 상태 권한 받기
-        mBinding.getViewModel().checkPermission(this);
+        checkPermission();
 
     }
 
@@ -41,5 +46,25 @@ public class ActivityMain extends AppCompatActivity {
                         +"Career : "+user.getCareer() + "\n"
                         +"City : "+user.getCity() + "\n"
         );
+    }
+
+
+    String[] permission_list = {
+            Manifest.permission.READ_PHONE_STATE
+    };
+
+
+    public void checkPermission() {
+
+        for (String permission : permission_list) {
+            //권한 허용 여부를 확인한다.
+            int chk = checkCallingOrSelfPermission(permission);
+
+            if (chk == PackageManager.PERMISSION_DENIED) {
+                //권한 허용을여부를 확인하는 창을 띄운다
+
+                requestPermissions(permission_list, 0);
+            }
+        }
     }
 }

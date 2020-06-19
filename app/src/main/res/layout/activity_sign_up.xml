@@ -24,7 +24,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="회원등록을 위해 아래 정보를 입력해주세요."
@@ -37,7 +37,7 @@
             app:layout_constraintVertical_bias="0.12" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="회원 등록"
@@ -50,7 +50,7 @@
             app:layout_constraintVertical_bias="0.022" />
 
         <Spinner
-            android:id="@+id/year_spinner"
+            android:id="@+id/sp_year"
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:entries="@array/출생년도"
@@ -62,7 +62,7 @@
             app:layout_constraintVertical_bias="0.222" />
 
         <Spinner
-            android:id="@+id/gender_spinner"
+            android:id="@+id/sp_gender"
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:entries="@array/성별"
@@ -74,7 +74,7 @@
             app:layout_constraintVertical_bias="0.319" />
 
         <Spinner
-            android:id="@+id/career_spinner"
+            android:id="@+id/sp_career"
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:entries="@array/직업"
@@ -86,7 +86,7 @@
             app:layout_constraintVertical_bias="0.416" />
 
         <TextView
-            android:id="@+id/cityView"
+            android:id="@+id/tv_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="거주 지역"
@@ -107,7 +107,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cityView"
+            app:layout_constraintTop_toBottomOf="@+id/tv_city"
             app:layout_constraintVertical_bias="0.304">
 
             <LinearLayout
@@ -116,19 +116,19 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/city_btn1"
+                    android:id="@+id/btn_city1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="서울" />
 
                 <Button
-                    android:id="@+id/city_btn3"
+                    android:id="@+id/btn_city3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="인천" />
 
                 <Button
-                    android:id="@+id/city_btn5"
+                    android:id="@+id/btn_city5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="경상, 대구, 울산" />
@@ -146,25 +146,25 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/city_btn2"
+                    android:id="@+id/btn_city2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="경기도" />
 
                 <Button
-                    android:id="@+id/city_btn4"
+                    android:id="@+id/btn_city4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="부산" />
 
                 <Button
-                    android:id="@+id/city_btn6"
+                    android:id="@+id/btn_city6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="대전, 충청" />
 
                 <Button
-                    android:id="@+id/city_btn8"
+                    android:id="@+id/btn_city8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="광주, 전라, 제주" />
@@ -172,11 +172,11 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/sign_up_btn"
+            android:id="@+id/btn_sign_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="등록하기"
-            android:onClick="@{() -> viewModel.signUpBtnClick(signUpBtn,cl)}"
+            android:onClick="@{() -> viewModel.signUpBtnClick(btnSignUp,cl)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

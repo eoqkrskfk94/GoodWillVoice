@@ -1,11 +1,13 @@
-package com.goodwiil.goodwillvoice.util;
+package com.goodwiil.goodwillvoice;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.TelephonyManager;
 
-public class CallBroadcastManager extends BroadcastReceiver {
+import com.goodwiil.goodwillvoice.util.ScreenManager;
+
+public class CallBroadcast extends BroadcastReceiver {
 
     private String number;
 
