@@ -14,4 +14,7 @@
     <string name="born_year">출생년도</string>
     <string name="gender">성별</string>
     <string name="career">직업</string>
+    <string name="Insert_info">회원등록을 위해 아래 정보를 입력해주세요.</string>
+    <string name="member_register">회원 등록</string>
+    <string name="register">등록하기</string>
 </resources>
