@@ -27,6 +27,12 @@ public class ActivityMenu extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        mBinding.getViewModel().onBackClick(this);
+    }
+
+
 
 
 

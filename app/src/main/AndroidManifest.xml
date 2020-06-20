@@ -10,7 +10,9 @@
         android:name=".application.GoodWillApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.ActivityMenu"></activity>
+        <activity
+            android:name=".view.ActivityMenu"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.ActivitySignUp"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -22,15 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ActivityMain" />
+        <activity
+            android:name=".view.ActivityMain"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <receiver android:name=".CallBroadcast">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>
-
-
 
     </application>
 

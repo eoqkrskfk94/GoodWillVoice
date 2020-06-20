@@ -6,7 +6,6 @@ import android.widget.Toast;
 
 public class ScreenManager {
 
-
     public static void startActivity(Context context, Class c){
         Intent intent = new Intent(context, c);
         context.startActivity(intent);

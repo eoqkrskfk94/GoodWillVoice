@@ -1,37 +1,22 @@
 package com.goodwiil.goodwillvoice.viewModel;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.goodwiil.goodwillvoice.R;
+
 import com.goodwiil.goodwillvoice.model.User;
 import com.goodwiil.goodwillvoice.util.AppDataManager;
+import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ActivityMain;
-import com.goodwiil.goodwillvoice.view.ActivitySignUp;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 
-public class SignUpViewModel {
+public class SignUpViewModel extends BaseViewModel{
 
-    public void yearSpinner(ActivitySignUp view, Spinner spinner){
-        ArrayList<String> years = new ArrayList<>();
-        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
-        for (int i = 1900; i <= thisYear; i++) {
-            years.add(Integer.toString(i));
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getBaseContext(), R.layout.activity_sign_up, years);
-        spinner.setAdapter(adapter);
-
-    }
 
     public void signUpBtnClick(View view, ConstraintLayout cl){
 
@@ -48,8 +33,7 @@ public class SignUpViewModel {
         else{
             User user = new User(year, gender, career, "");
             AppDataManager.setSharedPrefs(AppDataManager.SP_NAME, user);
-            Intent intent = new Intent(view.getContext(), ActivityMain.class);
-            view.getContext().startActivity(intent);
+            ScreenManager.startActivity(view.getContext(), ActivityMain.class);
             ((Activity)view.getContext()).finish();
         }
 

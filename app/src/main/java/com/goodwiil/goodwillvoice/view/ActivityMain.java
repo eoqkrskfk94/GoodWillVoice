@@ -67,4 +67,10 @@ public class ActivityMain extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        mBinding.getViewModel().onBackClick(this);
+    }
+
 }

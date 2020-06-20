@@ -1,4 +1,7 @@
 package com.goodwiil.goodwillvoice.viewModel;
 
-public class MenuViewModel {
+
+public class MenuViewModel{
+
+
 }
