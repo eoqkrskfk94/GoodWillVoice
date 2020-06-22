@@ -9,11 +9,13 @@ public class BaseViewModel {
     private long backKeyPressedTime = 0;
 
     public void onBackClick(Context context) {
+
         //1번째 백버튼 클릭
         if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
             backKeyPressedTime = System.currentTimeMillis();
             Toast.makeText(context, "뒤로 버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
+
         //2번째 백버튼 클릭 (종료)
         else {
             ((Activity)context).finish();
