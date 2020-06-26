@@ -7,8 +7,13 @@ import androidx.databinding.DataBindingUtil;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.provider.Settings;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.ActivityMainBinding;
@@ -30,6 +35,12 @@ public class ActivityMain extends AppCompatActivity {
         //전화 상태 권한 받기
         checkPermission();
 
+        //배터리 최적화 권한 받기
+        checkPermissionBattery();
+
+        //앱 위에 그리기 권한 받기
+        checkPermissionOverlay();
+
     }
 
     private ActivityMainBinding mBinding;
@@ -50,10 +61,15 @@ public class ActivityMain extends AppCompatActivity {
 
 
     String[] permission_list = {
-            Manifest.permission.READ_PHONE_STATE
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.RECEIVE_SMS,
+            Manifest.permission.READ_CALL_LOG,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.READ_SMS
     };
 
 
+    //권한 받기
     public void checkPermission() {
 
         for (String permission : permission_list) {
@@ -66,7 +82,39 @@ public class ActivityMain extends AppCompatActivity {
                 requestPermissions(permission_list, 0);
             }
         }
+
+
     }
+
+    //배터리 최적화 권한 받기
+    private void checkPermissionBattery() {
+        Intent intent = new Intent();
+        String packageName = getPackageName();
+        PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+        //battery = pm.isIgnoringBatteryOptimizations(packageName);
+        if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+            intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            intent.setData(Uri.parse("package:" + packageName));
+            startActivity(intent);
+        }
+    }
+
+    //overlay 권한받기
+    public void checkPermissionOverlay() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //overlay = Settings.canDrawOverlays(this);// 마시멜로우 이상일 경우
+            if (!Settings.canDrawOverlays(this)) {              // 체크
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, 1);
+            }
+        }
+    }
+
+
+
+
+
 
     @Override
     public void onBackPressed() {

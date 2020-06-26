@@ -43,7 +43,7 @@ public class AppDataManager {
     }
 
     //shared preference에 값을 불러오기
-    private static SharedPreferences getSharedPrefs(String name){
+    public static SharedPreferences getSharedPrefs(String name){
         return GoodWillApplication.getContext().getSharedPreferences(name, Activity.MODE_PRIVATE);
     }
 
