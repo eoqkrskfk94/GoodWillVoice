@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 
 import com.goodwiil.goodwillvoice.application.GoodWillApplication;
-import com.goodwiil.goodwillvoice.model.Setting;
 import com.goodwiil.goodwillvoice.model.User;
 import com.google.gson.Gson;
 
@@ -15,6 +14,7 @@ public class AppDataManager {
 
     public static final String SETTING_VIBRATE = "vibration_alarm";
     public static final String SETTING_VOICE = "voice_alarm";
+    public static final String SETTING_LEVEL = "level_list";
 
     public static final String SP_NAME_YEAR = "year";
     public static final String SP_NAME_GENDER = "gender";
@@ -44,6 +44,8 @@ public class AppDataManager {
         Gson gson = new Gson();
         return (gson.fromJson(getSharedPrefs(SP_NAME).getString(SP_KEY_USER, null), User.class));
     }
+
+
 
 
 

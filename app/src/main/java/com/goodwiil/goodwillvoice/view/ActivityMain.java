@@ -8,17 +8,21 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 
 import com.goodwiil.goodwillvoice.R;
+import com.goodwiil.goodwillvoice.application.GoodWillApplication;
 import com.goodwiil.goodwillvoice.databinding.ActivityMainBinding;
 import com.goodwiil.goodwillvoice.model.User;
 import com.goodwiil.goodwillvoice.util.AppDataManager;
+import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.viewModel.MainViewModel;
 import com.goodwiil.goodwillvoice.viewModel.MenuViewModel;
 
@@ -51,6 +55,11 @@ public class ActivityMain extends AppCompatActivity {
 
     private void getData(){
         User user = AppDataManager.getUserModel();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(GoodWillApplication.getContext());
+        Boolean vibrate = prefs.getBoolean("vibration_alarm", true);
+        ScreenManager.printToast(this, vibrate.toString());
+
+
         mBinding.tv.setText(
                 "Year : "+user.getYear() + "\n"
                         +"Gender : "+user.getGender() + "\n"
