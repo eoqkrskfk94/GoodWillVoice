@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.util.Log;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.application.GoodWillApplication;
@@ -100,7 +101,8 @@ public class ActivityMain extends AppCompatActivity {
         Intent intent = new Intent();
         String packageName = getPackageName();
         PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
-        //battery = pm.isIgnoringBatteryOptimizations(packageName);
+        Boolean battery = pm.isIgnoringBatteryOptimizations(packageName);
+        AppDataManager.setSharedPrefs(AppDataManager.PERMISSION_KEY, AppDataManager.PERMISSION_BATTERY, battery);
         if (!pm.isIgnoringBatteryOptimizations(packageName)) {
             intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
             intent.setData(Uri.parse("package:" + packageName));
@@ -111,7 +113,8 @@ public class ActivityMain extends AppCompatActivity {
     //overlay 권한받기
     public void checkPermissionOverlay() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            //overlay = Settings.canDrawOverlays(this);// 마시멜로우 이상일 경우
+            Boolean overlay = Settings.canDrawOverlays(this);// 마시멜로우 이상일 경우
+            AppDataManager.setSharedPrefs(AppDataManager.PERMISSION_KEY, AppDataManager.PERMISSION_OVERLAY, overlay);
             if (!Settings.canDrawOverlays(this)) {              // 체크
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + getPackageName()));

@@ -12,9 +12,14 @@ public class AppDataManager {
     public static final String SP_NAME = "userInfo";
     public static final String SP_KEY_USER = "userInfoKey";
 
+
     public static final String SETTING_VIBRATE = "vibration_alarm";
     public static final String SETTING_VOICE = "voice_alarm";
     public static final String SETTING_LEVEL = "level_list";
+
+    public static final String PERMISSION_KEY = "permissionInfo";
+    public static final String PERMISSION_BATTERY = "battery_optimization";
+    public static final String PERMISSION_OVERLAY = "overlay_permission";
 
     public static final String SP_NAME_YEAR = "year";
     public static final String SP_NAME_GENDER = "gender";
@@ -32,6 +37,13 @@ public class AppDataManager {
         editor.putString(SP_KEY_USER, json);
         editor.apply();
 
+    }
+
+    public static void setSharedPrefs(String name, String permission, Boolean accessibility){
+        SharedPreferences prefs = GoodWillApplication.getContext().getSharedPreferences(name, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(permission, accessibility);
+        editor.apply();
     }
 
 

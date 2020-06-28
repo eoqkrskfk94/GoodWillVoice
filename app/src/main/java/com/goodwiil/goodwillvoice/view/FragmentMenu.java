@@ -29,17 +29,18 @@ public class FragmentMenu extends PreferenceFragment {
         batteryPreference = (Preference) findPreference("battery");
         overlayPreference = (Preference) findPreference("overlay");
 
-//        if(MainActivity.getInstace().getBattery()){
-//            batteryPreference.setSummary("ON");
-//        }else{
-//            batteryPreference.setSummary("OFF");
-//        }
-//
-//        if(MainActivity.getInstace().getOverlay()){
-//            overlayPreference.setSummary("ON");
-//        }else{
-//            overlayPreference.setSummary("OFF");
-//        }
+
+        if(AppDataManager.getSharedPrefs(AppDataManager.PERMISSION_KEY).getBoolean(AppDataManager.PERMISSION_BATTERY, false)){
+            batteryPreference.setSummary("ON");
+        }else{
+            batteryPreference.setSummary("OFF");
+        }
+
+        if(AppDataManager.getSharedPrefs(AppDataManager.PERMISSION_KEY).getBoolean(AppDataManager.PERMISSION_OVERLAY, false)){
+            overlayPreference.setSummary("ON");
+        }else{
+            overlayPreference.setSummary("OFF");
+        }
 
         //SharedPreference객체를 참조하여 설정상태에 대한 제어 가능..
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
