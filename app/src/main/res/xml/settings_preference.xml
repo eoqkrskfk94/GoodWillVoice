@@ -27,6 +27,10 @@
             android:title="진동 알림 기능"
             tools:text="진동 알림 기능" />
 
+        <Preference
+            android:key="userInfo"
+            android:title="회원 정보 변경하기 " />
+
     </PreferenceCategory>
 
 
@@ -46,11 +50,17 @@
     </PreferenceCategory>
 
 
-    <PreferenceCategory android:title="회원 정보">
+    <PreferenceCategory android:title="정보">
 
         <Preference
-            android:key="userInfo"
-            android:title="회원 정보 변경하기 " />
+            android:key="serviceInfo"
+            android:title="고객센터" />
+
+        <Preference
+            android:key="faqInfo"
+            android:title="FAQ" />
+
+
 
     </PreferenceCategory>
 
