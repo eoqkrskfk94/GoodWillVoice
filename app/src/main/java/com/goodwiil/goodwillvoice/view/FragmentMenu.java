@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.util.AppDataManager;
+import com.goodwiil.goodwillvoice.util.ScreenManager;
 
 import androidx.annotation.Nullable;
 
@@ -18,6 +19,7 @@ public class FragmentMenu extends PreferenceFragment {
     ListPreference levelPreference;
     Preference batteryPreference;
     Preference overlayPreference;
+    Preference userInfoPreference;
 
 
     @Override
@@ -28,6 +30,7 @@ public class FragmentMenu extends PreferenceFragment {
         levelPreference = (ListPreference) findPreference("level_list");
         batteryPreference = (Preference) findPreference("battery");
         overlayPreference = (Preference) findPreference("overlay");
+        userInfoPreference = (Preference) findPreference("userInfo");
 
 
         if(AppDataManager.getSharedPrefs(AppDataManager.PERMISSION_KEY).getBoolean(AppDataManager.PERMISSION_BATTERY, false)){
@@ -50,6 +53,9 @@ public class FragmentMenu extends PreferenceFragment {
         levelPreference.setSummary(prefs.getString("level_list", "약"));
 
         prefs.registerOnSharedPreferenceChangeListener(listener);
+
+
+        changeUserBtnClick(userInfoPreference);
 
 
     }
@@ -91,6 +97,19 @@ public class FragmentMenu extends PreferenceFragment {
 
         }
     };
+
+
+
+    private void changeUserBtnClick(Preference preference){
+        preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                ScreenManager.startActivity(getActivity(), ActivitySignUp.class);
+                return false;
+            }
+        });
+
+    }
 
 
 

@@ -47,6 +47,16 @@
 
 
 
+    <PreferenceCategory android:title="회원 정보"/>
+
+        <Preference
+            android:key="userInfo"
+            android:title="회원 정보 변경하기 "/>
+
+
+
+
+
 
 
 </PreferenceScreen>
