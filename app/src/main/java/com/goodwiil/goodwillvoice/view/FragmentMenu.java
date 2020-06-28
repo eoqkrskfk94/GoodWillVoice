@@ -2,9 +2,6 @@ package com.goodwiil.goodwillvoice.view;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
 import com.goodwiil.goodwillvoice.R;
@@ -12,8 +9,11 @@ import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 
 import androidx.annotation.Nullable;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
-public class FragmentMenu extends PreferenceFragment {
+public class FragmentMenu extends PreferenceFragmentCompat {
 
     SharedPreferences prefs;
     ListPreference levelPreference;
@@ -57,6 +57,11 @@ public class FragmentMenu extends PreferenceFragment {
 
         changeUserBtnClick(userInfoPreference);
 
+
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
     }
 
