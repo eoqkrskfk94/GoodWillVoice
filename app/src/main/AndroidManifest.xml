@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.ActivityCallLog"></activity>
+        <activity
+            android:name=".view.ActivityCallLog"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.ActivityCallCenter"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -42,6 +44,7 @@
             </intent-filter>
         </receiver>
     </application>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
