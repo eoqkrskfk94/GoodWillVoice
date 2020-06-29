@@ -1,5 +1,6 @@
 package com.goodwiil.goodwillvoice.view;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -20,6 +21,8 @@ public class FragmentMenu extends PreferenceFragmentCompat {
     Preference batteryPreference;
     Preference overlayPreference;
     Preference userInfoPreference;
+    Preference callCenterPreference;
+    Preference faqPreference;
 
 
     @Override
@@ -31,6 +34,8 @@ public class FragmentMenu extends PreferenceFragmentCompat {
         batteryPreference = (Preference) findPreference("battery");
         overlayPreference = (Preference) findPreference("overlay");
         userInfoPreference = (Preference) findPreference("userInfo");
+        callCenterPreference = (Preference) findPreference("callCenter");
+        faqPreference = (Preference) findPreference("faqInfo");
 
 
         if(AppDataManager.getSharedPrefs(AppDataManager.PERMISSION_KEY).getBoolean(AppDataManager.PERMISSION_BATTERY, false)){
@@ -55,7 +60,9 @@ public class FragmentMenu extends PreferenceFragmentCompat {
         prefs.registerOnSharedPreferenceChangeListener(listener);
 
 
-        changeUserBtnClick(userInfoPreference);
+        BtnClick(userInfoPreference, ActivitySignUp.class);
+        BtnClick(callCenterPreference, ActivityCallCenter.class);
+        BtnClick(faqPreference, ActivityFaq.class);
 
 
     }
@@ -105,16 +112,18 @@ public class FragmentMenu extends PreferenceFragmentCompat {
 
 
 
-    private void changeUserBtnClick(Preference preference){
+    private void BtnClick(Preference preference, final Class c){
         preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                ScreenManager.startActivity(getActivity(), ActivitySignUp.class);
+                ScreenManager.startActivity(getActivity(), c);
                 return false;
             }
         });
 
     }
+
+
 
 
 
