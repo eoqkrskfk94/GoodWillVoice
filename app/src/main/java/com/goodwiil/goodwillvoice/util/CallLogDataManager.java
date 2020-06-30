@@ -71,6 +71,10 @@ public class CallLogDataManager {
             cursor.close();
         }
 
+        else{
+            ScreenManager.printToast(context, "최근기록 읽기 권한을 받아야 사용할수 있습니다.");
+        }
+
         return callLogInfos;
     }
 
@@ -111,6 +115,9 @@ public class CallLogDataManager {
                     contactInfos.add(contactsInfo);
                 }
             }
+        }
+        else{
+            ScreenManager.printToast(context, "연락처 권한을 받아야 사용할수 있습니다.");
         }
 
 
