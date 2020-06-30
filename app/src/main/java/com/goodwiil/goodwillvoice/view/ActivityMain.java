@@ -23,6 +23,7 @@ import com.goodwiil.goodwillvoice.application.GoodWillApplication;
 import com.goodwiil.goodwillvoice.databinding.ActivityMainBinding;
 import com.goodwiil.goodwillvoice.model.User;
 import com.goodwiil.goodwillvoice.util.AppDataManager;
+import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.viewModel.MainViewModel;
 import com.goodwiil.goodwillvoice.viewModel.MenuViewModel;
@@ -45,8 +46,6 @@ public class ActivityMain extends AppCompatActivity {
 
         //앱 위에 그리기 권한 받기
         checkPermissionOverlay();
-
-        AppDataManager.getCallLog(this);
 
     }
 
