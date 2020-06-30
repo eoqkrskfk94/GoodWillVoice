@@ -13,7 +13,9 @@ import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.model.User;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -32,10 +34,6 @@ public class AppDataManager {
     public static final String PERMISSION_BATTERY = "battery_optimization";
     public static final String PERMISSION_OVERLAY = "overlay_permission";
 
-    public static final String SP_NAME_YEAR = "year";
-    public static final String SP_NAME_GENDER = "gender";
-    public static final String SP_NAME_CAREER = "career";
-    public static final String SP_NAME_CITY = "city";
 
 
     //shared preference에 값을 저장하기
@@ -68,7 +66,7 @@ public class AppDataManager {
     }
 
 
-
+    //최근기록 불러오기
     public static ArrayList<CallLogInfo> getCallLog(Context context) {
 
         ArrayList<CallLogInfo> callLogInfos = new ArrayList<CallLogInfo>();
@@ -84,16 +82,51 @@ public class AppDataManager {
             int log_duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
 
             while (cursor.moveToNext()){
+                CallLogInfo callLogInfo = new CallLogInfo();
+
+                if(cursor.getString(log_name) == null)
+                    callLogInfo.setName("unknown");
+                else
+                    callLogInfo.setName(cursor.getString(log_name));
+
+                callLogInfo.setNumber(cursor.getString(log_number));
+                callLogInfo.setDate(changeDate(cursor.getString(log_date)));
+                callLogInfo.setDuration(cursor.getString(log_duration));
+
+                String callType = cursor.getString(log_type);
+                int code = Integer.parseInt(callType);
+                switch(code){
+                    case CallLog.Calls.OUTGOING_TYPE:
+                        callLogInfo.setType("OUTGOING");
+                        break;
+                    case CallLog.Calls.INCOMING_TYPE:
+                        callLogInfo.setType("INCOMING");
+                        break;
+                    case CallLog.Calls.MISSED_TYPE:
+                        callLogInfo.setType("MISSED");
+                        break;
+                    case CallLog.Calls.REJECTED_TYPE:
+                        callLogInfo.setType("REJECTED");
+                        break;
+                }
+
+                callLogInfos.add(callLogInfo);
+
 
             }
         }
 
-
-
-
-
-
         return callLogInfos;
+    }
+
+
+    public static String changeDate(String log_date){
+        Date logDate = new Date(Long.valueOf(log_date));
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        String newDate = formatter.format(logDate);
+
+
+        return newDate;
     }
 
 
