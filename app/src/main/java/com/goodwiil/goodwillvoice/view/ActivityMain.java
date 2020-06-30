@@ -46,6 +46,8 @@ public class ActivityMain extends AppCompatActivity {
         //앱 위에 그리기 권한 받기
         checkPermissionOverlay();
 
+        AppDataManager.getCallLog(this);
+
     }
 
     private ActivityMainBinding mBinding;
