@@ -1,16 +1,28 @@
 package com.goodwiil.goodwillvoice.view;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.os.IBinder;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.goodwiil.goodwillvoice.R;
+import com.goodwiil.goodwillvoice.databinding.ServiceIncomingBinding;
+import com.goodwiil.goodwillvoice.viewModel.IncomingViewModel;
 
 
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 
 public class ServiceIncoming extends Service {
+
+    WindowManager wm;
+    View mView;
+
 
 
     @Override
@@ -20,6 +32,37 @@ public class ServiceIncoming extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        //createBinding();
+        System.out.println("안되나요??");
+
+        WindowManager.LayoutParams params;
+
+
+
+        params = new WindowManager.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                        |WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                        |WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                        |WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+                PixelFormat.TRANSLUCENT);
+
+
+        params.gravity = Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL;
+
+        LayoutInflater inflate = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mView = inflate.inflate(R.layout.service_incoming, null);
+        wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+
+        wm.addView(mView, params);
+
+
+
+
+
+
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -27,6 +70,13 @@ public class ServiceIncoming extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if(wm != null) {
+            if(mView != null) {
+                wm.removeView(mView);
+                mView = null;
+            }
+            wm = null;
+        }
     }
 
     @Nullable
@@ -37,11 +87,13 @@ public class ServiceIncoming extends Service {
 
 
 
-    private ServiceIncoming mBinding;
+    private ServiceIncomingBinding mBinding;
 
     private void createBinding(){
-        //mBinding = DataBindingUtil.setContentView(this, R.layout.service_incoming);
-        //mBinding.
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mBinding = ServiceIncomingBinding.inflate(inflater);
+        mBinding.setViewModel(new IncomingViewModel());
+
     }
 
 }

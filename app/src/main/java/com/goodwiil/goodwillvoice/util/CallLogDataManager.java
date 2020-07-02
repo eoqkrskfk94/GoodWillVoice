@@ -20,7 +20,6 @@ import androidx.core.content.ContextCompat;
 public class CallLogDataManager {
 
 
-
     //최근기록 불러오기
     public static ArrayList<CallLogInfo> getCallLog(Context context) {
 
