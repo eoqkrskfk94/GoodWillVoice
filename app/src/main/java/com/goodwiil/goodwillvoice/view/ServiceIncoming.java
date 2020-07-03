@@ -17,6 +17,7 @@ import com.goodwiil.goodwillvoice.viewModel.IncomingViewModel;
 
 
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
 public class ServiceIncoming extends Service {
 
@@ -32,12 +33,9 @@ public class ServiceIncoming extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //createBinding();
-        System.out.println("안되나요??");
+        createBinding();
 
         WindowManager.LayoutParams params;
-
-
 
         params = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -49,18 +47,11 @@ public class ServiceIncoming extends Service {
                         |WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
                 PixelFormat.TRANSLUCENT);
 
-
         params.gravity = Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL;
 
-        LayoutInflater inflate = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mView = inflate.inflate(R.layout.service_incoming, null);
+        mView = mBinding.getRoot();
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-
         wm.addView(mView, params);
-
-
-
-
 
 
         return super.onStartCommand(intent, flags, startId);
@@ -86,12 +77,11 @@ public class ServiceIncoming extends Service {
     }
 
 
-
     private ServiceIncomingBinding mBinding;
 
     private void createBinding(){
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mBinding = ServiceIncomingBinding.inflate(inflater);
+        LayoutInflater inflate = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mBinding = DataBindingUtil.inflate(inflate, R.layout.service_incoming, null, false);
         mBinding.setViewModel(new IncomingViewModel());
 
     }
