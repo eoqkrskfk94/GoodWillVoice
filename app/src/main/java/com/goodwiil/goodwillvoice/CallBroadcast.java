@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.PowerManager;
 import android.telephony.TelephonyManager;
 
+import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceIncoming;
 
@@ -45,6 +46,7 @@ public class CallBroadcast extends BroadcastReceiver {
         if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)){
 
             if(number != null){
+                incomingName = CallLogDataManager.contactExists(context, number);
                 ScreenManager.startCallService(context, ServiceIncoming.class, incomingName, incomingNumber);
             }
 

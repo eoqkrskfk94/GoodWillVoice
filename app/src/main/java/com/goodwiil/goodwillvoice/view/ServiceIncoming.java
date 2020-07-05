@@ -43,13 +43,16 @@ public class ServiceIncoming extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         createBinding();
-
+        String number = (String) intent.getExtras().get("incomingNumber");
+        String name = (String) intent.getExtras().get("incomingName");
         params = setParams();
 
         mView = mBinding.getRoot();
         mView.setOnTouchListener(mViewTouchListener);
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        mBinding.tvNumber.setText(CallLogDataManager.convertNumber((String) intent.getExtras().get("incomingNumber")));
+        mBinding.tvNumber.setText(CallLogDataManager.convertNumber(number));
+        if(name.equals("unknown")) mBinding.tvName.setText("알 수 없는번호");
+        else mBinding.tvName.setText(name);
         wm.addView(mView, params);
 
 
@@ -86,7 +89,7 @@ public class ServiceIncoming extends Service {
         mBinding.setModel(new IncomingNumber());
         mBinding.ivProfile.setImageResource(R.drawable.profile_circle);
         mBinding.ivLine.setImageResource(R.drawable.line);
-        mBinding.tvName.setText("알 수 없는번호");
+        mBinding.tvName.setText("검색 중...");
         mBinding.tvRestrict.setText("차단이력 00건");
         mBinding.tvEnd.setText("바로 차단하기");
 
