@@ -9,6 +9,7 @@ import android.telephony.TelephonyManager;
 
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
+import com.goodwiil.goodwillvoice.view.ServiceCall;
 import com.goodwiil.goodwillvoice.view.ServiceIncoming;
 
 import static android.content.Context.POWER_SERVICE;
@@ -48,7 +49,7 @@ public class CallBroadcast extends BroadcastReceiver {
             if(number != null){
                 incomingName = CallLogDataManager.contactExists(context, number);
                 if(incomingName.equals("unknown"))
-                    ScreenManager.startCallService(context, ServiceIncoming.class, incomingName, incomingNumber);
+                    ScreenManager.startService(context, ServiceIncoming.class, incomingName, incomingNumber);
             }
 
         }
@@ -56,12 +57,14 @@ public class CallBroadcast extends BroadcastReceiver {
         //전화를 받았을때, 전화를 걸때
         if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)){
             context.stopService(new Intent(context, ServiceIncoming.class));
+            if(number != null) ScreenManager.startService(context, ServiceCall.class, incomingName, incomingNumber);
 
         }
 
         //전화를 끊었을때
         if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE)){
             context.stopService(new Intent(context, ServiceIncoming.class));
+            context.stopService(new Intent(context, ServiceCall.class));
 
         }
 

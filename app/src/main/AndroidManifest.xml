@@ -49,6 +49,11 @@
             android:enabled="true"
             android:permission="android.permission.SYSTEM_ALERT_WINDOW" />
 
+        <service
+            android:name=".view.ServiceCall"
+            android:enabled="true"
+            android:permission="android.permission.SYSTEM_ALERT_WINDOW" />
+
 
     </application>
 

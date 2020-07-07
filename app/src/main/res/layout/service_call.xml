@@ -6,10 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.goodwiil.goodwillvoice.viewModel.IncomingViewModel" />
-        <variable
-            name="model"
-            type="com.goodwiil.goodwillvoice.model.IncomingNumber" />
+            type="com.goodwiil.goodwillvoice.viewModel.CallViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +16,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl"
             android:layout_width="350dp"
-            android:layout_height="150dp"
+            android:layout_height="270dp"
             android:layout_margin="15dp"
             android:background="@drawable/popup_layout_ringing"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +48,7 @@
                 app:layout_constraintHorizontal_bias="0.52"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.733"
+                app:layout_constraintVertical_bias="0.437"
                 app:srcCompat="@drawable/line" />
 
             <ImageView
@@ -60,10 +57,10 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.073"
+                app:layout_constraintHorizontal_bias="0.054"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.369"
+                app:layout_constraintVertical_bias="0.207"
                 app:srcCompat="@drawable/profile_circle" />
 
             <TextView
@@ -94,23 +91,7 @@
                 app:layout_constraintHorizontal_bias="0.012"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.298" />
-
-            <TextView
-                android:id="@+id/tv_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:letterSpacing="-0.05"
-                android:lineSpacingExtra="-7sp"
-                android:textColor="#acacac"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.9"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.90999997"
-                tools:text="바로 차단하기" />
+                app:layout_constraintVertical_bias="0.188" />
 
             <TextView
                 android:id="@+id/tv_restrict"
@@ -122,17 +103,114 @@
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintHorizontal_bias="0.904"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.561"
+                app:layout_constraintVertical_bias="0.328"
                 tools:text="차단이력 00건" />
+
+            <TextView
+                android:id="@+id/tv_who"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16.7sp"
+                android:textColor="#acacac"
+                android:gravity="center_horizontal"
+                tools:text="이 전화는 누구인가요?"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_family"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:onClick="@{()->viewModel.familyBtnClick(tvFamily)}"
+                android:textColor="#bcbcbc"
+                android:textSize="16.7sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.093"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.673"
+                tools:ignore="MissingConstraints"
+                tools:text="가족" />
+
+            <TextView
+                android:id="@+id/tv_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="#bcbcbc"
+                android:textSize="16.7sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.146"
+                app:layout_constraintStart_toEndOf="@+id/tv_family"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.677"
+                tools:text="지인"
+                android:onClick="@{()->viewModel.friendBtnClick(tvFriend)}"/>
+
+
+            <TextView
+                android:id="@+id/tv_insurance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="#bcbcbc"
+                android:textSize="16.7sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.163"
+                app:layout_constraintStart_toEndOf="@+id/tv_friend"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.677"
+                tools:text="보험"
+                android:onClick="@{()->viewModel.insuranceBtnClick(tvInsurance)}"/>
+
+
+            <TextView
+                android:id="@+id/tv_ad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="#bcbcbc"
+                android:textSize="16.7sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toEndOf="@+id/tv_loan"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.677"
+                tools:text="광고"
+                android:onClick="@{()->viewModel.adBtnClick(tvAd)}"/>
+
+
+            <TextView
+                android:id="@+id/tv_loan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="#bcbcbc"
+                android:textSize="16.7sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintStart_toEndOf="@+id/tv_insurance"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.677"
+                tools:text="대출"
+                android:onClick="@{()->viewModel.loanBtnClick(tvLoan)}"/>
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 
