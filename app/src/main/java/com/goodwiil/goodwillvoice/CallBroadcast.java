@@ -47,7 +47,8 @@ public class CallBroadcast extends BroadcastReceiver {
 
             if(number != null){
                 incomingName = CallLogDataManager.contactExists(context, number);
-                ScreenManager.startCallService(context, ServiceIncoming.class, incomingName, incomingNumber);
+                if(incomingName.equals("unknown"))
+                    ScreenManager.startCallService(context, ServiceIncoming.class, incomingName, incomingNumber);
             }
 
         }
