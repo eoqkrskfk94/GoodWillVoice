@@ -16,7 +16,7 @@ public class ScreenManager {
     }
 
     //Service 시작 (이름과 번호도 같이 보내기)
-    public static void startCallService(Context context, Class c, String name, String number){
+    public static void startService(Context context, Class c, String name, String number){
         Intent serviceIntent = new Intent(context, c);
         serviceIntent.putExtra("incomingNumber",number);
         serviceIntent.putExtra("incomingName",name);

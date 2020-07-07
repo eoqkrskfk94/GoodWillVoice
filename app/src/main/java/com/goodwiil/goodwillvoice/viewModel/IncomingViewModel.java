@@ -1,15 +1,10 @@
 package com.goodwiil.goodwillvoice.viewModel;
 
-import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.goodwiil.goodwillvoice.model.ContactInfo;
-import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.view.ServiceIncoming;
 
-import java.util.ArrayList;
 
 public class IncomingViewModel {
 

@@ -14,17 +14,15 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.goodwiil.goodwillvoice.R;
-import com.goodwiil.goodwillvoice.databinding.ServiceIncomingBinding;
-import com.goodwiil.goodwillvoice.model.IncomingNumber;
+import com.goodwiil.goodwillvoice.databinding.ServiceCallBinding;
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
-import com.goodwiil.goodwillvoice.viewModel.IncomingViewModel;
-
+import com.goodwiil.goodwillvoice.viewModel.CallViewModel;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
+public class ServiceCall extends Service {
 
-public class ServiceIncoming extends Service {
 
     WindowManager wm;
     View mView;
@@ -77,19 +75,24 @@ public class ServiceIncoming extends Service {
     }
 
 
-    private ServiceIncomingBinding mBinding;
+    private ServiceCallBinding mBinding;
 
     private void createBinding(){
         LayoutInflater inflate = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mBinding = DataBindingUtil.inflate(inflate, R.layout.service_incoming, null, true);
+        mBinding = DataBindingUtil.inflate(inflate, R.layout.service_call, null, true);
 
-        mBinding.setViewModel(new IncomingViewModel());
-        mBinding.setModel(new IncomingNumber());
+        mBinding.setViewModel(new CallViewModel());
+//        mBinding.setModel(new IncomingNumber());
         mBinding.ivProfile.setImageResource(R.drawable.profile_circle);
         mBinding.ivLine.setImageResource(R.drawable.line);
         mBinding.tvName.setText("알 수 없는번호");
         mBinding.tvRestrict.setText("차단이력 00건");
-        mBinding.tvEnd.setText("바로 차단하기");
+        mBinding.tvWho.setText("이 전화는 누구인가요?");
+        mBinding.tvFamily.setText("가족");
+        mBinding.tvFriend.setText("지인");
+        mBinding.tvLoan.setText("대출");
+        mBinding.tvInsurance.setText("보험");
+        mBinding.tvAd.setText("광고");
 
     }
 
@@ -145,11 +148,4 @@ public class ServiceIncoming extends Service {
 
         MAX_Y = matrix.heightPixels - mView.getHeight();			//y 최대값 설정
     }
-
-
-
-
-
-
 }
-
