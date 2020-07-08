@@ -30,6 +30,7 @@ public class CallBroadcast extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         //화면이 꺼져도 앱 실행 기능
+        setWakeLock(context);
 
 
         //전화 상태 받아오기
