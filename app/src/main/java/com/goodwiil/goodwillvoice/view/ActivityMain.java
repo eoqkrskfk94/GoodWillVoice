@@ -58,12 +58,12 @@ public class ActivityMain extends AppCompatActivity {
     private void getData(){
         User user = AppDataManager.getUserModel();
 
-        mBinding.tv.setText(
-                "Year : "+user.getYear() + "\n"
-                        +"Gender : "+user.getGender() + "\n"
-                        +"Career : "+user.getCareer() + "\n"
-                        +"City : "+user.getCity() + "\n"
-        );
+//        mBinding.tv.setText(
+//                "Year : "+user.getYear() + "\n"
+//                        +"Gender : "+user.getGender() + "\n"
+//                        +"Career : "+user.getCareer() + "\n"
+//                        +"City : "+user.getCity() + "\n"
+//        );
     }
 
 
