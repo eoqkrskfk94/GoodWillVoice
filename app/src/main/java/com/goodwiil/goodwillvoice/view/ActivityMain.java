@@ -18,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.dinuscxj.progressbar.CircleProgressBar;
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.application.GoodWillApplication;
 import com.goodwiil.goodwillvoice.databinding.ActivityMainBinding;
@@ -28,7 +29,9 @@ import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.viewModel.MainViewModel;
 import com.goodwiil.goodwillvoice.viewModel.MenuViewModel;
 
-public class ActivityMain extends AppCompatActivity {
+public class ActivityMain extends AppCompatActivity implements CircleProgressBar.ProgressFormatter {
+    private static final String DEFAULT_PATTERN = "%d%%";
+    CircleProgressBar circleProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,10 @@ public class ActivityMain extends AppCompatActivity {
 
         //앱 위에 그리기 권한 받기
         checkPermissionOverlay();
+
+        //Progress bar 세팅
+        circleProgressBar=findViewById(R.id.cpb_circlebar);
+        circleProgressBar.setProgress(80);
 
     }
 
@@ -128,4 +135,8 @@ public class ActivityMain extends AppCompatActivity {
         mBinding.getViewModel().onBackClick(this);
     }
 
+    @Override
+    public CharSequence format(int progress, int max) {
+        return String.format(DEFAULT_PATTERN, (int) ((float) progress / (float) max * 100));
+    }
 }

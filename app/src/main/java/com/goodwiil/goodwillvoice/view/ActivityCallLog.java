@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.goodwiil.goodwillvoice.R;
-import com.goodwiil.goodwillvoice.databinding.ActivityCallLogBinding;
 import com.goodwiil.goodwillvoice.model.CallLogData;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.model.ContactInfo;
@@ -24,9 +22,10 @@ import com.goodwiil.goodwillvoice.viewModel.CallLogViewModel;
 
 import java.util.ArrayList;
 
-import static com.goodwiil.goodwillvoice.util.CallLogDataManager.getContacts;
-
 public class ActivityCallLog extends AppCompatActivity {
+    //data binding
+//    private ActivityCallLogBinding mBinding;
+
     public MyAdapter adapter;
     public ArrayList<CallLogInfo> logList = new ArrayList<>();
     public ArrayList<CallLogData> dataList = new ArrayList<>();
@@ -46,7 +45,7 @@ public class ActivityCallLog extends AppCompatActivity {
     }
 
     //Data 분별하기
-    public ArrayList<CallLogData> processingData(){
+    public ArrayList<CallLogData> processingData() {
         ArrayList<CallLogData> callLogData = new ArrayList<>();
 
         // 사용자 통화내역 기록 가져오기
@@ -56,10 +55,10 @@ public class ActivityCallLog extends AppCompatActivity {
         int numberOfknown = 0;
         int numberOfUnknown = 0;
 
-        for(CallLogInfo info : callLogList){
-            if(info.getType().equals("INCOMING")){
+        for (CallLogInfo info : callLogList) {
+            if (info.getType().equals("INCOMING")) {
                 numberOfIncomingCall++;
-                if(info.getName().equals("unknown")){
+                if (info.getName().equals("unknown")) {
                     numberOfUnknown++;
                 }
             }
@@ -67,21 +66,16 @@ public class ActivityCallLog extends AppCompatActivity {
 
         numberOfknown = numberOfIncomingCall - numberOfUnknown;
 
-        callLogData.add(new CallLogData("총 수신전화",numberOfIncomingCall));
-        callLogData.add(new CallLogData("등록된 전화",numberOfknown));
-        callLogData.add(new CallLogData("미등록된 전화",numberOfUnknown));
+        callLogData.add(new CallLogData("총 수신전화", numberOfIncomingCall));
+        callLogData.add(new CallLogData("등록된 전화", numberOfknown));
+        callLogData.add(new CallLogData("미등록된 전화", numberOfUnknown));
 
         return callLogData;
     }
 
-
-
-    //data binding
-    private ActivityCallLogBinding mBinding;
-
     private void createBinding() {
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_call_log);
-        mBinding.setViewModel(new CallLogViewModel());
+//        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_call_log);
+//        mBinding.setViewModel(new CallLogViewModel());
     }
 
     // adapter with array
