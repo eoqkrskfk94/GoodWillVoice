@@ -46,15 +46,20 @@ public class ServiceIncoming extends Service {
         String number = (String) intent.getExtras().get("incomingNumber");
         String name = (String) intent.getExtras().get("incomingName");
         params = setParams();
+        addWindowManager();
 
-        mView = mBinding.getRoot();
-        mView.setOnTouchListener(mViewTouchListener);
-        wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        mBinding.tvNumber.setText(CallLogDataManager.convertNumber(number));
-        wm.addView(mView, params);
+
 
 
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void addWindowManager() {
+        mView = mBinding.getRoot();
+        mView.setOnTouchListener(mViewTouchListener);
+        wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        //mBinding.tvNumber.setText(CallLogDataManager.convertNumber(number));
+        wm.addView(mView, params);
     }
 
 
@@ -80,16 +85,10 @@ public class ServiceIncoming extends Service {
     private ServiceIncomingBinding mBinding;
 
     private void createBinding(){
-        LayoutInflater inflate = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mBinding = DataBindingUtil.inflate(inflate, R.layout.service_incoming, null, true);
+        mBinding = ServiceIncomingBinding.inflate(LayoutInflater.from(this));
 
         mBinding.setViewModel(new IncomingViewModel());
         mBinding.setModel(new IncomingNumber());
-        mBinding.ivProfile.setImageResource(R.drawable.profile_circle);
-        mBinding.ivLine.setImageResource(R.drawable.line);
-        mBinding.tvName.setText("알 수 없는번호");
-        mBinding.tvRestrict.setText("차단이력 00건");
-        mBinding.tvEnd.setText("바로 차단하기");
 
     }
 
