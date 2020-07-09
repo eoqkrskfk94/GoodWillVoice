@@ -21,8 +21,6 @@ public class ActivitySignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         createBinding();
         populateSpinner();
-
-
     }
 
 
