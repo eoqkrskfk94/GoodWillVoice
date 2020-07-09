@@ -64,7 +64,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.369"
-                app:srcCompat="@drawable/profile_circle" />
+                android:src="@drawable/profile_circle" />
 
             <TextView
                 android:id="@+id/tv_name"
@@ -77,7 +77,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_number"
                 app:layout_constraintVertical_bias="0.0"
-                tools:text="알 수 없는번호" />
+                android:text="알 수 없는번호" />
 
             <TextView
                 android:id="@+id/tv_number"
