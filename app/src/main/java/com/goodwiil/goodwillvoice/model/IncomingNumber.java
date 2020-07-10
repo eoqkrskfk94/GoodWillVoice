@@ -1,6 +1,8 @@
 package com.goodwiil.goodwillvoice.model;
 
-public class IncomingNumber {
+import java.io.Serializable;
+
+public class IncomingNumber implements Serializable {
 
     private String number;
     private String name;

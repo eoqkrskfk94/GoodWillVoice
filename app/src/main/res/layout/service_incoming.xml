@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <data>
+        <import type="com.goodwiil.goodwillvoice.util.CallLogDataManager"/>
         <variable
             name="viewModel"
             type="com.goodwiil.goodwillvoice.viewModel.IncomingViewModel" />
@@ -52,7 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.733"
-                app:srcCompat="@drawable/line" />
+                android:src="@drawable/line" />
 
             <ImageView
                 android:id="@+id/iv_profile"
@@ -86,7 +87,7 @@
                 android:layout_marginStart="91dp"
                 android:letterSpacing="-0.05"
                 android:lineSpacingExtra="-18.7sp"
-                android:text="070-1234-5678"
+                android:text="@{CallLogDataManager.convertNumber(model.number)}"
                 android:textColor="#000000"
                 android:textSize="26.7sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -110,7 +111,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.90999997"
-                tools:text="바로 차단하기" />
+                android:text="바로 차단하기" />
 
             <TextView
                 android:id="@+id/tv_restrict"
@@ -126,7 +127,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.561"
-                tools:text="차단이력 00건" />
+                android:text="차단이력 00건"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

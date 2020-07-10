@@ -43,22 +43,21 @@ public class ServiceIncoming extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         createBinding();
-        String number = (String) intent.getExtras().get("incomingNumber");
-        String name = (String) intent.getExtras().get("incomingName");
-        params = setParams();
+        getData(intent);
         addWindowManager();
-
-
-
-
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void getData(Intent intent) {
+        IncomingNumber model = (IncomingNumber)intent.getSerializableExtra("incomingNumber");
+        mBinding.getModel().setNumber(model.getNumber());
     }
 
     private void addWindowManager() {
         mView = mBinding.getRoot();
         mView.setOnTouchListener(mViewTouchListener);
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        //mBinding.tvNumber.setText(CallLogDataManager.convertNumber(number));
+        params = setParams();
         wm.addView(mView, params);
     }
 
@@ -86,7 +85,6 @@ public class ServiceIncoming extends Service {
 
     private void createBinding(){
         mBinding = ServiceIncomingBinding.inflate(LayoutInflater.from(this));
-
         mBinding.setViewModel(new IncomingViewModel());
         mBinding.setModel(new IncomingNumber());
 
