@@ -29,10 +29,9 @@ public class ServiceIncoming extends Service {
     WindowManager wm;
     View mView;
     WindowManager.LayoutParams params;
-    private int MAX_X = -1, MAX_Y = -1;
+    private int MAX_X = -1;
     private float  START_Y;							//움직이기 위해 터치한 시작 점
     private int  PREV_Y;								//움직이기 이전에 뷰가 위치한 점
-
 
 
     @Override
@@ -45,6 +44,7 @@ public class ServiceIncoming extends Service {
         createBinding();
         getData(intent);
         addWindowManager();
+
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -139,8 +139,6 @@ public class ServiceIncoming extends Service {
     private void setMaxPosition() {
         DisplayMetrics matrix = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(matrix);		//화면 정보를 가져와서
-
-        MAX_Y = matrix.heightPixels - mView.getHeight();			//y 최대값 설정
     }
 
 
