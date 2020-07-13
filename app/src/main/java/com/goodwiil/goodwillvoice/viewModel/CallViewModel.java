@@ -29,5 +29,20 @@ public class CallViewModel {
     public void adBtnClick(View view){
         ScreenManager.printToast(view.getContext(), "광고");
     }
+    public void parcelBtnClick(View view){
+        ScreenManager.printToast(view.getContext(), "택배");
+    }
+    public void happyCallBtnClick(View view){
+        ScreenManager.printToast(view.getContext(), "해피콜");
+    }
+    public void policeBtnClick(View view){
+        ScreenManager.printToast(view.getContext(), "경찰");
+    }
+    public void governBtnClick(View view){
+        ScreenManager.printToast(view.getContext(), "금강원");
+    }
+    public void othersBtnClick(View view){
+        ScreenManager.printToast(view.getContext(), "기타");
+    }
 
 }

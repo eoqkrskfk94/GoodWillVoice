@@ -63,7 +63,7 @@ public class CallBroadcast extends BroadcastReceiver {
             context.stopService(new Intent(context, ServiceIncoming.class));
             if(number != null) {
                 model = new IncomingNumber(incomingNumber, incomingName);
-                ScreenManager.startService(context, ServiceIncoming.class, model);
+                ScreenManager.startService(context, ServiceCall.class, model);
             }
 
         }
