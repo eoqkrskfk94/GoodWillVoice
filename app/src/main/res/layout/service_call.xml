@@ -8,6 +8,9 @@
         <variable
             name="viewModel"
             type="com.goodwiil.goodwillvoice.viewModel.CallViewModel" />
+        <variable
+            name="model"
+            type="com.goodwiil.goodwillvoice.model.IncomingNumber" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16.7sp"
-                android:textColor="#acacac"
+                android:textColor="@color/colorGray"
                 android:gravity="center_horizontal"
                 android:text="이 전화는 누구인가요?"
                 
@@ -119,9 +122,11 @@
                 />
 
             <LinearLayout
+                android:id="@+id/ll1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -133,40 +138,10 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:onClick="@{()->viewModel.familyBtnClick(tvFamily)}"
-                    android:textColor="#bcbcbc"
-                    android:textSize="16.7sp"
-                    tools:ignore="MissingConstraints"
-                    tools:text="가족" />
-
-                <TextView
-                    android:id="@+id/tv_insurance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:onClick="@{()->viewModel.insuranceBtnClick(tvInsurance)}"
-                    android:textColor="#bcbcbc"
-                    android:textSize="16.7sp"
-                    tools:text="보험" />
-
-                <TextView
-                    android:id="@+id/tv_loan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:onClick="@{()->viewModel.loanBtnClick(tvLoan)}"
-                    android:textColor="#bcbcbc"
-                    android:textSize="16.7sp"
-                    tools:text="대출" />
-
-                <TextView
-                    android:id="@+id/tv_ad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:onClick="@{()->viewModel.adBtnClick(tvAd)}"
-                    android:textColor="#bcbcbc"
-                    android:textSize="16.7sp"
-                    tools:text="광고" />
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="30dp"
+                    android:text="@string/family" />
 
                 <TextView
                     android:id="@+id/tv_friend"
@@ -174,13 +149,119 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:onClick="@{()->viewModel.friendBtnClick(tvFriend)}"
-                    android:textColor="#bcbcbc"
-                    android:textSize="16.7sp"
-                    tools:text="지인" />
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="30dp"
+                    android:text="지인" />
+
+                <TextView
+                    android:id="@+id/tv_insurance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{()->viewModel.insuranceBtnClick(tvInsurance)}"
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="30dp"
+                    android:text="@string/insurance" />
+
+                <TextView
+                    android:id="@+id/tv_loan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{()->viewModel.loanBtnClick(tvLoan)}"
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="30dp"
+                    android:text="@string/loan" />
+
+                <TextView
+                    android:id="@+id/tv_ad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{()->viewModel.adBtnClick(tvAd)}"
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    android:text="@string/ad" />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll1">
+
+                <TextView
+                    android:id="@+id/tv_parcel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{()->viewModel.parcelBtnClick(tvFamily)}"
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="21dp"
+                    android:text="택배" />
+
+                <TextView
+                    android:id="@+id/tv_happy_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{()->viewModel.happyCallBtnClick(tvFriend)}"
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="21dp"
+                    android:text="해피콜" />
+
+                <TextView
+                    android:id="@+id/tv_police"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{()->viewModel.policeBtnClick(tvInsurance)}"
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="21dp"
+                    android:text="경찰" />
+
+                <TextView
+                    android:id="@+id/tv_govern"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{()->viewModel.governBtnClick(tvLoan)}"
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="21dp"
+                    android:text="금강원" />
+
+                <TextView
+                    android:id="@+id/tv_others"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{()->viewModel.othersBtnClick(tvAd)}"
+                    android:textColor="@color/colorGray"
+                    android:textSize="20sp"
+                    android:text="기타" />
+
+
+
             </LinearLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
