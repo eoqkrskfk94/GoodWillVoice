@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:animateLayoutChanges="true">
-
-    <Preference
-        android:key="userInfo"
-        android:title="회원 정보 변경하기"
-        app:icon="@drawable/profile_none" />
 
 
     <PreferenceCategory android:title="앱 설정">
@@ -38,8 +32,6 @@
     </PreferenceCategory>
 
 
-
-
     <PreferenceCategory android:title="권한 설정">
 
         <Preference
@@ -48,14 +40,14 @@
             android:selectable="false"
             android:summary="ON"
             android:title="다른 앱 위에 그리기"
-            app:iconSpaceReserved="false"/>
+            app:iconSpaceReserved="false" />
         <Preference
             android:enabled="true"
             android:key="battery"
             android:selectable="false"
             android:summary="ON"
             android:title="배터리 사용량 최적화 제외"
-            app:iconSpaceReserved="false"/>
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
 
@@ -64,13 +56,12 @@
         <Preference
             android:key="callCenter"
             android:title="고객센터"
-            app:iconSpaceReserved="false"/>
+            app:iconSpaceReserved="false" />
 
         <Preference
             android:key="faqInfo"
             android:title="FAQ"
-            app:iconSpaceReserved="false"/>
-
+            app:iconSpaceReserved="false" />
 
 
     </PreferenceCategory>

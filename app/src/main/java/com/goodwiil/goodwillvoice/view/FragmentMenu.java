@@ -36,12 +36,8 @@ public class FragmentMenu extends PreferenceFragment {
         levelPreference = (ListPreference) findPreference("level_list");
         batteryPreference = (Preference) findPreference("battery");
         overlayPreference = (Preference) findPreference("overlay");
-        userInfoPreference = (Preference) findPreference("userInfo");
         callCenterPreference = (Preference) findPreference("callCenter");
         faqPreference = (Preference) findPreference("faqInfo");
-
-        User user = AppDataManager.getUserModel();
-        userInfoPreference.setTitle(user.getCareer());
 
 
 
@@ -67,7 +63,6 @@ public class FragmentMenu extends PreferenceFragment {
         prefs.registerOnSharedPreferenceChangeListener(listener);
 
 
-        BtnClick(userInfoPreference, ActivitySignUp.class);
         BtnClick(callCenterPreference, ActivityCallCenter.class);
         BtnClick(faqPreference, ActivityFaq.class);
 
