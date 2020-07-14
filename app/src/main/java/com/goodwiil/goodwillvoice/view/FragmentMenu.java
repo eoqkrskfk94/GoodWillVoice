@@ -4,17 +4,20 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
 
 import com.goodwiil.goodwillvoice.R;
+import com.goodwiil.goodwillvoice.model.User;
 import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 
 import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceFragmentCompat;
 
-public class FragmentMenu extends PreferenceFragmentCompat {
+public class FragmentMenu extends PreferenceFragment {
 
     SharedPreferences prefs;
     ListPreference levelPreference;
@@ -36,6 +39,10 @@ public class FragmentMenu extends PreferenceFragmentCompat {
         userInfoPreference = (Preference) findPreference("userInfo");
         callCenterPreference = (Preference) findPreference("callCenter");
         faqPreference = (Preference) findPreference("faqInfo");
+
+        User user = AppDataManager.getUserModel();
+        userInfoPreference.setTitle(user.getCareer());
+
 
 
         if(AppDataManager.getSharedPrefs(AppDataManager.PERMISSION_KEY).getBoolean(AppDataManager.PERMISSION_BATTERY, false)){

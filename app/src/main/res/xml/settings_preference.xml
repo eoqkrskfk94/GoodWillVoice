@@ -5,6 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:animateLayoutChanges="true">
 
+    <Preference
+        android:key="userInfo"
+        android:title="회원 정보 변경하기"
+        app:icon="@drawable/profile_none" />
+
+
     <PreferenceCategory android:title="앱 설정">
 
         <ListPreference
@@ -12,41 +18,44 @@
             android:entries="@array/level"
             android:entryValues="@array/level"
             android:key="level_list"
-            android:summary="강"
-            android:title="탐지 강도 설정" />
+            android:title="탐지 강도 설정"
+            app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="voice_alarm"
-            android:title="경고음성 위험 알림" />
+            android:title="경고음성 위험 알림"
+            app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
 
             android:defaultValue="true"
             android:key="vibration_alarm"
             android:title="진동 알림 기능"
+            app:iconSpaceReserved="false"
             tools:text="진동 알림 기능" />
-
-        <Preference
-            android:key="userInfo"
-            android:title="회원 정보 변경하기 " />
 
     </PreferenceCategory>
 
 
+
+
     <PreferenceCategory android:title="권한 설정">
+
         <Preference
             android:enabled="true"
             android:key="overlay"
             android:selectable="false"
             android:summary="ON"
-            android:title="다른 앱 위에 그리기" />
+            android:title="다른 앱 위에 그리기"
+            app:iconSpaceReserved="false"/>
         <Preference
             android:enabled="true"
             android:key="battery"
             android:selectable="false"
             android:summary="ON"
-            android:title="배터리 사용량 최적화 제외" />
+            android:title="배터리 사용량 최적화 제외"
+            app:iconSpaceReserved="false"/>
     </PreferenceCategory>
 
 
@@ -54,11 +63,13 @@
 
         <Preference
             android:key="callCenter"
-            android:title="고객센터" />
+            android:title="고객센터"
+            app:iconSpaceReserved="false"/>
 
         <Preference
             android:key="faqInfo"
-            android:title="FAQ" />
+            android:title="FAQ"
+            app:iconSpaceReserved="false"/>
 
 
 
