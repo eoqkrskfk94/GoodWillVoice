@@ -24,6 +24,19 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/member_register"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.022" />
+
+        <TextView
             android:id="@+id/tv_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,18 +49,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.12" />
 
-        <TextView
-            android:id="@+id/tv_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/member_register"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.022" />
+
 
         <Spinner
             android:id="@+id/sp_year"
@@ -65,123 +67,41 @@
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:entries="@array/성별"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_year"
+            android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.319" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Spinner
             android:id="@+id/sp_career"
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:entries="@array/직업"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_gender"
+            android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.416" />
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="거주 지역"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.075"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.531" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <EditText
+            android:id="@+id/et_nick_name"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:hint="별명"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_city"
-            app:layout_constraintVertical_bias="0.304">
-
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_city1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="서울" />
-
-                <Button
-                    android:id="@+id/btn_city3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="인천" />
-
-                <Button
-                    android:id="@+id/btn_city5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="경상, 대구, 울산" />
-
-                <Button
-                    android:id="@+id/city_btn7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="강원" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btn_city2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="경기도" />
-
-                <Button
-                    android:id="@+id/btn_city4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="부산" />
-
-                <Button
-                    android:id="@+id/btn_city6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="대전, 충청" />
-
-                <Button
-                    android:id="@+id/btn_city8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="광주, 전라, 제주" />
-            </LinearLayout>
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/sp_career" />
 
         <Button
             android:id="@+id/btn_sign_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/register"
             android:onClick="@{() -> viewModel.signUpBtnClick(btnSignUp,cl)}"
+            android:text="@string/register"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
 
