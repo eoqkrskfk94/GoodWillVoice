@@ -1,6 +1,8 @@
 package com.goodwiil.goodwillvoice.viewModel;
 
 import android.content.Intent;
+import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.goodwiil.goodwillvoice.view.ServiceIncoming;
