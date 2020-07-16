@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
 
@@ -18,6 +19,7 @@ import java.util.Date;
 import androidx.core.content.ContextCompat;
 
 public class CallLogDataManager {
+
 
     //최근기록 불러오기
     public static ArrayList<CallLogInfo> getCallLog(Context context) {
@@ -125,6 +127,34 @@ public class CallLogDataManager {
 
         return contactInfos;
     }
+
+    //연락처에서 번호 찾
+    public static String contactExists(Context context, String number) {
+        /// number is the phone number
+        String contactName = "unknown";
+
+        Uri lookupUri = Uri.withAppendedPath(
+                ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                Uri.encode(number));
+        String[] mPhoneNumberProjection = { ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME };
+        Cursor cur = context.getContentResolver().query(lookupUri,mPhoneNumberProjection, null, null, null);
+        try {
+            if (cur.moveToFirst()) {
+                contactName = cur.getString(2);
+                cur.close();
+                return contactName;
+            }
+        } finally {
+            if (cur != null)
+                cur.close();
+        }
+        return contactName;
+    }
+
+
+
+
+
 
     //날짜 형식 바꾸기 "yyyy/MM/dd HH:mm"
     public static String changeDate(String log_date){

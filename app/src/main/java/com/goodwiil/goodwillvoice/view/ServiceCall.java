@@ -1,7 +1,6 @@
 package com.goodwiil.goodwillvoice.view;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
@@ -13,24 +12,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import com.goodwiil.goodwillvoice.R;
-import com.goodwiil.goodwillvoice.databinding.ServiceIncomingBinding;
+import com.goodwiil.goodwillvoice.databinding.ServiceCallBinding;
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
-import com.goodwiil.goodwillvoice.util.CallLogDataManager;
-import com.goodwiil.goodwillvoice.viewModel.IncomingViewModel;
-
+import com.goodwiil.goodwillvoice.viewModel.CallViewModel;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 
+public class ServiceCall extends Service {
 
-public class ServiceIncoming extends Service {
 
     WindowManager wm;
     View mView;
     WindowManager.LayoutParams params;
+    private int MAX_X = -1;
     private float  START_Y;							//움직이기 위해 터치한 시작 점
     private int  PREV_Y;								//움직이기 이전에 뷰가 위치한 점
+
 
 
     @Override
@@ -47,19 +44,6 @@ public class ServiceIncoming extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private void getData(Intent intent) {
-        IncomingNumber model = (IncomingNumber)intent.getSerializableExtra("incomingNumber");
-        mBinding.getModel().setNumber(model.getNumber());
-    }
-
-    private void addWindowManager() {
-        mView = mBinding.getRoot();
-        mView.setOnTouchListener(mViewTouchListener);
-        wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        params = setParams();
-        wm.addView(mView, params);
-    }
-
 
     @Override
     public void onDestroy() {
@@ -73,6 +57,19 @@ public class ServiceIncoming extends Service {
         }
     }
 
+    private void getData(Intent intent) {
+        IncomingNumber model = (IncomingNumber)intent.getSerializableExtra("incomingNumber");
+        mBinding.getModel().setNumber(model.getNumber());
+    }
+
+    private void addWindowManager() {
+        mView = mBinding.getRoot();
+        mView.setOnTouchListener(mViewTouchListener);
+        wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        params = setParams();
+        wm.addView(mView, params);
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -80,11 +77,11 @@ public class ServiceIncoming extends Service {
     }
 
 
-    private ServiceIncomingBinding mBinding;
+    private ServiceCallBinding mBinding;
 
     private void createBinding(){
-        mBinding = ServiceIncomingBinding.inflate(LayoutInflater.from(this));
-        mBinding.setViewModel(new IncomingViewModel());
+        mBinding = ServiceCallBinding.inflate(LayoutInflater.from(this));
+        mBinding.setViewModel(new CallViewModel());
         mBinding.setModel(new IncomingNumber());
 
     }
@@ -112,6 +109,8 @@ public class ServiceIncoming extends Service {
         @Override public boolean onTouch(View v, MotionEvent event) {
             switch(event.getAction()) {
                 case MotionEvent.ACTION_DOWN:                //사용자 터치 다운이면
+                    if(MAX_X == -1)
+                        setMaxPosition();
                     START_Y = event.getRawY();                    //터치 시작 점
                     PREV_Y = params.y;                            //뷰의 시작 점
                     break;
@@ -130,10 +129,11 @@ public class ServiceIncoming extends Service {
         }
     };
 
-
-
-
-
-
+    /**
+     * 뷰의 위치가 화면 안에 있게 최대값을 설정한다
+     */
+    private void setMaxPosition() {
+        DisplayMetrics matrix = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(matrix);		//화면 정보를 가져와서
+    }
 }
-

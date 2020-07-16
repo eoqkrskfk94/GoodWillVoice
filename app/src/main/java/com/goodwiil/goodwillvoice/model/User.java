@@ -6,15 +6,15 @@ public class User {
     private String year;
     private String gender;
     private String career;
-    private String city;
+    private String nickName;
 
     public User() { }
 
-    public User(String year, String gender, String career, String city) {
+    public User(String year, String gender, String career, String nickName) {
         this.year = year;
         this.gender = gender;
         this.career = career;
-        this.city = city;
+        this.nickName = nickName;
     }
 
     public String getYear() {
@@ -41,13 +41,14 @@ public class User {
         this.career = career;
     }
 
-    public String getCity() {
-        return city;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
+
 
 
 
