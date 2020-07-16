@@ -1,33 +1,23 @@
 package com.goodwiil.goodwillvoice.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.util.Log;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 import com.goodwiil.goodwillvoice.R;
-import com.goodwiil.goodwillvoice.application.GoodWillApplication;
 import com.goodwiil.goodwillvoice.databinding.ActivityMainBinding;
 import com.goodwiil.goodwillvoice.model.User;
 import com.goodwiil.goodwillvoice.util.AppDataManager;
-import com.goodwiil.goodwillvoice.util.CallLogDataManager;
-import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.viewModel.MainViewModel;
-import com.goodwiil.goodwillvoice.viewModel.MenuViewModel;
 
 public class ActivityMain extends AppCompatActivity implements CircleProgressBar.ProgressFormatter {
     private static final String DEFAULT_PATTERN = "%d%%";
