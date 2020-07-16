@@ -2,13 +2,17 @@
 <resources>
     <string-array name="직업">
         <item>직업</item>
-        <item>직업1</item>
-        <item>직업2</item>
-        <item>직업3</item>
-        <item>직업4</item>
-        <item>직업5</item>
+        <item>학생(초/중/고)</item>
+        <item>대학생</item>
+        <item>대학원생</item>
+        <item>취업준비생</item>
+        <item>전업주부</item>
+        <item>일반 사무직</item>
+        <item>자영업자</item>
+        <item>전문직  종사자</item>
+        <item>공무원/공기업/교사</item>
+        <item>기타</item>
     </string-array>
-
 
     <string-array name="성별">
         <item>성별</item>
