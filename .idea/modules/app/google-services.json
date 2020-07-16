@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "230649705384",
+    "firebase_url": "https://aigoodwillvoice-84988.firebaseio.com",
+    "project_id": "aigoodwillvoice-84988",
+    "storage_bucket": "aigoodwillvoice-84988.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230649705384:android:535a51a193af7ce4a4639d",
+        "android_client_info": {
+          "package_name": "com.goodwiil.goodwillvoice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230649705384-n9s94ls69bgm01cbsmggkp9ge7eb4mke.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.goodwiil.goodwillvoice",
+            "certificate_hash": "72b8aaa2aca544ce3ae6b97fab1c1e7d8c80025b"
+          }
+        },
+        {
+          "client_id": "230649705384-2cptn8bahp40rj5b6gdlpkvi06hj4lb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjSOZZG3IsGptzdPPIRRf8V8Kqv66Gg7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230649705384-2cptn8bahp40rj5b6gdlpkvi06hj4lb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
