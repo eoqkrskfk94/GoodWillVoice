@@ -11,8 +11,7 @@ import com.goodwiil.goodwillvoice.model.CallLogData;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.viewModel.CallLogViewModel;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 
 import java.util.ArrayList;
 
@@ -30,10 +29,6 @@ public class ActivityCallLog extends AppCompatActivity {
 
 
         // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
 
     }
 
