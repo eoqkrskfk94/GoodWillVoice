@@ -1,11 +1,9 @@
 package com.goodwiil.goodwillvoice.view;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -13,15 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.ServiceIncomingBinding;
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
-import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.viewModel.IncomingViewModel;
 
 
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 
 
 public class ServiceIncoming extends Service {
