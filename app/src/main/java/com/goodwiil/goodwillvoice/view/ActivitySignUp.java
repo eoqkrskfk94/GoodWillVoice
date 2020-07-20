@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.ActivitySignUpBinding;
 import com.goodwiil.goodwillvoice.model.User;
+import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.viewModel.SignUpViewModel;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class ActivitySignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         createBinding();
         populateSpinner();
+        setUserInfo();
     }
 
 
@@ -43,5 +45,13 @@ public class ActivitySignUp extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,years);
         mBinding.spYear.setAdapter(adapter);
+    }
+
+    private void setUserInfo(){
+        User user = AppDataManager.getUserModel();
+
+        if(user != null){
+            mBinding.etNickName.setText(user.getNickName());
+        }
     }
 }
