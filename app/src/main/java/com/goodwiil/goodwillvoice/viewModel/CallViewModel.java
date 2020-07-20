@@ -3,9 +3,11 @@ package com.goodwiil.goodwillvoice.viewModel;
 import android.content.Intent;
 import android.view.View;
 
+import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceCall;
-import com.goodwiil.goodwillvoice.view.ServiceIncoming;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class CallViewModel {
 
@@ -14,35 +16,42 @@ public class CallViewModel {
         view.getContext().stopService(new Intent(view.getContext(), ServiceCall.class));
     }
 
-    public void friendBtnClick(View view){
+    public void familyBtnClick(View view, ConstraintLayout cl){
+        ScreenManager.printToast(view.getContext(), "가족");
+        setType(view, "가족", cl);
+    }
+    public void friendBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), "지인");
     }
-    public void familyBtnClick(View view){
-        ScreenManager.printToast(view.getContext(), "가족");
-    }
-    public void loanBtnClick(View view){
+    public void loanBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), "대출");
     }
-    public void insuranceBtnClick(View view){
+    public void insuranceBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), "보험");
     }
-    public void adBtnClick(View view){
+    public void adBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), "광고");
     }
-    public void parcelBtnClick(View view){
+    public void parcelBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), "택배");
     }
-    public void happyCallBtnClick(View view){
+    public void happyCallBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), "해피콜");
     }
-    public void policeBtnClick(View view){
+    public void policeBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), "경찰");
     }
-    public void governBtnClick(View view){
+    public void governBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), "금강원");
     }
-    public void othersBtnClick(View view){
+    public void othersBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), "기타");
+    }
+
+
+    public void setType(View view, String type, ConstraintLayout cl){
+        cl.findViewById(R.id.ll1).setVisibility(View.GONE);
+        cl.findViewById(R.id.ll2).setVisibility(View.GONE);
     }
 
 }

@@ -19,16 +19,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class SignUpViewModel extends BaseViewModel{
 
-    private User user = new User();
-
-
     public void signUpBtnClick(View view, ConstraintLayout cl){
-
 
         String year = ((Spinner)cl.getChildAt(2)).getSelectedItem().toString();
         String gender = ((Spinner)cl.getChildAt(3)).getSelectedItem().toString();
         String career = ((Spinner)cl.getChildAt(4)).getSelectedItem().toString();
-        String nickName = cl.findViewById(R.id.et_nick_name).toString();
+        EditText nickNameEdit = cl.findViewById(R.id.et_nick_name);
+        String nickName = nickNameEdit.getText().toString();
 
 
         if(year.equals("출생년도") || gender.equals("성별") || career.equals("직업")){
