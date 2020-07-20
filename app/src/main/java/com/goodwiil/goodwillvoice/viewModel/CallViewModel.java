@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.goodwiil.goodwillvoice.R;
+import com.goodwiil.goodwillvoice.application.GoodWillApplication;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceCall;
 
@@ -17,8 +18,8 @@ public class CallViewModel {
     }
 
     public void familyBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), "가족");
-        setType(view, "가족", cl);
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.family));
+        setType(view, view.getContext().getString(R.string.family), cl);
     }
     public void friendBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), "지인");
