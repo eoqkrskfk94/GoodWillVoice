@@ -6,7 +6,7 @@ public class CallLogInfo {
     private String number;
     private String type;
     private String date;
-    private String duration;
+    private int duration;
 
 
     public String getName() {
@@ -41,11 +41,11 @@ public class CallLogInfo {
         this.date = date;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 }

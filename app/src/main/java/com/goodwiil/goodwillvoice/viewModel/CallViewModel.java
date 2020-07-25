@@ -3,6 +3,7 @@ package com.goodwiil.goodwillvoice.viewModel;
 import android.content.Intent;
 import android.view.View;
 
+import com.goodwiil.goodwillvoice.CallBroadcast;
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.application.GoodWillApplication;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
@@ -19,37 +20,58 @@ public class CallViewModel {
 
     public void familyBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.family));
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.family));
+        off(view);
+
     }
     public void friendBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), "지인");
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.friend));
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.friend));
+        off(view);
     }
     public void loanBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), "대출");
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.loan));
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.loan));
+        off(view);
     }
     public void insuranceBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), "보험");
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.insurance));
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.insurance));
+        off(view);
     }
     public void adBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), "광고");
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.ad));
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.ad));
+        off(view);
     }
     public void parcelBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), "택배");
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.parcel));
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.parcel));
+        off(view);
     }
     public void happyCallBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), "해피콜");
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.happy_call));
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.happy_call));
+        off(view);
     }
     public void policeBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), "경찰");
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.police));
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.police));
+        off(view);
     }
     public void governBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), "금강원");
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.government));
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.government));
+        off(view);
     }
     public void othersBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), "기타");
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.others));
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.others));
+        off(view);
     }
 
 
-    public void setType(View view, String type, ConstraintLayout cl){
+    public void off(View view){
         view.getContext().stopService(new Intent(view.getContext(), ServiceCall.class));
     }
 

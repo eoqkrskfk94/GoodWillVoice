@@ -32,6 +32,7 @@
     <string name="police">경찰</string>
     <string name="government">금강원</string>
     <string name="others">기타</string>
+    <string name="unknown">알수없음</string>
 
 
 </resources>
