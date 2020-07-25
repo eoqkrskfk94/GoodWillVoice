@@ -19,7 +19,6 @@ public class CallViewModel {
 
     public void familyBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.family));
-        setType(view, view.getContext().getString(R.string.family), cl);
     }
     public void friendBtnClick(View view, ConstraintLayout cl){
         ScreenManager.printToast(view.getContext(), "지인");
@@ -51,8 +50,7 @@ public class CallViewModel {
 
 
     public void setType(View view, String type, ConstraintLayout cl){
-        cl.findViewById(R.id.ll1).setVisibility(View.GONE);
-        cl.findViewById(R.id.ll2).setVisibility(View.GONE);
+        view.getContext().stopService(new Intent(view.getContext(), ServiceCall.class));
     }
 
 }

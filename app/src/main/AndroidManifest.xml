@@ -43,6 +43,7 @@
         <receiver android:name=".CallBroadcast">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="com.example.action.ACTION_TTS_READ_MESSAGE" />
             </intent-filter>
         </receiver>
 
@@ -55,6 +56,10 @@
             android:name=".view.ServiceCall"
             android:enabled="true"
             android:permission="android.permission.SYSTEM_ALERT_WINDOW" />
+
+        <service
+            android:name=".VoiceService"
+            android:enabled="true" />
 
 
     </application>

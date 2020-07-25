@@ -10,6 +10,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.speech.tts.TextToSpeech;
 import android.telephony.TelephonyManager;
 
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
@@ -18,10 +19,12 @@ import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceCall;
 import com.goodwiil.goodwillvoice.view.ServiceIncoming;
 
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static android.content.Context.POWER_SERVICE;
+import static android.speech.tts.TextToSpeech.ERROR;
 
 public class CallBroadcast extends BroadcastReceiver {
 
@@ -36,7 +39,10 @@ public class CallBroadcast extends BroadcastReceiver {
     private PowerManager powerManager;
     static PowerManager.WakeLock wakeLock;
     private Boolean vibrate;
+    private Boolean voice;
     private String level;
+
+    private Context context;
 
 
     @SuppressLint("InvalidWakeLockTag")
@@ -45,7 +51,11 @@ public class CallBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
+
+
+
         //화면이 꺼져도 앱 실행 기능
+        this.context = context;
         setWakeLock(context);
         setting(context);
 
@@ -110,6 +120,7 @@ public class CallBroadcast extends BroadcastReceiver {
 
     private void setting(Context context){
         prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        voice = prefs.getBoolean("voice_alarm", false);
         vibrate = prefs.getBoolean("vibration_alarm", true);
         level = prefs.getString("level_list", "강");
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -130,7 +141,7 @@ public class CallBroadcast extends BroadcastReceiver {
             @Override
             public void run() {
                 counter++;
-                vibrate(counter);
+                vibrateAndVoice(counter);
             }
         };
         return  tempTask;
@@ -138,7 +149,7 @@ public class CallBroadcast extends BroadcastReceiver {
 
 
     //진동 기능
-    public void vibrate(int sec){
+    public void vibrateAndVoice(int sec){
 
 
         int call_length[] = {0, 0, 0};
@@ -169,14 +180,13 @@ public class CallBroadcast extends BroadcastReceiver {
         }
 
         if(sec == call_length[0]){
-            if (vibrate) vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+            if(vibrate) vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
         }
         else if(sec == call_length[1]){
-            if (vibrate) vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+            if(vibrate) vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
         }
         else if(sec == call_length[2]){
-            if (vibrate) vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
-
+            if(vibrate) vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
         }
 
 
