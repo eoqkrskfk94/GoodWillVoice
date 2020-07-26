@@ -28,7 +28,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static android.content.Context.POWER_SERVICE;
-import static android.speech.tts.TextToSpeech.ERROR;
 
 public class CallBroadcast extends BroadcastReceiver {
 

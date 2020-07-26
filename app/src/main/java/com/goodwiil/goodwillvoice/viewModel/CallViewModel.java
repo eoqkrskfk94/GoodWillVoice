@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.goodwiil.goodwillvoice.CallBroadcast;
 import com.goodwiil.goodwillvoice.R;
-import com.goodwiil.goodwillvoice.application.GoodWillApplication;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceCall;
 
@@ -16,6 +15,7 @@ public class CallViewModel {
     //팝업창 닫기 버튼 함수
     public void backBtnClick(View view){
         view.getContext().stopService(new Intent(view.getContext(), ServiceCall.class));
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.unknown));
     }
 
     public void familyBtnClick(View view, ConstraintLayout cl){

@@ -30,19 +30,19 @@
             android:layout_marginEnd="10dp">
 
 
-            <Button
+            <ImageButton
                 android:id="@+id/button"
                 android:layout_width="20dp"
                 android:layout_height="30dp"
-                android:onClick="@{() -> viewModel.backBtnClick(button)}"
-                android:text=""
-
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="5dp"
+                android:background="#00FFFFFF"
+                android:onClick="@{() -> viewModel.backBtnClick(button)}"
+                android:src="@drawable/x"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
 
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/iv_line"
@@ -62,7 +62,7 @@
                 android:id="@+id/iv_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/profile_circle"
+                android:src="@drawable/call_proflie"
 
                 app:layout_constraintTop_toBottomOf="@+id/button"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorGray"
+                android:textColor="@color/colorNormal"
                 android:textSize="16.7sp"
                 android:text="@string/unknown_number"
 
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{CallLogDataManager.convertNumber(model.number)}"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorNormal"
                 android:textSize="25sp"
                 tools:text="010-1234-5678"
                 app:layout_constraintTop_toTopOf="@+id/iv_profile"
@@ -98,7 +98,7 @@
                 android:id="@+id/tv_restrict"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorGray"
+                android:textColor="@color/colorNormal"
                 android:textSize="15sp"
                 android:text="@string/restrict_zero"
 
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16.7sp"
-                android:textColor="@color/colorGray"
+                android:textColor="@color/colorNormal"
                 android:gravity="center_horizontal"
                 android:text="이 전화는 누구인가요?"
                 
@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:onClick="@{()->viewModel.familyBtnClick(tvFamily, cl)}"
-                    android:textColor="@color/colorGray"
+                    android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:layout_marginEnd="30dp"
                     android:text="@string/family" />
@@ -149,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:onClick="@{()->viewModel.friendBtnClick(tvFriend, cl)}"
-                    android:textColor="@color/colorGray"
+                    android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:layout_marginEnd="30dp"
                     android:text="@string/friend" />
@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:onClick="@{()->viewModel.insuranceBtnClick(tvInsurance, cl)}"
-                    android:textColor="@color/colorGray"
+                    android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:layout_marginEnd="30dp"
                     android:text="@string/insurance" />
@@ -171,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:onClick="@{()->viewModel.loanBtnClick(tvLoan, cl)}"
-                    android:textColor="@color/colorGray"
+                    android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:layout_marginEnd="30dp"
                     android:text="@string/loan" />
@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:onClick="@{()->viewModel.adBtnClick(tvAd, cl)}"
-                    android:textColor="@color/colorGray"
+                    android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:text="@string/ad" />
 
@@ -207,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:onClick="@{()->viewModel.parcelBtnClick(tvFamily, cl)}"
-                    android:textColor="@color/colorGray"
+                    android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:layout_marginEnd="21dp"
                     android:text="@string/parcel" />
@@ -218,7 +218,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:onClick="@{()->viewModel.happyCallBtnClick(tvFriend, cl)}"
-                    android:textColor="@color/colorGray"
+                    android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:layout_marginEnd="21dp"
                     android:text="@string/happy_call" />
@@ -229,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:onClick="@{()->viewModel.policeBtnClick(tvInsurance, cl)}"
-                    android:textColor="@color/colorGray"
+                    android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:layout_marginEnd="21dp"
                     android:text="@string/police" />
@@ -240,7 +240,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:onClick="@{()->viewModel.governBtnClick(tvLoan, cl)}"
-                    android:textColor="@color/colorGray"
+                    android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:layout_marginEnd="21dp"
                     android:text="@string/government" />
@@ -251,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:onClick="@{()->viewModel.othersBtnClick(tvAd, cl)}"
-                    android:textColor="@color/colorGray"
+                    android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:text="@string/others" />
 
