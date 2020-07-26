@@ -13,6 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/layout_top_bar"
+            android:layout_width="match_parent"
+            android:background="@color/colorBlue"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/top_banner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <TextView
             android:id="@+id/tv"
             android:layout_width="wrap_content"
@@ -71,12 +81,10 @@
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
             android:onClick="@{()-> viewModel.callLogBtnClick(btnLog)}"
+            android:layout_marginStart="50dp"
+            android:layout_marginBottom="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.143"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.904"
             app:srcCompat="@drawable/search" />
 
         <ImageButton
@@ -85,13 +93,11 @@
             android:layout_height="wrap_content"
             android:background="#00FFFFFF"
             android:onClick="@{() -> viewModel.menuBtnClick(btnMenu)}"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.955"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023"
-            app:srcCompat="@drawable/menu_button" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="50dp"
+            app:srcCompat="@drawable/setting" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

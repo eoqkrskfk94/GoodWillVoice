@@ -46,7 +46,7 @@ public class CallLogDataManager {
 
                 callLogInfo.setNumber(cursor.getString(log_number));
                 callLogInfo.setDate(changeDate(cursor.getString(log_date)));
-                callLogInfo.setDuration(cursor.getString(log_duration));
+                callLogInfo.setDuration(Integer.parseInt((cursor.getString(log_duration))));
 
                 String callType = cursor.getString(log_type);
                 int code = Integer.parseInt(callType);

@@ -29,25 +29,25 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp">
 
-            <Button
+            <ImageButton
                 android:id="@+id/button"
                 android:layout_width="20dp"
                 android:layout_height="30dp"
-                android:onClick="@{() -> viewModel.backBtnClick(button)}"
-                android:text=""
-
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="3dp"
+                android:background="#00FFFFFF"
+                android:onClick="@{() -> viewModel.backBtnClick(button)}"
+                android:src="@drawable/x"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
 
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/iv_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/profile_circle"
+                android:src="@drawable/call_proflie"
 
                 app:layout_constraintTop_toBottomOf="@+id/button"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{CallLogDataManager.convertNumber(model.number)}"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorNormal"
                 android:textSize="25sp"
                 tools:text="010-1234-5678"
                 app:layout_constraintTop_toTopOf="@+id/iv_profile"
@@ -85,7 +85,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorGray"
+                android:textColor="@color/colorNormal"
                 android:textSize="16.7sp"
                 android:text="@string/unknown_number"
 
@@ -97,7 +97,7 @@
                 android:id="@+id/tv_restrict"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorGray"
+                android:textColor="@color/colorNormal"
                 android:textSize="15sp"
                 android:text="@string/restrict_zero"
 
@@ -110,7 +110,7 @@
                 android:id="@+id/tv_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorGray"
+                android:textColor="@color/colorPurple"
                 android:textSize="15sp"
                 android:text="@string/restrict_number"
                 app:layout_constraintTop_toBottomOf="@+id/tv_restrict"

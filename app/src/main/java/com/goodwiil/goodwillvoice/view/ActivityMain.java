@@ -11,6 +11,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.speech.tts.TextToSpeech;
+import android.view.View;
+import android.widget.Button;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 import com.goodwiil.goodwillvoice.R;
@@ -19,14 +22,20 @@ import com.goodwiil.goodwillvoice.model.User;
 import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.viewModel.MainViewModel;
 
+import java.util.Locale;
+
+import static android.speech.tts.TextToSpeech.ERROR;
+
 public class ActivityMain extends AppCompatActivity implements CircleProgressBar.ProgressFormatter {
     private static final String DEFAULT_PATTERN = "%d%%";
     CircleProgressBar circleProgressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createBinding();
+
 
         //현재 회원 등록 정보 화면에 출력하기
         getData();

@@ -10,20 +10,28 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.speech.tts.TextToSpeech;
 import android.telephony.TelephonyManager;
 
+import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceCall;
 import com.goodwiil.goodwillvoice.view.ServiceIncoming;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static android.content.Context.POWER_SERVICE;
 
 public class CallBroadcast extends BroadcastReceiver {
+
+    public static CallLogInfo callLogInfo;
 
     private String number;
     private Vibrator vibrator;
@@ -36,7 +44,11 @@ public class CallBroadcast extends BroadcastReceiver {
     private PowerManager powerManager;
     static PowerManager.WakeLock wakeLock;
     private Boolean vibrate;
+    private Boolean voice;
     private String level;
+
+
+    private Context context;
 
 
     @SuppressLint("InvalidWakeLockTag")
@@ -45,7 +57,11 @@ public class CallBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
+
+
+
         //화면이 꺼져도 앱 실행 기능
+        this.context = context;
         setWakeLock(context);
         setting(context);
 
@@ -66,6 +82,11 @@ public class CallBroadcast extends BroadcastReceiver {
                 if(incomingName.equals("unknown"))
                     model = new IncomingNumber(incomingNumber, incomingName);
                     ScreenManager.startService(context, ServiceIncoming.class, model);
+                    //ScreenManager.startService(context, VoiceService.class, model);
+
+                    //전화번호 기록
+                    callLogInfo = new CallLogInfo();
+                    callLogInfo.setNumber(incomingNumber);
             }
         }
 
@@ -78,6 +99,11 @@ public class CallBroadcast extends BroadcastReceiver {
 
                     wakeLock.acquire();
 
+                    //날짜 기록
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    Date date = new Date();
+                    callLogInfo.setDate(dateFormat.format(date));
+
                     //앱 위에 그리기 권한이 있으
                     if(Settings.canDrawOverlays(context)){
                         ScreenManager.startService(context, ServiceCall.class, model);
@@ -88,28 +114,34 @@ public class CallBroadcast extends BroadcastReceiver {
 
                     }
 
-
                 }
             }
-
 
         }
 
         //전화를 끊었을때
         if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE)){
 
+
             if(wakeLock.isHeld()) wakeLock.release();
 
             tt.cancel();
+
             context.stopService(new Intent(context, ServiceIncoming.class));
             context.stopService(new Intent(context, ServiceCall.class));
 
-        }
+            ScreenManager.printToast(context,
+                    callLogInfo.getNumber() + "\n" +
+                            callLogInfo.getType() + "\n" +
+                            callLogInfo.getDate() + "\n" +
+                            callLogInfo.getDuration());
 
+        }
     }
 
     private void setting(Context context){
         prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        voice = prefs.getBoolean("voice_alarm", false);
         vibrate = prefs.getBoolean("vibration_alarm", true);
         level = prefs.getString("level_list", "강");
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -130,7 +162,12 @@ public class CallBroadcast extends BroadcastReceiver {
             @Override
             public void run() {
                 counter++;
-                vibrate(counter);
+                //System.out.println(counter);
+
+                //통화시간 기록
+                callLogInfo.setDuration(counter);
+
+                vibrateAndVoice(counter);
             }
         };
         return  tempTask;
@@ -138,7 +175,7 @@ public class CallBroadcast extends BroadcastReceiver {
 
 
     //진동 기능
-    public void vibrate(int sec){
+    public void vibrateAndVoice(int sec){
 
 
         int call_length[] = {0, 0, 0};
@@ -169,14 +206,13 @@ public class CallBroadcast extends BroadcastReceiver {
         }
 
         if(sec == call_length[0]){
-            if (vibrate) vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+            if(vibrate) vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
         }
         else if(sec == call_length[1]){
-            if (vibrate) vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+            if(vibrate) vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
         }
         else if(sec == call_length[2]){
-            if (vibrate) vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
-
+            if(vibrate) vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
         }
 
 

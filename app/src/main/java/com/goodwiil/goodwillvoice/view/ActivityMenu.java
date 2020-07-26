@@ -19,8 +19,8 @@ public class ActivityMenu extends AppCompatActivity {
         createBinding();
         User user = AppDataManager.getUserModel();
         mBinding.tvUserName.setText(user.getNickName());
-        mBinding.tvUserGender.setText(user.getGender());
-        mBinding.tvUserCareer.setText(user.getCareer());
+//        mBinding.tvUserGender.setText(user.getGender());
+//        mBinding.tvUserCareer.setText(user.getCareer());
     }
 
 
