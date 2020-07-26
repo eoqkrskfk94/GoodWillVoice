@@ -44,11 +44,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.407"
-            app:progress_end_color="#ABF200"
-            app:progress_start_color="#FFBB00"
+            app:progress_end_color="@color/colorBlue"
+            app:progress_start_color="#9BCAFF"
             app:progress_stroke_cap="round"
-            app:progress_stroke_width="50dp "
+            app:progress_stroke_width="50dp"
             app:progress_text_size="55sp"
+            app:progress_text_color="@color/colorBlack"
             app:style="solid_line" />
 
         <ImageView
