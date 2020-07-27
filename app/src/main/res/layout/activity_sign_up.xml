@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:text="@string/Insert_info"
             android:textSize="20sp"
+            android:textColor="@color/colorNormal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.49"
@@ -91,16 +92,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sp_career" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_sign_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
             android:onClick="@{() -> viewModel.signUpBtnClick(btnSignUp,cl)}"
+            android:src="@drawable/signup_btn"
             android:text="@string/register"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="10dp"/>
 
 
 
