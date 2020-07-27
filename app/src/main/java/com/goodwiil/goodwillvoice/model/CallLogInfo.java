@@ -7,6 +7,8 @@ public class CallLogInfo {
     private String type;
     private String date;
     private int duration;
+    private double longitude;
+    private double latitude;
 
 
     public String getName() {
@@ -47,5 +49,21 @@ public class CallLogInfo {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 }

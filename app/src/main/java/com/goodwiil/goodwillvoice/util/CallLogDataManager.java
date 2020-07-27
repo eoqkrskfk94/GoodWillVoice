@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
@@ -19,6 +21,27 @@ import java.util.Date;
 import androidx.core.content.ContextCompat;
 
 public class CallLogDataManager {
+
+    //위치정보 받기
+    public static ArrayList<Double> getCurrentLoc(Context context){
+
+        ArrayList<Double> gps = new ArrayList<Double>();
+        double longitude;
+        double latitude;
+
+        int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
+        final LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+
+        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
+            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            longitude = location.getLongitude();
+            latitude = location.getLatitude();
+            gps.add(longitude);
+            gps.add(latitude);
+        }
+
+        return gps;
+    }
 
 
     //최근기록 불러오기

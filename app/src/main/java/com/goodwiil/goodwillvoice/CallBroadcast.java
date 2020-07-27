@@ -5,6 +5,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationListener;
+import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -22,6 +25,7 @@ import com.goodwiil.goodwillvoice.view.ServiceIncoming;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Timer;
@@ -104,6 +108,11 @@ public class CallBroadcast extends BroadcastReceiver {
                     Date date = new Date();
                     callLogInfo.setDate(dateFormat.format(date));
 
+                    //전화 받은 위치 기록
+                    ArrayList<Double> gps = CallLogDataManager.getCurrentLoc(context);
+                    callLogInfo.setLongitude(gps.get(0));
+                    callLogInfo.setLatitude(gps.get(1));
+
                     //앱 위에 그리기 권한이 있으
                     if(Settings.canDrawOverlays(context)){
                         ScreenManager.startService(context, ServiceCall.class, model);
@@ -134,7 +143,10 @@ public class CallBroadcast extends BroadcastReceiver {
                     callLogInfo.getNumber() + "\n" +
                             callLogInfo.getType() + "\n" +
                             callLogInfo.getDate() + "\n" +
-                            callLogInfo.getDuration());
+                            callLogInfo.getDuration() + "\n" +
+                            callLogInfo.getLongitude()  + "\n" +
+                            callLogInfo.getLatitude()
+                    );
 
         }
     }
@@ -217,5 +229,29 @@ public class CallBroadcast extends BroadcastReceiver {
 
 
     }
+
+
+    final LocationListener gpsLocationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+
+            String provider = location.getProvider();
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+            double altitude = location.getAltitude();
+
+
+        }
+
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
+
+        public void onProviderEnabled(String provider) {
+        }
+
+        public void onProviderDisabled(String provider) {
+        }
+    };
+
+
 
 }

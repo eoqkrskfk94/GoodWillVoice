@@ -38,6 +38,8 @@ public class SignUpViewModel extends BaseViewModel{
             ((Activity)view.getContext()).finish();
         }
 
+        ScreenManager.printToast(view.getContext(), "회원정보가 등록되었습니다.");
+
     }
 
 
