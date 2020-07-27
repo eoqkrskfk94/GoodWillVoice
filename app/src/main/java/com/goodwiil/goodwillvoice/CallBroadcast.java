@@ -13,7 +13,6 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.speech.tts.TextToSpeech;
 import android.telephony.TelephonyManager;
 
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
@@ -21,13 +20,13 @@ import com.goodwiil.goodwillvoice.model.IncomingNumber;
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceCall;
+import com.goodwiil.goodwillvoice.view.ServiceEnd;
 import com.goodwiil.goodwillvoice.view.ServiceIncoming;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -116,12 +115,11 @@ public class CallBroadcast extends BroadcastReceiver {
                     //앱 위에 그리기 권한이 있으
                     if(Settings.canDrawOverlays(context)){
                         ScreenManager.startService(context, ServiceCall.class, model);
-
-                        tt = timerTaskMaker();
-                        final Timer timer = new Timer();
-                        timer.schedule(tt, 0, 1000);
-
                     }
+
+                    tt = timerTaskMaker();
+                    final Timer timer = new Timer();
+                    timer.schedule(tt, 0, 1000);
 
                 }
             }
@@ -131,13 +129,28 @@ public class CallBroadcast extends BroadcastReceiver {
         //전화를 끊었을때
         if(state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE)){
 
-
             if(wakeLock.isHeld()) wakeLock.release();
+            if(number != null){
+                model = new IncomingNumber(incomingNumber, incomingName);
+
+                System.out.println("여기여깅");
+                System.out.println(model.getNumber());
+                System.out.println(model.getName());
+
+                if(callLogInfo.getType() == null){
+                    if(Settings.canDrawOverlays(context)){
+                        System.out.println("되냐고 이거");
+                        ScreenManager.startService(context, ServiceEnd.class, model);
+                    }
+                }
+            }
 
             tt.cancel();
 
             context.stopService(new Intent(context, ServiceIncoming.class));
             context.stopService(new Intent(context, ServiceCall.class));
+
+
 
             ScreenManager.printToast(context,
                     callLogInfo.getNumber() + "\n" +
@@ -178,6 +191,9 @@ public class CallBroadcast extends BroadcastReceiver {
 
                 //통화시간 기록
                 callLogInfo.setDuration(counter);
+                if(counter == 60){
+                    context.stopService(new Intent(context, ServiceCall.class));
+                }
 
                 vibrateAndVoice(counter);
             }
