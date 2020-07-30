@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.VibrationEffect;
@@ -50,6 +51,7 @@ public class CallBroadcast extends BroadcastReceiver {
     private Boolean voice;
     private String level;
 
+    //private AudioManager am;
 
     private Context context;
 
@@ -60,13 +62,14 @@ public class CallBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-
-
-
         //화면이 꺼져도 앱 실행 기능
         this.context = context;
         setWakeLock(context);
         setting(context);
+
+//        AudioManager am = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+//        am.setStreamVolume(AudioManager.STREAM_VOICE_CALL, 0, 0);
+//        am.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
 
         //전화 상태 받아오기
         String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
@@ -101,6 +104,7 @@ public class CallBroadcast extends BroadcastReceiver {
                     model = new IncomingNumber(incomingNumber, incomingName);
 
                     wakeLock.acquire();
+
 
                     //날짜 기록
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -137,7 +141,7 @@ public class CallBroadcast extends BroadcastReceiver {
                 System.out.println(model.getNumber());
                 System.out.println(model.getName());
 
-                if(callLogInfo.getType() == null){
+                if(callLogInfo != null && callLogInfo.getType() == null){
                     if(Settings.canDrawOverlays(context)){
                         System.out.println("되냐고 이거");
                         ScreenManager.startService(context, ServiceEnd.class, model);
@@ -179,7 +183,6 @@ public class CallBroadcast extends BroadcastReceiver {
 
         if(wakeLock == null){
             wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "TimerWakeLock:");
-
         }
     }
     public TimerTask timerTaskMaker(){
@@ -194,7 +197,6 @@ public class CallBroadcast extends BroadcastReceiver {
                 if(counter == 60){
                     context.stopService(new Intent(context, ServiceCall.class));
                 }
-
                 vibrateAndVoice(counter);
             }
         };

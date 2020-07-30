@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
 
+import com.goodwiil.goodwillvoice.model.CallAnalysisInfo;
 import com.goodwiil.goodwillvoice.model.CallLogData;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.model.ContactInfo;
@@ -21,6 +22,8 @@ import java.util.Date;
 import androidx.core.content.ContextCompat;
 
 public class CallLogDataManager {
+
+    public static CallAnalysisInfo callAnalysisInfo = new CallAnalysisInfo();
 
     //위치정보 받기
     public static ArrayList<Double> getCurrentLoc(Context context){
@@ -62,8 +65,19 @@ public class CallLogDataManager {
             while (cursor.moveToNext()){
                 CallLogInfo callLogInfo = new CallLogInfo();
 
-                if(cursor.getString(log_name) == null)
+                if(cursor.getString(log_name) == null){
                     callLogInfo.setName("unknown");
+                    if((Integer.parseInt(cursor.getString(log_duration)) > callAnalysisInfo.getUnknownCallMax())){
+                        callAnalysisInfo.setUnknownCallMax(Integer.parseInt(cursor.getString(log_duration)));
+                    }
+                    if((Integer.parseInt(cursor.getString(log_duration)) > 0)){
+                        if((Integer.parseInt(cursor.getString(log_duration)) < callAnalysisInfo.getUnknownCallMin())){
+                            callAnalysisInfo.setUnknownCallMin(Integer.parseInt(cursor.getString(log_duration)));
+                        }
+                    }
+
+                }
+
                 else
                     callLogInfo.setName(cursor.getString(log_name));
 
@@ -76,15 +90,19 @@ public class CallLogDataManager {
                 switch(code){
                     case CallLog.Calls.OUTGOING_TYPE:
                         callLogInfo.setType("OUTGOING");
+                        if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumOutgoing(callAnalysisInfo.getNumOutgoing()+1);
                         break;
                     case CallLog.Calls.INCOMING_TYPE:
                         callLogInfo.setType("INCOMING");
+                        if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumIncoming(callAnalysisInfo.getNumIncoming()+1);
                         break;
                     case CallLog.Calls.MISSED_TYPE:
                         callLogInfo.setType("MISSED");
+                        if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumMissed(callAnalysisInfo.getNumMissed()+1);
                         break;
                     case CallLog.Calls.REJECTED_TYPE:
                         callLogInfo.setType("REJECTED");
+                        if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumRejected(callAnalysisInfo.getNumRejected()+1);
                         break;
                 }
 
@@ -100,6 +118,11 @@ public class CallLogDataManager {
             ScreenManager.printToast(context, "최근기록 읽기 권한을 받아야 사용할수 있습니다.");
         }
 
+        System.out.println(callAnalysisInfo.getUnknownCallMax());
+        System.out.println(callAnalysisInfo.getUnknownCallMin());
+        System.out.println(callAnalysisInfo.getNumRejected());
+        System.out.println(callAnalysisInfo.getNumIncoming());
+        System.out.println(callAnalysisInfo.getNumRejected());
         return callLogInfos;
     }
 
