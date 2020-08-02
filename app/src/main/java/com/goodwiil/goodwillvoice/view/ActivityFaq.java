@@ -1,10 +1,10 @@
 package com.goodwiil.goodwillvoice.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.ActivityFaqBinding;
@@ -23,7 +23,7 @@ public class ActivityFaq extends AppCompatActivity {
     }
 
     private ActivityFaqBinding mBinding;
-    private void createBinding(){
+    private void createBinding() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_faq);
         mBinding.setViewModel(new FaqViewModel());
     }

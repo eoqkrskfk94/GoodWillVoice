@@ -1,9 +1,5 @@
 package com.goodwiil.goodwillvoice.view;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,10 +8,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.provider.Settings;
-import android.speech.tts.TextToSpeech;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 import com.goodwiil.goodwillvoice.R;
@@ -29,10 +26,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
-
-import static android.speech.tts.TextToSpeech.ERROR;
 
 public class ActivityMain extends AppCompatActivity implements CircleProgressBar.ProgressFormatter {
     private static final String DEFAULT_PATTERN = "%d%%";

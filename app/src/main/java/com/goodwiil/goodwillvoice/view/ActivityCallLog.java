@@ -1,32 +1,27 @@
 package com.goodwiil.goodwillvoice.view;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.os.Bundle;
-
 import com.goodwiil.goodwillvoice.R;
-//import com.goodwiil.goodwillvoice.databinding.ActivityCallLogBinding;
+import com.goodwiil.goodwillvoice.databinding.ActivityCallLogBinding;
 import com.goodwiil.goodwillvoice.model.CallLogData;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.viewModel.CallLogViewModel;
 
-
 import java.util.ArrayList;
 
 public class ActivityCallLog extends AppCompatActivity {
     //data binding
-//    private ActivityCallLogBinding mBinding;
-
-    public ArrayList<CallLogInfo> logList = new ArrayList<>();
-    public ArrayList<CallLogData> dataList = new ArrayList<>();
+    private ActivityCallLogBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        createBinding();
-
+        createBinding();
 
         // Write a message to the database
 
@@ -62,8 +57,8 @@ public class ActivityCallLog extends AppCompatActivity {
     }
 
     private void createBinding() {
-//        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_call_log);
-//        mBinding.setViewModel(new CallLogViewModel());
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_call_log);
+        mBinding.setViewModel(new CallLogViewModel());
     }
 
 

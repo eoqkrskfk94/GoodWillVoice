@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
-import android.telecom.Call;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.ActivityCallCenterBinding;
@@ -16,11 +15,8 @@ public class ActivityCallCenter extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createBinding();
-
         mBinding.tv.setText("고객센터");
-
     }
-
 
     private ActivityCallCenterBinding mBinding;
     private void createBinding(){

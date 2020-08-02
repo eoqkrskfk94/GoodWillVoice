@@ -18,7 +18,7 @@ public class BaseViewModel {
 
         //2번째 백버튼 클릭 (종료)
         else {
-            ((Activity)context).finish();
+            ((Activity) context).finish();
             System.exit(0);
             android.os.Process.killProcess(android.os.Process.myPid());
         }

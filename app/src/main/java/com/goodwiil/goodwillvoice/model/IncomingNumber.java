@@ -7,7 +7,7 @@ public class IncomingNumber implements Serializable {
     private String number;
     private String name;
 
-    public IncomingNumber(){}
+    public IncomingNumber() {}
 
     public IncomingNumber(String number, String name) {
         this.number = number;
@@ -29,8 +29,6 @@ public class IncomingNumber implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-
 
 
 }

@@ -9,11 +9,8 @@ import com.goodwiil.goodwillvoice.view.ActivitySignUp;
 
 public class SplashViewModel {
 
-    public void startApp(Context context){
-
+    public void startApp(Context context) {
         //화원등록이 되어있으면 바로 메인화면으로 시작 아니면 회원등록화면으로 시작
         ScreenManager.startActivity(context, (AppDataManager.getUserModel() == null) ? (ActivitySignUp.class) : (ActivityMain.class));
     }
-
-
 }

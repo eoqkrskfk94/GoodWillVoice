@@ -1,10 +1,10 @@
 package com.goodwiil.goodwillvoice.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.ActivitySignUpBinding;
@@ -25,7 +25,6 @@ public class ActivitySignUp extends AppCompatActivity {
         setUserInfo();
     }
 
-
     private ActivitySignUpBinding mBinding;
     private void createBinding() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
@@ -33,7 +32,7 @@ public class ActivitySignUp extends AppCompatActivity {
         mBinding.setModel(new User());
     }
 
-    private void populateSpinner(){
+    private void populateSpinner() {
         ArrayList<String> years = new ArrayList<String>();
 
         years.add("출생년도");
@@ -43,14 +42,14 @@ public class ActivitySignUp extends AppCompatActivity {
             years.add(Integer.toString(i));
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,years);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, years);
         mBinding.spYear.setAdapter(adapter);
     }
 
-    private void setUserInfo(){
+    private void setUserInfo() {
         User user = AppDataManager.getUserModel();
 
-        if(user != null){
+        if (user != null) {
             mBinding.etNickName.setText(user.getNickName());
         }
     }

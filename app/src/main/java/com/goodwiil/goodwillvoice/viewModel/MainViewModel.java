@@ -1,6 +1,5 @@
 package com.goodwiil.goodwillvoice.viewModel;
 
-
 import android.view.View;
 
 import com.goodwiil.goodwillvoice.util.AppDataManager;
@@ -8,17 +7,17 @@ import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ActivityCallLog;
 import com.goodwiil.goodwillvoice.view.ActivityMenu;
 
-public class MainViewModel extends BaseViewModel{
+public class MainViewModel extends BaseViewModel {
 
-    public void menuBtnClick(View view){
+    public void menuBtnClick(View view) {
         ScreenManager.startActivity(view.getContext(), ActivityMenu.class);
     }
 
-    public void callLogBtnClick(View view){
+    public void callLogBtnClick(View view) {
         ScreenManager.startActivity(view.getContext(), ActivityCallLog.class);
     }
 
-    public void setPermissionPref(String name, Boolean auth){
+    public void setPermissionPref(String name, Boolean auth) {
         AppDataManager.setSharedPrefs(AppDataManager.PERMISSION_KEY, name, auth);
     }
 
