@@ -17,8 +17,4 @@ public class MainViewModel extends BaseViewModel {
         ScreenManager.startActivity(view.getContext(), ActivityCallLog.class);
     }
 
-    public void setPermissionPref(String name, Boolean auth) {
-        AppDataManager.setSharedPrefs(AppDataManager.PERMISSION_KEY, name, auth);
-    }
-
 }

@@ -55,7 +55,6 @@ public class CallBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-
         //화면이 꺼져도 앱 실행 기능
         this.context = context;
         setWakeLock(context);
