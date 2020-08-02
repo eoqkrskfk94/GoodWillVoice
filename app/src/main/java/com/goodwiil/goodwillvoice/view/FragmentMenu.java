@@ -1,21 +1,17 @@
 package com.goodwiil.goodwillvoice.view;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.View;
-
-import com.goodwiil.goodwillvoice.R;
-import com.goodwiil.goodwillvoice.model.User;
-import com.goodwiil.goodwillvoice.util.AppDataManager;
-import com.goodwiil.goodwillvoice.util.ScreenManager;
 
 import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceFragmentCompat;
+
+import com.goodwiil.goodwillvoice.R;
+import com.goodwiil.goodwillvoice.util.AppDataManager;
+import com.goodwiil.goodwillvoice.util.ScreenManager;
 
 public class FragmentMenu extends PreferenceFragment {
 
@@ -27,9 +23,8 @@ public class FragmentMenu extends PreferenceFragment {
     Preference callCenterPreference;
     Preference faqPreference;
 
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState){
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings_preference);
 
@@ -39,41 +34,31 @@ public class FragmentMenu extends PreferenceFragment {
         callCenterPreference = (Preference) findPreference("callCenter");
         faqPreference = (Preference) findPreference("faqInfo");
 
-
-
-        if(AppDataManager.getSharedPrefs(AppDataManager.PERMISSION_KEY).getBoolean(AppDataManager.PERMISSION_BATTERY, false)){
+        if (AppDataManager.getSharedPrefs(AppDataManager.PERMISSION_KEY).getBoolean(AppDataManager.PERMISSION_BATTERY, false)) {
             batteryPreference.setSummary("ON");
-        }else{
+        } else {
             batteryPreference.setSummary("OFF");
         }
 
-        if(AppDataManager.getSharedPrefs(AppDataManager.PERMISSION_KEY).getBoolean(AppDataManager.PERMISSION_OVERLAY, false)){
+        if (AppDataManager.getSharedPrefs(AppDataManager.PERMISSION_KEY).getBoolean(AppDataManager.PERMISSION_OVERLAY, false)) {
             overlayPreference.setSummary("ON");
-        }else{
+        } else {
             overlayPreference.setSummary("OFF");
         }
 
         //SharedPreference객체를 참조하여 설정상태에 대한 제어 가능..
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-
-
         levelPreference.setSummary(prefs.getString("level_list", "약"));
-
         prefs.registerOnSharedPreferenceChangeListener(listener);
-
 
         BtnClick(callCenterPreference, ActivityCallCenter.class);
         BtnClick(faqPreference, ActivityFaq.class);
-
 
     }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-
     }
-
 
     @Override
     public void onResume() {
@@ -86,25 +71,21 @@ public class FragmentMenu extends PreferenceFragment {
     @Override
     public void onPause() {
         super.onPause();
-
         prefs.unregisterOnSharedPreferenceChangeListener(listener);
-
     }
 
     SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if(key.equals(AppDataManager.SETTING_VIBRATE)){
+            if (key.equals(AppDataManager.SETTING_VIBRATE)) {
                 boolean vibrate = prefs.getBoolean(AppDataManager.SETTING_VIBRATE, false);
-
             }
 
-            if(key.equals(AppDataManager.SETTING_VOICE)){
+            if (key.equals(AppDataManager.SETTING_VOICE)) {
                 boolean voice = prefs.getBoolean(AppDataManager.SETTING_VOICE, false);
-
             }
 
-            if(key.equals(AppDataManager.SETTING_LEVEL)){
+            if (key.equals(AppDataManager.SETTING_LEVEL)) {
                 String level = prefs.getString(AppDataManager.SETTING_LEVEL, "");
                 levelPreference.setSummary(level);
             }
@@ -112,9 +93,7 @@ public class FragmentMenu extends PreferenceFragment {
         }
     };
 
-
-
-    private void BtnClick(Preference preference, final Class c){
+    private void BtnClick(Preference preference, final Class c) {
         preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -122,13 +101,6 @@ public class FragmentMenu extends PreferenceFragment {
                 return false;
             }
         });
-
     }
-
-
-
-
-
-
 
 }

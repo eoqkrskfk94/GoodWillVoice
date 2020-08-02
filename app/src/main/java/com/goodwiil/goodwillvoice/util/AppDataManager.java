@@ -3,7 +3,6 @@ package com.goodwiil.goodwillvoice.util;
 import android.app.Activity;
 import android.content.SharedPreferences;
 
-
 import com.goodwiil.goodwillvoice.application.GoodWillApplication;
 import com.goodwiil.goodwillvoice.model.User;
 import com.google.gson.Gson;
@@ -14,7 +13,6 @@ public class AppDataManager {
     public static final String SP_NAME = "userInfo";
     public static final String SP_KEY_USER = "userInfoKey";
 
-
     public static final String SETTING_VIBRATE = "vibration_alarm";
     public static final String SETTING_VOICE = "voice_alarm";
     public static final String SETTING_LEVEL = "level_list";
@@ -22,8 +20,6 @@ public class AppDataManager {
     public static final String PERMISSION_KEY = "permissionInfo";
     public static final String PERMISSION_BATTERY = "battery_optimization";
     public static final String PERMISSION_OVERLAY = "overlay_permission";
-
-
 
     //shared preference에 값을 저장하기
     public static void setSharedPrefs(String name, User user) {
@@ -33,7 +29,6 @@ public class AppDataManager {
         String json = gson.toJson(user);
         editor.putString(SP_KEY_USER, json);
         editor.apply();
-
     }
 
     public static void setSharedPrefs(String name, String permission, Boolean accessibility) {
@@ -42,7 +37,6 @@ public class AppDataManager {
         editor.putBoolean(permission, accessibility);
         editor.apply();
     }
-
 
     //shared preference에 값을 불러오기
     public static SharedPreferences getSharedPrefs(String name) {
@@ -53,14 +47,6 @@ public class AppDataManager {
         Gson gson = new Gson();
         return (gson.fromJson(getSharedPrefs(SP_NAME).getString(SP_KEY_USER, null), User.class));
     }
-
-
-
-
-
-
-
-
 
 
 }

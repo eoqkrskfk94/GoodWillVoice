@@ -1,14 +1,12 @@
 package com.goodwiil.goodwillvoice.model;
 
-
 public class User {
-
     private String year;
     private String gender;
     private String career;
     private String nickName;
 
-    public User() { }
+    public User() {}
 
     public User(String year, String gender, String career, String nickName) {
         this.year = year;
@@ -48,9 +46,5 @@ public class User {
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
-
-
-
-
 
 }

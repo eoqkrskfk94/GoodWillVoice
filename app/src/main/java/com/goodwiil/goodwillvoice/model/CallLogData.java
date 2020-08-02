@@ -4,7 +4,7 @@ public class CallLogData {
     public String name;
     public int value;
 
-    public CallLogData(String name, int value){
+    public CallLogData(String name, int value) {
         this.name = name;
         this.value = value;
     }
