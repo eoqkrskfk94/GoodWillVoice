@@ -2,22 +2,13 @@ package com.goodwiil.goodwillvoice;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Build;
 import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
-import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 
-import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
-
-import androidx.annotation.Nullable;
-
-import static android.speech.tts.TextToSpeech.ERROR;
 
 public class VoiceService extends Service implements TextToSpeech.OnInitListener {
 
@@ -58,11 +49,10 @@ public class VoiceService extends Service implements TextToSpeech.OnInitListener
                 Log.e("TTS", "This Language is not supported");
             }
             ScreenManager.printToast(this, "TTS GOOD");
-            tts.speak("전화", TextToSpeech.QUEUE_FLUSH, null,null);
+            tts.speak("전화", TextToSpeech.QUEUE_FLUSH, null, null);
         } else {
             Log.e("TTS", "Initilization Failed!");
         }
     }
-
 
 }

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
-import com.goodwiil.goodwillvoice.view.ServiceIncoming;
 
 public class ScreenManager {
 
@@ -13,7 +12,6 @@ public class ScreenManager {
     public static void startActivity(Context context, Class c){
         Intent intent = new Intent(context, c);
         context.startActivity(intent);
-
     }
 
     //Service 시작 (이름과 번호도 같이 보내기)

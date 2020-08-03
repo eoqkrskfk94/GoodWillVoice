@@ -1,9 +1,9 @@
 package com.goodwiil.goodwillvoice.view;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
-import android.os.Bundle;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.ActivityMenuBinding;
@@ -25,15 +25,10 @@ public class ActivityMenu extends AppCompatActivity {
 
 
     private ActivityMenuBinding mBinding;
-    private void createBinding(){
+    private void createBinding() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_menu);
         mBinding.setViewModel(new MenuViewModel());
     }
-
-
-
-
-
 
 
 }

@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
 
+import androidx.core.content.ContextCompat;
 import com.goodwiil.goodwillvoice.model.CallAnalysisInfo;
 import com.goodwiil.goodwillvoice.model.CallLogData;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
@@ -19,14 +20,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import androidx.core.content.ContextCompat;
-
 public class CallLogDataManager {
 
     public static CallAnalysisInfo callAnalysisInfo = new CallAnalysisInfo();
 
     //위치정보 받기
-    public static ArrayList<Double> getCurrentLoc(Context context){
+    public static ArrayList<Double> getCurrentLoc(Context context) {
 
         ArrayList<Double> gps = new ArrayList<Double>();
         double longitude;
@@ -35,7 +34,7 @@ public class CallLogDataManager {
         int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
         final LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
-        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             longitude = location.getLongitude();
             latitude = location.getLatitude();
@@ -54,7 +53,7 @@ public class CallLogDataManager {
 
         int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG);
 
-        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             Cursor cursor = context.getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null);
             int log_name = cursor.getColumnIndex(CallLog.Calls.CACHED_NAME);
             int log_number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
@@ -62,7 +61,7 @@ public class CallLogDataManager {
             int log_date = cursor.getColumnIndex(CallLog.Calls.DATE);
             int log_duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
 
-            while (cursor.moveToNext()){
+            while (cursor.moveToNext()) {
                 CallLogInfo callLogInfo = new CallLogInfo();
 
                 if(cursor.getString(log_name) == null){
@@ -87,7 +86,7 @@ public class CallLogDataManager {
 
                 String callType = cursor.getString(log_type);
                 int code = Integer.parseInt(callType);
-                switch(code){
+                switch (code) {
                     case CallLog.Calls.OUTGOING_TYPE:
                         callLogInfo.setType("OUTGOING");
                         if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumOutgoing(callAnalysisInfo.getNumOutgoing()+1);
@@ -108,13 +107,10 @@ public class CallLogDataManager {
 
                 callLogInfos.add(callLogInfo);
 
-
             }
 
             cursor.close();
-        }
-
-        else{
+        } else {
             ScreenManager.printToast(context, "최근기록 읽기 권한을 받아야 사용할수 있습니다.");
         }
 
@@ -127,13 +123,13 @@ public class CallLogDataManager {
     }
 
     //연락처 불러오기
-    public static ArrayList<ContactInfo> getContacts(Context context){
+    public static ArrayList<ContactInfo> getContacts(Context context) {
 
         ArrayList<ContactInfo> contactInfos = new ArrayList<ContactInfo>();
 
         int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS);
 
-        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             Cursor cursor = context.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
 
             while (cursor.moveToNext()) {
@@ -163,13 +159,9 @@ public class CallLogDataManager {
                     contactInfos.add(contactsInfo);
                 }
             }
-        }
-        else{
+        } else {
             ScreenManager.printToast(context, "연락처 권한을 받아야 사용할수 있습니다.");
         }
-
-
-
 
         return contactInfos;
     }
@@ -182,8 +174,8 @@ public class CallLogDataManager {
         Uri lookupUri = Uri.withAppendedPath(
                 ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
                 Uri.encode(number));
-        String[] mPhoneNumberProjection = { ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME };
-        Cursor cur = context.getContentResolver().query(lookupUri,mPhoneNumberProjection, null, null, null);
+        String[] mPhoneNumberProjection = {ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME};
+        Cursor cur = context.getContentResolver().query(lookupUri, mPhoneNumberProjection, null, null, null);
         try {
             if (cur.moveToFirst()) {
                 contactName = cur.getString(2);
@@ -198,16 +190,11 @@ public class CallLogDataManager {
     }
 
 
-
-
-
-
     //날짜 형식 바꾸기 "yyyy/MM/dd HH:mm"
-    public static String changeDate(String log_date){
+    public static String changeDate(String log_date) {
         Date logDate = new Date(Long.valueOf(log_date));
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         String newDate = formatter.format(logDate);
-
 
         return newDate;
     }
