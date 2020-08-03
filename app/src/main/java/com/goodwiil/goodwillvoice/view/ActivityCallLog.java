@@ -17,49 +17,73 @@ import java.util.ArrayList;
 public class ActivityCallLog extends AppCompatActivity {
     //data binding
     private ActivityCallLogBinding mBinding;
+    private int numberOfIncomingCall;
+    private int numberOfknown;
+    private int numberOfUnknown;
+    private int unknownRejected;
+    private int unknownReceived;
+    private int unknownMissed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createBinding();
+        processingData();
+
+        mBinding.tvTotal.setText(String.valueOf(numberOfIncomingCall));
+        mBinding.tvTotalUnknown.setText(String.valueOf(numberOfUnknown));
+        mBinding.tvTotalUnknownMore.setText(String.valueOf(numberOfUnknown));
+        mBinding.tvTotalKnown.setText(String.valueOf(numberOfknown));
+
+        mBinding.tvReceived.setText(String.valueOf(unknownReceived));
+        mBinding.tvRejected.setText(String.valueOf(unknownRejected));
+        mBinding.tvMissed.setText(String.valueOf(unknownMissed));
 
         // Write a message to the database
 
     }
 
     //Data 분별하기
-    public ArrayList<CallLogData> processingData() {
+    public void processingData() {
         ArrayList<CallLogData> callLogData = new ArrayList<>();
 
         // 사용자 통화내역 기록 가져오기
         ArrayList<CallLogInfo> callLogList = CallLogDataManager.getCallLog(this);
 
-        int numberOfIncomingCall = 0;
-        int numberOfknown = 0;
-        int numberOfUnknown = 0;
+        numberOfIncomingCall = 0;
+        numberOfknown = 0;
+        numberOfUnknown = 0;
+        unknownRejected = 0;
+        unknownReceived = 0;
+        unknownMissed = 0;
 
         for (CallLogInfo info : callLogList) {
-            if (info.getType().equals("INCOMING")) {
+
+            if (!info.getType().equals("OUTGOING")) {
                 numberOfIncomingCall++;
                 if (info.getName().equals("unknown")) {
                     numberOfUnknown++;
+                    if(info.getDuration() > 0){
+                        System.out.println(info.getDuration());
+                        unknownReceived++;
+                    }
+                }
+            }
+            if (info.getName().equals("unknown")) {
+                if(info.getType().equals("REJECTED")){
+                    unknownRejected++;
+                }
+                else if(info.getType().equals("MISSED")){
+                    unknownMissed++;
                 }
             }
         }
-
         numberOfknown = numberOfIncomingCall - numberOfUnknown;
-
-        callLogData.add(new CallLogData("총 수신전화", numberOfIncomingCall));
-        callLogData.add(new CallLogData("등록된 전화", numberOfknown));
-        callLogData.add(new CallLogData("미등록된 전화", numberOfUnknown));
-
-        return callLogData;
     }
 
     private void createBinding() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_call_log);
         mBinding.setViewModel(new CallLogViewModel());
     }
-
 
 }

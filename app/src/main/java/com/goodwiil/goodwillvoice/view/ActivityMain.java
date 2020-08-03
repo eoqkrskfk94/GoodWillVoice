@@ -50,6 +50,9 @@ public class ActivityMain extends AppCompatActivity implements CircleProgressBar
         //현재 회원 등록 정보 화면에 출력하기
         getData();
 
+        //최근기록 불러오기
+        CallLogDataManager.callLogInfos = CallLogDataManager.getCallLog(this);
+
         //프로그레스 바 세팅
         circleProgressBar = findViewById(R.id.cpb_circlebar);
         circleProgressBar.setProgress(80);
@@ -60,14 +63,14 @@ public class ActivityMain extends AppCompatActivity implements CircleProgressBar
         //현재 회원 등록 정보 화면에 출력하기
         getData();
 
-        //전화 상태 권한 받기
-        checkPermission();
-
-        //배터리 최적화 권한 받기
-        checkPermissionBattery();
-
-        //앱 위에 그리기 권한 받기
-        checkPermissionOverlay();
+//        //전화 상태 권한 받기
+//        checkPermission();
+//
+//        //배터리 최적화 권한 받기
+//        checkPermissionBattery();
+//
+//        //앱 위에 그리기 권한 받기
+//        checkPermissionOverlay();
 
 
         //startSubThread();
