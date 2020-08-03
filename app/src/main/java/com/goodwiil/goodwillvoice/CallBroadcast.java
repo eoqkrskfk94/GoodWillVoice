@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.VibrationEffect;
@@ -20,6 +21,7 @@ import com.goodwiil.goodwillvoice.model.IncomingNumber;
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceCall;
+import com.goodwiil.goodwillvoice.view.ServiceEnd;
 import com.goodwiil.goodwillvoice.view.ServiceIncoming;
 
 import java.text.DateFormat;
@@ -48,6 +50,7 @@ public class CallBroadcast extends BroadcastReceiver {
     private Boolean vibrate;
     private Boolean voice;
     private String level;
+
     private Context context;
 
     @SuppressLint("InvalidWakeLockTag")
@@ -59,6 +62,10 @@ public class CallBroadcast extends BroadcastReceiver {
         this.context = context;
         setWakeLock(context);
         setting(context);
+
+//        AudioManager am = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+//        am.setStreamVolume(AudioManager.STREAM_VOICE_CALL, 0, 0);
+//        am.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
 
         //전화 상태 받아오기
         String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
@@ -93,6 +100,7 @@ public class CallBroadcast extends BroadcastReceiver {
 
                     wakeLock.acquire();
 
+
                     //날짜 기록
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     Date date = new Date();
@@ -106,12 +114,11 @@ public class CallBroadcast extends BroadcastReceiver {
                     //앱 위에 그리기 권한이 있으
                     if (Settings.canDrawOverlays(context)) {
                         ScreenManager.startService(context, ServiceCall.class, model);
-
-                        tt = timerTaskMaker();
-                        final Timer timer = new Timer();
-                        timer.schedule(tt, 0, 1000);
-
                     }
+
+                    tt = timerTaskMaker();
+                    final Timer timer = new Timer();
+                    timer.schedule(tt, 0, 1000);
 
                 }
             }
@@ -121,13 +128,28 @@ public class CallBroadcast extends BroadcastReceiver {
         //전화를 끊었을때
         if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE)) {
 
+            if(wakeLock.isHeld()) wakeLock.release();
+            if(number != null){
+                model = new IncomingNumber(incomingNumber, incomingName);
 
-            if (wakeLock.isHeld()) wakeLock.release();
+                System.out.println("여기여깅");
+                System.out.println(model.getNumber());
+                System.out.println(model.getName());
+
+                if(callLogInfo != null && callLogInfo.getType() == null){
+                    if(Settings.canDrawOverlays(context)){
+                        System.out.println("되냐고 이거");
+                        ScreenManager.startService(context, ServiceEnd.class, model);
+                    }
+                }
+            }
 
             tt.cancel();
 
             context.stopService(new Intent(context, ServiceIncoming.class));
             context.stopService(new Intent(context, ServiceCall.class));
+
+
 
             ScreenManager.printToast(context,
                     callLogInfo.getNumber() + "\n" +
@@ -156,7 +178,6 @@ public class CallBroadcast extends BroadcastReceiver {
 
         if (wakeLock == null) {
             wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "TimerWakeLock:");
-
         }
     }
 
@@ -169,7 +190,9 @@ public class CallBroadcast extends BroadcastReceiver {
 
                 //통화시간 기록
                 callLogInfo.setDuration(counter);
-
+                if(counter == 60){
+                    context.stopService(new Intent(context, ServiceCall.class));
+                }
                 vibrateAndVoice(counter);
             }
         };
