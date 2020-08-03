@@ -23,6 +23,16 @@ import java.util.Date;
 public class CallLogDataManager {
 
     public static CallAnalysisInfo callAnalysisInfo = new CallAnalysisInfo();
+    public static ArrayList<CallLogInfo> callLogInfos = new ArrayList<CallLogInfo>();
+
+    public static int knownTotal = 0;
+    public static int unknownTotal = 0;
+
+    public static int totalCall = 0;
+    public static int knownCallTotal = 0;
+    public static int unknownCallTotal = 0;
+    public static int knownCallTotalNum = 0;
+    public static int unknownCallTotalNum = 0;
 
     //위치정보 받기
     public static ArrayList<Double> getCurrentLoc(Context context) {
@@ -48,7 +58,14 @@ public class CallLogDataManager {
 
     //최근기록 불러오기
     public static ArrayList<CallLogInfo> getCallLog(Context context) {
+        CallLogDataManager.unknownCallTotalNum = 0;
+        CallLogDataManager.unknownCallTotal = 0;
+        CallLogDataManager.knownCallTotalNum = 0;
+        CallLogDataManager.knownCallTotal = 0;
+        CallLogDataManager.unknownTotal = 0;
+        CallLogDataManager.knownTotal = 0;
 
+        callAnalysisInfo = new CallAnalysisInfo();
         ArrayList<CallLogInfo> callLogInfos = new ArrayList<CallLogInfo>();
 
         int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG);
@@ -65,20 +82,33 @@ public class CallLogDataManager {
                 CallLogInfo callLogInfo = new CallLogInfo();
 
                 if(cursor.getString(log_name) == null){
+                    CallLogDataManager.unknownTotal += 1;
                     callLogInfo.setName("unknown");
-                    if((Integer.parseInt(cursor.getString(log_duration)) > callAnalysisInfo.getUnknownCallMax())){
-                        callAnalysisInfo.setUnknownCallMax(Integer.parseInt(cursor.getString(log_duration)));
-                    }
                     if((Integer.parseInt(cursor.getString(log_duration)) > 0)){
+
+                        CallLogDataManager.unknownCallTotalNum += 1;
+                        CallLogDataManager.unknownCallTotal += Integer.parseInt(cursor.getString(log_duration));
+
+
+                        if((Integer.parseInt(cursor.getString(log_duration)) > callAnalysisInfo.getUnknownCallMax())){
+                            callAnalysisInfo.setUnknownCallMax(Integer.parseInt(cursor.getString(log_duration)));
+                        }
+
                         if((Integer.parseInt(cursor.getString(log_duration)) < callAnalysisInfo.getUnknownCallMin())){
                             callAnalysisInfo.setUnknownCallMin(Integer.parseInt(cursor.getString(log_duration)));
                         }
+
                     }
 
                 }
 
-                else
+                else{
+                    CallLogDataManager.knownTotal += 1;
+                    CallLogDataManager.knownCallTotalNum += 1;
+                    CallLogDataManager.knownCallTotal += Integer.parseInt(cursor.getString(log_duration));
                     callLogInfo.setName(cursor.getString(log_name));
+                }
+
 
                 callLogInfo.setNumber(cursor.getString(log_number));
                 callLogInfo.setDate(changeDate(cursor.getString(log_date)));
@@ -110,13 +140,18 @@ public class CallLogDataManager {
             }
 
             cursor.close();
+
+            CallLogDataManager.totalCall = CallLogDataManager.knownTotal + CallLogDataManager.unknownTotal;
         } else {
             ScreenManager.printToast(context, "최근기록 읽기 권한을 받아야 사용할수 있습니다.");
         }
 
-        System.out.println(callAnalysisInfo.getUnknownCallMax());
-        System.out.println(callAnalysisInfo.getUnknownCallMin());
+        System.out.println(secondsToString(callAnalysisInfo.getUnknownCallMax()));
+        System.out.println(secondsToString(callAnalysisInfo.getUnknownCallMin()));
         System.out.println(callAnalysisInfo.getNumRejected());
+        System.out.println(secondsToString((CallLogDataManager.unknownCallTotal)/CallLogDataManager.unknownCallTotalNum));
+
+
         System.out.println(callAnalysisInfo.getNumIncoming());
         System.out.println(callAnalysisInfo.getNumRejected());
         return callLogInfos;
@@ -210,6 +245,11 @@ public class CallLogDataManager {
             return src.replaceFirst("(^[0-9]{4})([0-9]{4})([0-9]{4})$", "$1-$2-$3");
         }
         return src.replaceFirst("(^02|[0-9]{3})([0-9]{3,4})([0-9]{4})$", "$1-$2-$3");
+    }
+
+    //초를 mm:ss 형식으로 바꾸기
+    private static String secondsToString(int pTime) {
+        return String.format("%02d:%02d", pTime / 60, pTime % 60);
     }
 
 }
