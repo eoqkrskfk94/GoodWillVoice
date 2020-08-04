@@ -132,33 +132,19 @@ public class CallBroadcast extends BroadcastReceiver {
             if(number != null){
                 model = new IncomingNumber(incomingNumber, incomingName);
 
-                System.out.println("여기여깅");
-                System.out.println(model.getNumber());
-                System.out.println(model.getName());
 
-                if(callLogInfo != null && callLogInfo.getType() == null){
-                    if(Settings.canDrawOverlays(context)){
-                        System.out.println("되냐고 이거");
-                        ScreenManager.startService(context, ServiceEnd.class, model);
-                    }
-                }
+//                if(callLogInfo != null && callLogInfo.getType() == null){
+//                    if(Settings.canDrawOverlays(context)){
+//                        ScreenManager.startService(context, ServiceEnd.class, model);
+//                    }
+//                }
             }
 
-            tt.cancel();
+            if(tt != null) tt.cancel();
 
             context.stopService(new Intent(context, ServiceIncoming.class));
             context.stopService(new Intent(context, ServiceCall.class));
 
-
-
-            ScreenManager.printToast(context,
-                    callLogInfo.getNumber() + "\n" +
-                            callLogInfo.getType() + "\n" +
-                            callLogInfo.getDate() + "\n" +
-                            callLogInfo.getDuration() + "\n" +
-                            callLogInfo.getLongitude() + "\n" +
-                            callLogInfo.getLatitude()
-            );
 
         }
     }
