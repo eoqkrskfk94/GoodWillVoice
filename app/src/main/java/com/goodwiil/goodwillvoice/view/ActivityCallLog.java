@@ -39,6 +39,9 @@ public class ActivityCallLog extends AppCompatActivity {
         mBinding.tvRejected.setText(String.valueOf(unknownRejected));
         mBinding.tvMissed.setText(String.valueOf(unknownMissed));
 
+        mBinding.tvMax.setText(CallLogDataManager.secondsToString(CallLogDataManager.callAnalysisInfo.getUnknownCallMax()));
+        mBinding.tvMin.setText(CallLogDataManager.secondsToString(CallLogDataManager.callAnalysisInfo.getUnknownCallMin()));
+        mBinding.tvAverage.setText(CallLogDataManager.secondsToString(CallLogDataManager.unknownCallTotal/CallLogDataManager.unknownCallTotalNum));
         // Write a message to the database
 
     }
@@ -64,7 +67,6 @@ public class ActivityCallLog extends AppCompatActivity {
                 if (info.getName().equals("unknown")) {
                     numberOfUnknown++;
                     if(info.getDuration() > 0){
-                        System.out.println(info.getDuration());
                         unknownReceived++;
                     }
                 }

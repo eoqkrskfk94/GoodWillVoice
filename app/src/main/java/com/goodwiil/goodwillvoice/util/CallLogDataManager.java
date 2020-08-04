@@ -248,7 +248,7 @@ public class CallLogDataManager {
     }
 
     //초를 mm:ss 형식으로 바꾸기
-    private static String secondsToString(int pTime) {
+    public static String secondsToString(int pTime) {
         return String.format("%02d:%02d", pTime / 60, pTime % 60);
     }
 
