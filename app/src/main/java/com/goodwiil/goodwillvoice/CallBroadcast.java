@@ -189,6 +189,9 @@ public class CallBroadcast extends BroadcastReceiver {
     //진동 기능
     public void vibrateAndVoice(int sec) {
 
+        long[] timings = new long[]{100, 100, 400, 200, 400};
+        int[] amplitudes = new int[]{0, 50, 100, 50, 150};
+
 
         int call_length[] = {0, 0, 0};
         if (level.equals("")) {
@@ -219,13 +222,14 @@ public class CallBroadcast extends BroadcastReceiver {
 
         if (sec == call_length[0]) {
             if (vibrate)
-                vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+                //vibrator.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1));
+                vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
         } else if (sec == call_length[1]) {
             if (vibrate)
-                vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+                vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
         } else if (sec == call_length[2]) {
             if (vibrate)
-                vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+                vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
         }
 
     }

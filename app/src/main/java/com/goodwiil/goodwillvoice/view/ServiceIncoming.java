@@ -93,7 +93,7 @@ public class ServiceIncoming extends Service {
                         | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
                 PixelFormat.TRANSLUCENT);
 
-        params.gravity = Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL;
+        params.gravity = Gravity.CENTER_VERTICAL | Gravity.TOP;
 
         return params;
     }

@@ -20,7 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl"
             android:layout_width="0dp"
-            android:layout_height="300dp"
+            android:layout_height="290dp"
             android:background="@drawable/popup_layout_ringing"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/button"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 />
 
             <TextView
