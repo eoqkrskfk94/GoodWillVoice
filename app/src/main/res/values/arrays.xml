@@ -21,9 +21,9 @@
     </string-array>
 
     <string-array name="level">
-        <item>약</item>
-        <item>중</item>
-        <item>강</item>
+        <item>약 (10분 마다 진동)</item>
+        <item>중 (5분 마다 진동)</item>
+        <item>강 (1분 마다 진동)</item>
     </string-array>
 
 
