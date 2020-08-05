@@ -146,14 +146,6 @@ public class CallLogDataManager {
             ScreenManager.printToast(context, "최근기록 읽기 권한을 받아야 사용할수 있습니다.");
         }
 
-        System.out.println(secondsToString(callAnalysisInfo.getUnknownCallMax()));
-        System.out.println(secondsToString(callAnalysisInfo.getUnknownCallMin()));
-        System.out.println(callAnalysisInfo.getNumRejected());
-        System.out.println(secondsToString((CallLogDataManager.unknownCallTotal)/CallLogDataManager.unknownCallTotalNum));
-
-
-        System.out.println(callAnalysisInfo.getNumIncoming());
-        System.out.println(callAnalysisInfo.getNumRejected());
         return callLogInfos;
     }
 
@@ -248,7 +240,7 @@ public class CallLogDataManager {
     }
 
     //초를 mm:ss 형식으로 바꾸기
-    private static String secondsToString(int pTime) {
+    public static String secondsToString(int pTime) {
         return String.format("%02d:%02d", pTime / 60, pTime % 60);
     }
 

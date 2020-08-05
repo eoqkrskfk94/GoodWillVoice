@@ -7,9 +7,9 @@ import androidx.databinding.DataBindingUtil;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.ActivityCallLogBinding;
-import com.goodwiil.goodwillvoice.model.CallLogData;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
+import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.viewModel.CallLogViewModel;
 
 import java.util.ArrayList;
@@ -30,22 +30,24 @@ public class ActivityCallLog extends AppCompatActivity {
         createBinding();
         processingData();
 
-        mBinding.tvTotal.setText(String.valueOf(numberOfIncomingCall));
-        mBinding.tvTotalUnknown.setText(String.valueOf(numberOfUnknown));
-        mBinding.tvTotalUnknownMore.setText(String.valueOf(numberOfUnknown));
-        mBinding.tvTotalKnown.setText(String.valueOf(numberOfknown));
+        ScreenManager.startCountAnimation(numberOfIncomingCall, mBinding.tvTotal);
+        ScreenManager.startCountAnimation(numberOfUnknown, mBinding.tvTotalUnknown);
+        ScreenManager.startCountAnimation(numberOfUnknown, mBinding.tvTotalUnknownMore);
 
-        mBinding.tvReceived.setText(String.valueOf(unknownReceived));
-        mBinding.tvRejected.setText(String.valueOf(unknownRejected));
-        mBinding.tvMissed.setText(String.valueOf(unknownMissed));
+        ScreenManager.startCountAnimation(numberOfknown, mBinding.tvTotalKnown);
+        ScreenManager.startCountAnimation(unknownReceived, mBinding.tvReceived);
+        ScreenManager.startCountAnimation(unknownRejected, mBinding.tvRejected);
+        ScreenManager.startCountAnimation(unknownMissed, mBinding.tvMissed);
 
-        // Write a message to the database
+        ScreenManager.startCountAnimationTime(CallLogDataManager.callAnalysisInfo.getUnknownCallMax(), mBinding.tvMax);
+        ScreenManager.startCountAnimationTime(CallLogDataManager.callAnalysisInfo.getUnknownCallMin(), mBinding.tvMin);
+        ScreenManager.startCountAnimationTime(CallLogDataManager.unknownCallTotal/CallLogDataManager.unknownCallTotalNum, mBinding.tvAverage);
+
 
     }
 
     //Data 분별하기
     public void processingData() {
-        ArrayList<CallLogData> callLogData = new ArrayList<>();
 
         // 사용자 통화내역 기록 가져오기
         ArrayList<CallLogInfo> callLogList = CallLogDataManager.getCallLog(this);
@@ -64,7 +66,6 @@ public class ActivityCallLog extends AppCompatActivity {
                 if (info.getName().equals("unknown")) {
                     numberOfUnknown++;
                     if(info.getDuration() > 0){
-                        System.out.println(info.getDuration());
                         unknownReceived++;
                     }
                 }

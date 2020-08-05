@@ -50,6 +50,7 @@ public class CallBroadcast extends BroadcastReceiver {
     private Boolean vibrate;
     private Boolean voice;
     private String level;
+    private static String lastState;
 
     private Context context;
 
@@ -79,6 +80,7 @@ public class CallBroadcast extends BroadcastReceiver {
         if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
 
             if (number != null) {
+                lastState = state;
                 incomingName = CallLogDataManager.contactExists(context, number);
                 if (incomingName.equals("unknown"))
                     model = new IncomingNumber(incomingNumber, incomingName);
@@ -93,35 +95,43 @@ public class CallBroadcast extends BroadcastReceiver {
 
         //전화를 받았을때, 전화를 걸때
         if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
-            context.stopService(new Intent(context, ServiceIncoming.class));
-            if (!(intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL))) {
-                if (number != null) {
-                    model = new IncomingNumber(incomingNumber, incomingName);
 
-                    wakeLock.acquire();
+            //통화 받았을때만
+            if(lastState.equals("RINGING")){
+
+                context.stopService(new Intent(context, ServiceIncoming.class));
+                if (!(intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL))) {
+                    if (number != null) {
+                        model = new IncomingNumber(incomingNumber, incomingName);
+
+                        wakeLock.acquire();
 
 
-                    //날짜 기록
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    Date date = new Date();
-                    callLogInfo.setDate(dateFormat.format(date));
+                        //날짜 기록
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        Date date = new Date();
+                        callLogInfo.setDate(dateFormat.format(date));
 
-                    //전화 받은 위치 기록
-                    ArrayList<Double> gps = CallLogDataManager.getCurrentLoc(context);
-                    callLogInfo.setLongitude(gps.get(0));
-                    callLogInfo.setLatitude(gps.get(1));
+                        //전화 받은 위치 기록
+                        ArrayList<Double> gps = CallLogDataManager.getCurrentLoc(context);
+                        callLogInfo.setLongitude(gps.get(0));
+                        callLogInfo.setLatitude(gps.get(1));
 
-                    //앱 위에 그리기 권한이 있으
-                    if (Settings.canDrawOverlays(context)) {
-                        ScreenManager.startService(context, ServiceCall.class, model);
+                        //앱 위에 그리기 권한이 있으
+                        if (Settings.canDrawOverlays(context)) {
+                            ScreenManager.startService(context, ServiceCall.class, model);
+                        }
+
+                        tt = timerTaskMaker();
+                        final Timer timer = new Timer();
+                        timer.schedule(tt, 0, 1000);
+
                     }
-
-                    tt = timerTaskMaker();
-                    final Timer timer = new Timer();
-                    timer.schedule(tt, 0, 1000);
-
                 }
+
             }
+
+
 
         }
 
@@ -132,33 +142,21 @@ public class CallBroadcast extends BroadcastReceiver {
             if(number != null){
                 model = new IncomingNumber(incomingNumber, incomingName);
 
-                System.out.println("여기여깅");
-                System.out.println(model.getNumber());
-                System.out.println(model.getName());
 
-                if(callLogInfo != null && callLogInfo.getType() == null){
-                    if(Settings.canDrawOverlays(context)){
-                        System.out.println("되냐고 이거");
-                        ScreenManager.startService(context, ServiceEnd.class, model);
-                    }
-                }
+//                if(callLogInfo != null && callLogInfo.getType() == null){
+//                    if(Settings.canDrawOverlays(context)){
+//                        ScreenManager.startService(context, ServiceEnd.class, model);
+//                    }
+//                }
             }
 
-            tt.cancel();
+            lastState = state;
+
+            if(tt != null) tt.cancel();
 
             context.stopService(new Intent(context, ServiceIncoming.class));
             context.stopService(new Intent(context, ServiceCall.class));
 
-
-
-            ScreenManager.printToast(context,
-                    callLogInfo.getNumber() + "\n" +
-                            callLogInfo.getType() + "\n" +
-                            callLogInfo.getDate() + "\n" +
-                            callLogInfo.getDuration() + "\n" +
-                            callLogInfo.getLongitude() + "\n" +
-                            callLogInfo.getLatitude()
-            );
 
         }
     }
@@ -167,7 +165,7 @@ public class CallBroadcast extends BroadcastReceiver {
         prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         voice = prefs.getBoolean("voice_alarm", false);
         vibrate = prefs.getBoolean("vibration_alarm", true);
-        level = prefs.getString("level_list", "강");
+        level = prefs.getString("level_list", "강 (1분 마다 진동)");
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
     }
@@ -203,6 +201,9 @@ public class CallBroadcast extends BroadcastReceiver {
     //진동 기능
     public void vibrateAndVoice(int sec) {
 
+        long[] timings = new long[]{100, 100, 400, 200, 400};
+        int[] amplitudes = new int[]{0, 50, 100, 50, 150};
+
 
         int call_length[] = {0, 0, 0};
         if (level.equals("")) {
@@ -211,19 +212,19 @@ public class CallBroadcast extends BroadcastReceiver {
             call_length[0] = 30;
             call_length[1] = 60;
             call_length[2] = 90;
-        } else if (level.equals("약")) {
+        } else if (level.equals("약 (10분 마다 진동)")) {
             //call_length[0] = 180;
             //call_length[1] = 300;
             call_length[0] = 30;
             call_length[1] = 60;
             call_length[2] = 90;
-        } else if (level.equals("중")) {
+        } else if (level.equals("중 (5분 마다 진동)")) {
             //call_length[0] = 540;
             //call_length[1] = 900;
             call_length[0] = 20;
             call_length[1] = 30;
             call_length[2] = 40;
-        } else if (level.equals("강")) {
+        } else if (level.equals("강 (1분 마다 진동)")) {
             //call_length[0] = 60;
             //call_length[1] = 180;
             call_length[0] = 10;
@@ -233,13 +234,14 @@ public class CallBroadcast extends BroadcastReceiver {
 
         if (sec == call_length[0]) {
             if (vibrate)
-                vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+                //vibrator.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1));
+                vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
         } else if (sec == call_length[1]) {
             if (vibrate)
-                vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+                vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
         } else if (sec == call_length[2]) {
             if (vibrate)
-                vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+                vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
         }
 
     }

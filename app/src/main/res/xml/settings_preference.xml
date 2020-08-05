@@ -8,7 +8,7 @@
     <PreferenceCategory android:title="앱 설정">
 
         <ListPreference
-            android:defaultValue="강"
+            android:defaultValue="강 (1분 마다 진동)"
             android:entries="@array/level"
             android:entryValues="@array/level"
             android:key="level_list"
