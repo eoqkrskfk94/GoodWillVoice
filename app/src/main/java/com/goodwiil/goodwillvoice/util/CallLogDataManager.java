@@ -146,14 +146,6 @@ public class CallLogDataManager {
             ScreenManager.printToast(context, "최근기록 읽기 권한을 받아야 사용할수 있습니다.");
         }
 
-        System.out.println(secondsToString(callAnalysisInfo.getUnknownCallMax()));
-        System.out.println(secondsToString(callAnalysisInfo.getUnknownCallMin()));
-        System.out.println(callAnalysisInfo.getNumRejected());
-        System.out.println(secondsToString((CallLogDataManager.unknownCallTotal)/CallLogDataManager.unknownCallTotalNum));
-
-
-        System.out.println(callAnalysisInfo.getNumIncoming());
-        System.out.println(callAnalysisInfo.getNumRejected());
         return callLogInfos;
     }
 

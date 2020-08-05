@@ -48,7 +48,6 @@ public class ActivityCallLog extends AppCompatActivity {
 
     //Data 분별하기
     public void processingData() {
-        ArrayList<CallLogData> callLogData = new ArrayList<>();
 
         // 사용자 통화내역 기록 가져오기
         ArrayList<CallLogInfo> callLogList = CallLogDataManager.getCallLog(this);
