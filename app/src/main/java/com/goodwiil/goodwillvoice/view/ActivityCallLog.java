@@ -7,9 +7,9 @@ import androidx.databinding.DataBindingUtil;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.ActivityCallLogBinding;
-import com.goodwiil.goodwillvoice.model.CallLogData;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
+import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.viewModel.CallLogViewModel;
 
 import java.util.ArrayList;
@@ -30,19 +30,19 @@ public class ActivityCallLog extends AppCompatActivity {
         createBinding();
         processingData();
 
-        mBinding.tvTotal.setText(String.valueOf(numberOfIncomingCall));
-        mBinding.tvTotalUnknown.setText(String.valueOf(numberOfUnknown));
-        mBinding.tvTotalUnknownMore.setText(String.valueOf(numberOfUnknown));
-        mBinding.tvTotalKnown.setText(String.valueOf(numberOfknown));
+        ScreenManager.startCountAnimation(numberOfIncomingCall, mBinding.tvTotal);
+        ScreenManager.startCountAnimation(numberOfUnknown, mBinding.tvTotalUnknown);
+        ScreenManager.startCountAnimation(numberOfUnknown, mBinding.tvTotalUnknownMore);
 
-        mBinding.tvReceived.setText(String.valueOf(unknownReceived));
-        mBinding.tvRejected.setText(String.valueOf(unknownRejected));
-        mBinding.tvMissed.setText(String.valueOf(unknownMissed));
+        ScreenManager.startCountAnimation(numberOfknown, mBinding.tvTotalKnown);
+        ScreenManager.startCountAnimation(unknownReceived, mBinding.tvReceived);
+        ScreenManager.startCountAnimation(unknownRejected, mBinding.tvRejected);
+        ScreenManager.startCountAnimation(unknownMissed, mBinding.tvMissed);
 
-        mBinding.tvMax.setText(CallLogDataManager.secondsToString(CallLogDataManager.callAnalysisInfo.getUnknownCallMax()));
-        mBinding.tvMin.setText(CallLogDataManager.secondsToString(CallLogDataManager.callAnalysisInfo.getUnknownCallMin()));
-        mBinding.tvAverage.setText(CallLogDataManager.secondsToString(CallLogDataManager.unknownCallTotal/CallLogDataManager.unknownCallTotalNum));
-        // Write a message to the database
+        ScreenManager.startCountAnimationTime(CallLogDataManager.callAnalysisInfo.getUnknownCallMax(), mBinding.tvMax);
+        ScreenManager.startCountAnimationTime(CallLogDataManager.callAnalysisInfo.getUnknownCallMin(), mBinding.tvMin);
+        ScreenManager.startCountAnimationTime(CallLogDataManager.unknownCallTotal/CallLogDataManager.unknownCallTotalNum, mBinding.tvAverage);
+
 
     }
 

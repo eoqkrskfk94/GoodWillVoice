@@ -40,7 +40,6 @@ public class ActivitySignUp extends AppCompatActivity {
 
         populateSpinner();
         setUserInfo();
-
     }
 
     private ActivitySignUpBinding mBinding;
@@ -80,7 +79,6 @@ public class ActivitySignUp extends AppCompatActivity {
         String packageName = getPackageName();
         PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
         Boolean battery = pm.isIgnoringBatteryOptimizations(packageName);
-        mBinding.getViewModel().setPermissionPref(AppDataManager.PERMISSION_BATTERY, battery);
 
         if (!pm.isIgnoringBatteryOptimizations(packageName)) {
             intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
@@ -93,7 +91,6 @@ public class ActivitySignUp extends AppCompatActivity {
     public void checkPermissionOverlay() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Boolean overlay = Settings.canDrawOverlays(this);// 마시멜로우 이상일 경우
-            mBinding.getViewModel().setPermissionPref(AppDataManager.PERMISSION_OVERLAY, overlay);
 
             if (!Settings.canDrawOverlays(this)) {              // 체크
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,

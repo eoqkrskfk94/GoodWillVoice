@@ -33,9 +33,10 @@
             android:id="@+id/tv_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
             android:text="미등록 수신 내역 "
+            android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/layout_top_bar"
@@ -71,15 +72,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="15dp"
                         android:text="총 수신전화"
+                        android:textColor="@color/design_default_color_primary_dark"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="35dp"
                         android:layout_marginTop="10dp"
                         android:text="등록된 전화"
                         android:textSize="18sp" />
@@ -87,8 +89,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="35dp"
                         android:layout_marginTop="30dp"
+                        android:textColor="@color/design_default_color_primary_dark"
+
                         android:text="미등록 전화"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -96,7 +100,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="60dp"
                         android:layout_marginTop="10dp"
                         android:text="피싱캐치가 확인된 전화"
                         android:textSize="18sp" />
@@ -104,7 +108,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="60dp"
                         android:layout_marginTop="10dp"
                         android:text="보험 / 금융 상품"
                         android:textSize="18sp" />
@@ -112,7 +116,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="60dp"
                         android:layout_marginTop="10dp"
                         android:text="고객센터 "
                         android:textSize="18sp" />
@@ -120,7 +124,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="60dp"
                         android:layout_marginTop="10dp"
                         android:text="학교"
                         android:textSize="18sp" />
@@ -128,16 +132,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="70dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginLeft="60dp"
+                        android:layout_marginTop="30dp"
                         android:text="알 수 없는 전화"
+                        android:textColor="@color/design_default_color_primary_dark"
+
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
+                        android:layout_marginLeft="80dp"
                         android:layout_marginTop="10dp"
                         android:text="받은 번호"
                         android:textSize="18sp" />
@@ -145,7 +151,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
+                        android:layout_marginLeft="80dp"
                         android:layout_marginTop="10dp"
                         android:text="수신 거절한 번호"
                         android:textSize="18sp" />
@@ -153,7 +159,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
+                        android:layout_marginLeft="80dp"
                         android:layout_marginTop="10dp"
                         android:text="부재중"
                         android:textSize="18sp" />
@@ -161,7 +167,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
+                        android:layout_marginLeft="80dp"
                         android:layout_marginTop="10dp"
                         android:text="최대 통화 시간"
                         android:textSize="18sp" />
@@ -169,7 +175,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
+                        android:layout_marginLeft="80dp"
                         android:layout_marginTop="10dp"
                         android:text="최소 통화 시간"
                         android:textSize="18sp" />
@@ -177,7 +183,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="100dp"
+                        android:layout_marginLeft="80dp"
                         android:layout_marginTop="10dp"
                         android:text="평균 통화 시간"
                         android:textSize="18sp" />
@@ -194,11 +200,13 @@
                         android:id="@+id/tv_total"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="15dp"
                         android:text="1"
+                        android:textColor="@color/design_default_color_primary_dark"
+
                         android:textStyle="bold"
                         android:layout_marginLeft="70dp"
-                        android:textSize="18sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/tv_total_known"
@@ -225,7 +233,9 @@
                         android:textStyle="bold"
                         android:layout_marginLeft="70dp"
                         android:text="1"
-                        android:textSize="18sp" />
+                        android:textColor="@color/design_default_color_primary_dark"
+
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -276,7 +286,9 @@
                         android:textStyle="bold"
                         android:layout_marginLeft="70dp"
                         android:text="51"
-                        android:textSize="18sp" />
+                        android:textColor="@color/design_default_color_primary_dark"
+
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/tv_received"
