@@ -61,7 +61,9 @@ public class ActivityCallLog extends AppCompatActivity {
 
         for (CallLogInfo info : callLogList) {
 
-            if (!info.getType().equals("OUTGOING")) {
+            System.out.println(info.getType());
+
+            if (info.getType() != null && !info.getType().equals("OUTGOING")) {
                 numberOfIncomingCall++;
                 if (info.getName().equals("unknown")) {
                     numberOfUnknown++;
@@ -70,7 +72,7 @@ public class ActivityCallLog extends AppCompatActivity {
                     }
                 }
             }
-            if (info.getName().equals("unknown")) {
+            if (info.getType() != null && info.getName().equals("unknown")) {
                 if(info.getType().equals("REJECTED")){
                     unknownRejected++;
                 }
