@@ -44,6 +44,7 @@ public class ActivityCallLog extends AppCompatActivity {
         ScreenManager.startCountAnimationTime(CallLogDataManager.unknownCallTotal/CallLogDataManager.unknownCallTotalNum, mBinding.tvAverage);
 
 
+
     }
 
     //Data 분별하기
