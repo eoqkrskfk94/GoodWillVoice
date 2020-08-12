@@ -92,10 +92,12 @@ public class CallLogDataManager {
 
                         if((Integer.parseInt(cursor.getString(log_duration)) > callAnalysisInfo.getUnknownCallMax())){
                             callAnalysisInfo.setUnknownCallMax(Integer.parseInt(cursor.getString(log_duration)));
+                            callAnalysisInfo.setUnknownCallMaxNumber(CallLogDataManager.convertNumber(cursor.getString(log_number)));
                         }
 
                         if((Integer.parseInt(cursor.getString(log_duration)) < callAnalysisInfo.getUnknownCallMin())){
                             callAnalysisInfo.setUnknownCallMin(Integer.parseInt(cursor.getString(log_duration)));
+                            callAnalysisInfo.setUnknownCallMinNumber(CallLogDataManager.convertNumber(cursor.getString(log_number)));
                         }
 
                     }

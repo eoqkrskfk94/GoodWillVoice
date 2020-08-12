@@ -17,6 +17,7 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -45,6 +46,7 @@ public class ActivityMain extends AppCompatActivity implements CircleProgressBar
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createBinding();
+
 
 
         //현재 회원 등록 정보 화면에 출력하기

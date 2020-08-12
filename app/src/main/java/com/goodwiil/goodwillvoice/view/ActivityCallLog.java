@@ -39,6 +39,8 @@ public class ActivityCallLog extends AppCompatActivity {
         ScreenManager.startCountAnimation(unknownRejected, mBinding.tvRejected);
         ScreenManager.startCountAnimation(unknownMissed, mBinding.tvMissed);
 
+        mBinding.tvMaxNumber.setText(CallLogDataManager.callAnalysisInfo.getUnknownCallMaxNumber());
+        mBinding.tvMinNumber.setText(CallLogDataManager.callAnalysisInfo.getUnknownCallMinNumber());
         ScreenManager.startCountAnimationTime(CallLogDataManager.callAnalysisInfo.getUnknownCallMax(), mBinding.tvMax);
         ScreenManager.startCountAnimationTime(CallLogDataManager.callAnalysisInfo.getUnknownCallMin(), mBinding.tvMin);
         ScreenManager.startCountAnimationTime(CallLogDataManager.unknownCallTotal/CallLogDataManager.unknownCallTotalNum, mBinding.tvAverage);

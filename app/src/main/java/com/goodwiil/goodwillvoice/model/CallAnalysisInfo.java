@@ -9,6 +9,8 @@ public class CallAnalysisInfo {
     private int unknownCallMax;
     private int unknownCallMin;
     private int unknownCallAverage;
+    private String unknownCallMaxNumber;
+    private String unknownCallMinNumber;
     private int knownCallMax;
     private int knownCallMin;
     private int knownCallAverage = 0;
@@ -105,5 +107,21 @@ public class CallAnalysisInfo {
 
     public void setKnownCallAverage(int knownCallAverage) {
         this.knownCallAverage = knownCallAverage;
+    }
+
+    public String getUnknownCallMaxNumber() {
+        return unknownCallMaxNumber;
+    }
+
+    public void setUnknownCallMaxNumber(String unknownCallMaxNumber) {
+        this.unknownCallMaxNumber = unknownCallMaxNumber;
+    }
+
+    public String getUnknownCallMinNumber() {
+        return unknownCallMinNumber;
+    }
+
+    public void setUnknownCallMinNumber(String unknownCallMinNumber) {
+        this.unknownCallMinNumber = unknownCallMinNumber;
     }
 }
