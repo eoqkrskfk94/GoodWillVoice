@@ -5,14 +5,16 @@ public class User {
     private String gender;
     private String career;
     private String nickName;
+    private String number;
 
     public User() {}
 
-    public User(String year, String gender, String career, String nickName) {
+    public User(String year, String gender, String career, String nickName, String number) {
         this.year = year;
         this.gender = gender;
         this.career = career;
         this.nickName = nickName;
+        this.number = number;
     }
 
     public String getYear() {
@@ -45,6 +47,14 @@ public class User {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
 }

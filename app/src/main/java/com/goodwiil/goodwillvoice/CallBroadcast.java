@@ -1,10 +1,12 @@
 package com.goodwiil.goodwillvoice;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.media.AudioManager;
@@ -18,7 +20,11 @@ import android.telephony.TelephonyManager;
 
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
+import com.goodwiil.goodwillvoice.model.PhoneCall;
+import com.goodwiil.goodwillvoice.model.User;
+import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
+import com.goodwiil.goodwillvoice.util.DBManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceCall;
 import com.goodwiil.goodwillvoice.view.ServiceEnd;
@@ -30,6 +36,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import androidx.core.content.ContextCompat;
 
 import static android.content.Context.POWER_SERVICE;
 
@@ -142,6 +150,16 @@ public class CallBroadcast extends BroadcastReceiver {
             if(number != null){
                 model = new IncomingNumber(incomingNumber, incomingName);
 
+                prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+                User user = AppDataManager.getUserModel();
+                PhoneCall phoneCall = new PhoneCall(user,callLogInfo);
+                int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.INTERNET);
+
+                if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+                    DBManager dbManager = new DBManager();
+                    dbManager.insertData(phoneCall);
+                    ScreenManager.printToast(context, "통화기록이 등록되었습니다.");
+                }
 
 //                if(callLogInfo != null && callLogInfo.getType() == null){
 //                    if(Settings.canDrawOverlays(context)){

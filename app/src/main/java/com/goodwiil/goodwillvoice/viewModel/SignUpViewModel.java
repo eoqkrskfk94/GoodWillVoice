@@ -1,12 +1,17 @@
 package com.goodwiil.goodwillvoice.viewModel;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.model.User;
@@ -14,6 +19,8 @@ import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.util.DBManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ActivityMain;
+
+import static android.content.Context.TELEPHONY_SERVICE;
 
 
 public class SignUpViewModel extends BaseViewModel {
@@ -26,12 +33,28 @@ public class SignUpViewModel extends BaseViewModel {
         EditText nickNameEdit = cl.findViewById(R.id.et_nick_name);
         String nickName = nickNameEdit.getText().toString();
 
+        TelephonyManager telManager = (TelephonyManager) view.getContext().getSystemService(TELEPHONY_SERVICE);
+        if (
+                ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        String phoneNum = telManager.getLine1Number();
+        if(phoneNum.startsWith("+82")){
+            phoneNum = phoneNum.replace("+82", "0");}
+
         if (year.equals("출생년도") || gender.equals("성별") || career.equals("직업")) {
             Toast.makeText(view.getContext(), "다시 입력해주세요.", Toast.LENGTH_SHORT).show();
         } else {
-            User user = new User(year, gender, career, nickName);
-            DBManager dbManager = new DBManager();
-            dbManager.insertData(user);
+            User user = new User(year, gender, career, nickName, phoneNum);
+            int permissionCheck = ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.INTERNET);
+
+            if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+                DBManager dbManager = new DBManager();
+                dbManager.insertData(user);
+            }
+
             AppDataManager.setSharedPrefs(AppDataManager.SP_NAME, user);
             ScreenManager.startActivity(view.getContext(), ActivityMain.class);
             ((Activity) view.getContext()).finish();
