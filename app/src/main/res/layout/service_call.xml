@@ -20,7 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl"
             android:layout_width="0dp"
-            android:layout_height="290dp"
+            android:layout_height="180dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/popup_layout_ringing"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/line"
-
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/iv_profile"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/call_proflie"
-
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/button"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="20dp"
@@ -78,7 +78,7 @@
                 android:textColor="@color/colorNormal"
                 android:textSize="16.7sp"
                 android:text="@string/unknown_number"
-
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_profile"
                 app:layout_constraintStart_toEndOf="@id/iv_profile"
                 android:layout_marginStart="15dp" />
@@ -89,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{CallLogDataManager.convertNumber(model.number)}"
                 android:textColor="@color/colorNormal"
+                android:visibility="gone"
                 android:textSize="25sp"
                 tools:text="010-1234-5678"
                 app:layout_constraintTop_toTopOf="@+id/iv_profile"
@@ -102,7 +103,7 @@
                 android:textColor="@color/colorNormal"
                 android:textSize="15sp"
                 android:text="@string/restrict_zero"
-
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_name"
                 android:layout_marginEnd="25dp" />
@@ -115,11 +116,11 @@
                 android:textColor="@color/colorNormal"
                 android:gravity="center_horizontal"
                 android:text="이 전화는 누구인가요?"
-                
-                app:layout_constraintTop_toTopOf="@+id/iv_line"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 />
 
             <LinearLayout
