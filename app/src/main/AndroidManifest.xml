@@ -63,6 +63,11 @@
             android:permission="android.permission.SYSTEM_ALERT_WINDOW" />
 
         <service
+            android:name=".view.ServiceWarning"
+            android:enabled="true"
+            android:permission="android.permission.SYSTEM_ALERT_WINDOW" />
+
+        <service
             android:name=".VoiceService"
             android:enabled="true" />
 
