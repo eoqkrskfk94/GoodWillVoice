@@ -64,8 +64,6 @@ public class ActivityCallLog extends AppCompatActivity {
 
         for (CallLogInfo info : callLogList) {
 
-            System.out.println(info.getType());
-
             if (info.getType() != null && !info.getType().equals("OUTGOING")) {
                 numberOfIncomingCall++;
                 if (info.getName().equals("unknown")) {

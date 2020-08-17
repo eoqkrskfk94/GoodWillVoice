@@ -15,15 +15,35 @@ import com.goodwiil.goodwillvoice.model.CallAnalysisInfo;
 import com.goodwiil.goodwillvoice.model.CallLogData;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.model.ContactInfo;
+import com.goodwiil.goodwillvoice.model.NumberType;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class CallLogDataManager {
+    public static final int SEOUL_NUMBER = 0;
+    public static final int BUSAN_NUMBER = 0;
+    public static final int DAEGU_NUMBER = 0;
+    public static final int INCHEON_NUMBER = 0;
+    public static final int GYANGJU_NUMBER = 0;
+    public static final int DAEJEON_NUMBER = 0;
+    public static final int ULSAN_NUMBER = 0;
+    public static final int SEJONG_NUMBER = 0;
+    public static final int GYEONGGI_NUMBER = 0;
+    public static final int GANGWON_NUMBER = 0;
+    public static final int CHUNGBUK_NUMBER = 0;
+    public static final int CHUNGNAM_NUMBER = 0;
+    public static final int JEONBUK_NUMBER = 0;
+    public static final int JEONNAM_NUMBER = 0;
+    public static final int GYEONGBUK_NUMBER = 0;
+    public static final int GYEONGNAM_NUMBER = 0;
+    public static final int JEJU_NUMBER = 0;
+
 
     public static CallAnalysisInfo callAnalysisInfo = new CallAnalysisInfo();
     public static ArrayList<CallLogInfo> callLogInfos = new ArrayList<CallLogInfo>();
+    public static NumberType numberType = new NumberType();
 
     public static int knownTotal = 0;
     public static int unknownTotal = 0;
@@ -58,6 +78,7 @@ public class CallLogDataManager {
 
     //최근기록 불러오기
     public static ArrayList<CallLogInfo> getCallLog(Context context) {
+
         CallLogDataManager.unknownCallTotalNum = 0;
         CallLogDataManager.unknownCallTotal = 0;
         CallLogDataManager.knownCallTotalNum = 0;
@@ -66,6 +87,7 @@ public class CallLogDataManager {
         CallLogDataManager.knownTotal = 0;
 
         callAnalysisInfo = new CallAnalysisInfo();
+        numberType = new NumberType();
         ArrayList<CallLogInfo> callLogInfos = new ArrayList<CallLogInfo>();
 
         int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CALL_LOG);
@@ -80,10 +102,11 @@ public class CallLogDataManager {
 
             while (cursor.moveToNext()) {
                 CallLogInfo callLogInfo = new CallLogInfo();
-
+                categorizeIncomingNumber(cursor.getString(log_number));
                 if(cursor.getString(log_name) == null){
                     CallLogDataManager.unknownTotal += 1;
                     callLogInfo.setName("unknown");
+
                     if((Integer.parseInt(cursor.getString(log_duration)) > 0)){
 
                         CallLogDataManager.unknownCallTotalNum += 1;
@@ -195,7 +218,7 @@ public class CallLogDataManager {
         return contactInfos;
     }
 
-    //연락처에서 번호 찾
+    //연락처에서 번호 찾기
     public static String contactExists(Context context, String number) {
         /// number is the phone number
         String contactName = "unknown";
@@ -244,6 +267,32 @@ public class CallLogDataManager {
     //초를 mm:ss 형식으로 바꾸기
     public static String secondsToString(int pTime) {
         return String.format("%02d:%02d", pTime / 60, pTime % 60);
+    }
+
+    // 번호 분류하기
+    private static void categorizeIncomingNumber(String number){
+        String numberKind = number.substring(0,3);
+        if(numberKind.equals("010")) numberType.addPhoneNumber();
+        else if(numberKind.equals("070"))numberType.addInternetNumber();
+        else if(number.substring(0,2).equals("02")) numberType.addlocationNumber(SEOUL_NUMBER);
+        else if(numberKind.equals("051")) numberType.addlocationNumber(BUSAN_NUMBER);
+        else if(numberKind.equals("053")) numberType.addlocationNumber(DAEGU_NUMBER);
+        else if(numberKind.equals("032")) numberType.addlocationNumber(INCHEON_NUMBER);
+        else if(numberKind.equals("062")) numberType.addlocationNumber(GYANGJU_NUMBER);
+        else if(numberKind.equals("042")) numberType.addlocationNumber(DAEJEON_NUMBER);
+        else if(numberKind.equals("052")) numberType.addlocationNumber(ULSAN_NUMBER);
+        else if(numberKind.equals("044")) numberType.addlocationNumber(SEJONG_NUMBER);
+        else if(numberKind.equals("031")) numberType.addlocationNumber(GYEONGGI_NUMBER);
+        else if(numberKind.equals("033")) numberType.addlocationNumber(GANGWON_NUMBER);
+        else if(numberKind.equals("043")) numberType.addlocationNumber(CHUNGBUK_NUMBER);
+        else if(numberKind.equals("041")) numberType.addlocationNumber(CHUNGNAM_NUMBER);
+        else if(numberKind.equals("063")) numberType.addlocationNumber(JEONBUK_NUMBER);
+        else if(numberKind.equals("061")) numberType.addlocationNumber(JEONNAM_NUMBER);
+        else if(numberKind.equals("054")) numberType.addlocationNumber(GYEONGBUK_NUMBER);
+        else if(numberKind.equals("055")) numberType.addlocationNumber(GYEONGNAM_NUMBER);
+        else if(numberKind.equals("064")) numberType.addlocationNumber(JEJU_NUMBER);
+
+
     }
 
 }
