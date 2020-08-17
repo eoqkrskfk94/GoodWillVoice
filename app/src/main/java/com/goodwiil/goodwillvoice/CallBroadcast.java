@@ -29,6 +29,7 @@ import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceCall;
 import com.goodwiil.goodwillvoice.view.ServiceEnd;
 import com.goodwiil.goodwillvoice.view.ServiceIncoming;
+import com.goodwiil.goodwillvoice.view.ServiceWarning;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -174,7 +175,7 @@ public class CallBroadcast extends BroadcastReceiver {
 
             context.stopService(new Intent(context, ServiceIncoming.class));
             context.stopService(new Intent(context, ServiceCall.class));
-
+            context.stopService(new Intent(context, ServiceWarning.class));
 
         }
     }
@@ -202,11 +203,10 @@ public class CallBroadcast extends BroadcastReceiver {
             @Override
             public void run() {
                 counter++;
-                //System.out.println(counter);
 
                 //통화시간 기록
                 callLogInfo.setDuration(counter);
-                if(counter == 60){
+                if(counter == 30){
                     context.stopService(new Intent(context, ServiceCall.class));
                 }
                 vibrateAndVoice(counter);
@@ -253,11 +253,14 @@ public class CallBroadcast extends BroadcastReceiver {
         if (sec == call_length[0]) {
             if (vibrate)
                 //vibrator.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1));
+                ScreenManager.startService(context, ServiceWarning.class, model);
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
         } else if (sec == call_length[1]) {
+            ServiceWarning.getInstance().update(1);
             if (vibrate)
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
         } else if (sec == call_length[2]) {
+            ServiceWarning.getInstance().update(2);
             if (vibrate)
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
         }

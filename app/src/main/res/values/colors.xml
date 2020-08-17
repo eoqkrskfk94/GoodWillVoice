@@ -11,4 +11,8 @@
     <color name="colorPurple">#76189d</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlue">#004ca0</color>
+
+    <color name="warning1">#CDDC39</color>
+    <color name="warning2">#FF9800</color>
+    <color name="warning3">#FA3C00</color>
 </resources>
