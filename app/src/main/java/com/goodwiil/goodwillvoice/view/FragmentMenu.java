@@ -3,6 +3,7 @@ package com.goodwiil.goodwillvoice.view;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 
 import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
@@ -34,11 +35,13 @@ public class FragmentMenu extends PreferenceFragment {
         callCenterPreference = (Preference) findPreference("callCenter");
         faqPreference = (Preference) findPreference("faqInfo");
 
+
         if (AppDataManager.getSharedPrefs(AppDataManager.PERMISSION_KEY).getBoolean(AppDataManager.PERMISSION_BATTERY, false)) {
             batteryPreference.setSummary("ON");
         } else {
             batteryPreference.setSummary("OFF");
         }
+
 
         if (AppDataManager.getSharedPrefs(AppDataManager.PERMISSION_KEY).getBoolean(AppDataManager.PERMISSION_OVERLAY, false)) {
             overlayPreference.setSummary("ON");

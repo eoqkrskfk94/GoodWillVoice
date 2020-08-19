@@ -82,6 +82,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <Spinner
+            android:id="@+id/sp_level"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:entries="@array/신용등급"
+            app:layout_constraintTop_toBottomOf="@+id/sp_career"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <EditText
             android:id="@+id/et_nick_name"
             android:layout_width="300dp"
@@ -90,7 +100,7 @@
             android:hint="별명"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sp_career" />
+            app:layout_constraintTop_toBottomOf="@+id/sp_level" />
 
         <ImageButton
             android:id="@+id/btn_sign_up"

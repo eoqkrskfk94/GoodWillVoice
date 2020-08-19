@@ -6,15 +6,17 @@ public class User {
     private String career;
     private String nickName;
     private String number;
+    private String creditRating;
 
     public User() {}
 
-    public User(String year, String gender, String career, String nickName, String number) {
+    public User(String year, String gender, String career, String nickName, String number, String creditRating) {
         this.year = year;
         this.gender = gender;
         this.career = career;
         this.nickName = nickName;
         this.number = number;
+        this.creditRating = creditRating;
     }
 
     public String getYear() {
@@ -56,5 +58,9 @@ public class User {
     public void setNumber(String number) {
         this.number = number;
     }
+
+    public String getCreditRating() { return creditRating; }
+
+    public void setCreditRating(String creditRating){ this.creditRating = creditRating;}
 
 }

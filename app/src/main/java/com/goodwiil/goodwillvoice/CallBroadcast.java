@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.VibrationEffect;
@@ -27,7 +26,6 @@ import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.util.DBManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceCall;
-import com.goodwiil.goodwillvoice.view.ServiceEnd;
 import com.goodwiil.goodwillvoice.view.ServiceIncoming;
 import com.goodwiil.goodwillvoice.view.ServiceWarning;
 
@@ -72,6 +70,7 @@ public class CallBroadcast extends BroadcastReceiver {
         this.context = context;
         setWakeLock(context);
         setting(context);
+
 
 //        AudioManager am = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 //        am.setStreamVolume(AudioManager.STREAM_VOICE_CALL, 0, 0);
@@ -157,6 +156,9 @@ public class CallBroadcast extends BroadcastReceiver {
                 int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.INTERNET);
 
                 if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+                    if(callLogInfo.getType() != null){
+                    }
+
                     DBManager dbManager = new DBManager();
                     dbManager.insertData(phoneCall);
                     ScreenManager.printToast(context, "통화기록이 등록되었습니다.");
@@ -208,6 +210,7 @@ public class CallBroadcast extends BroadcastReceiver {
                 callLogInfo.setDuration(counter);
                 if(counter == 30){
                     context.stopService(new Intent(context, ServiceCall.class));
+                    ScreenManager.startService(context, ServiceWarning.class, model);
                 }
                 vibrateAndVoice(counter);
             }
@@ -253,14 +256,11 @@ public class CallBroadcast extends BroadcastReceiver {
         if (sec == call_length[0]) {
             if (vibrate)
                 //vibrator.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1));
-                ScreenManager.startService(context, ServiceWarning.class, model);
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
         } else if (sec == call_length[1]) {
-            ServiceWarning.getInstance().update(1);
             if (vibrate)
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
         } else if (sec == call_length[2]) {
-            ServiceWarning.getInstance().update(2);
             if (vibrate)
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
         }
