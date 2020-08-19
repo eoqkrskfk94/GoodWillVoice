@@ -61,4 +61,6 @@ public class User {
 
     public String getCreditRating() { return creditRating; }
 
+    public void setCreditRating(String creditRating){ this.creditRating = creditRating;}
+
 }

@@ -28,6 +28,7 @@ public class DBManager {
         user.put("nickname", data.getNickName());
         user.put("job", data.getCareer());
         user.put("number", data.getNumber());
+        user.put("creditRating", data.getCreditRating());
 
         // Add a new document with a generated ID
         db.collection("User")
