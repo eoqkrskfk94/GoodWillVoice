@@ -95,7 +95,7 @@ public class ServiceWarning extends Service{
                         | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
                 PixelFormat.TRANSLUCENT);
 
-        params.gravity = Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL;
+        params.gravity = Gravity.CENTER_VERTICAL | Gravity.TOP;
 
         return params;
     }
@@ -153,12 +153,8 @@ public class ServiceWarning extends Service{
 
     public void setState(int state){
         if(state == 0){
-            mBinding.tvWarning.setText("양호");
-            mBinding.tvWarning.setTextColor(getColor(R.color.warning1));
         }
         else if(state == 1){
-            mBinding.tvWarning.setText("주의");
-            mBinding.tvWarning.setTextColor(getColor(R.color.warning2));
 
         }
         else if(state == 2){

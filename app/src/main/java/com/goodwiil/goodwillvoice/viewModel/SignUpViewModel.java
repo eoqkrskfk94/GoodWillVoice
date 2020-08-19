@@ -30,6 +30,7 @@ public class SignUpViewModel extends BaseViewModel {
         String year = ((Spinner) cl.getChildAt(2)).getSelectedItem().toString();
         String gender = ((Spinner) cl.getChildAt(3)).getSelectedItem().toString();
         String career = ((Spinner) cl.getChildAt(4)).getSelectedItem().toString();
+        String creditRating = ((Spinner) cl.getChildAt(5)).getSelectedItem().toString();
         EditText nickNameEdit = cl.findViewById(R.id.et_nick_name);
         String nickName = nickNameEdit.getText().toString();
 
@@ -44,10 +45,10 @@ public class SignUpViewModel extends BaseViewModel {
         if(phoneNum.startsWith("+82")){
             phoneNum = phoneNum.replace("+82", "0");}
 
-        if (year.equals("출생년도") || gender.equals("성별") || career.equals("직업")) {
+        if (year.equals("출생년도") || gender.equals("성별") || career.equals("직업") || creditRating.equals("신용등급")) {
             Toast.makeText(view.getContext(), "다시 입력해주세요.", Toast.LENGTH_SHORT).show();
         } else {
-            User user = new User(year, gender, career, nickName, phoneNum);
+            User user = new User(year, gender, career, nickName, phoneNum, creditRating);
             int permissionCheck = ContextCompat.checkSelfPermission(view.getContext(), Manifest.permission.INTERNET);
 
             if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
