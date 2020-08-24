@@ -25,6 +25,12 @@ public class CallViewModel {
         off(view);
     }
 
+    public void loanBtnClick(View view, ConstraintLayout cl) {
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.loan) + "으로 등록되어있습니다.");
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.loan));
+        off(view);
+    }
+
     public void researchBtnClick(View view, ConstraintLayout cl) {
         ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.research) + "으로 등록되어있습니다.");
         CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.research));
