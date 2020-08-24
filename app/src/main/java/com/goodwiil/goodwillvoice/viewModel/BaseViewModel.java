@@ -2,11 +2,16 @@ package com.goodwiil.goodwillvoice.viewModel;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 import android.widget.Toast;
 
 public class BaseViewModel {
 
     private long backKeyPressedTime = 0;
+
+    public void backClick(View view){
+        ((Activity) view.getContext()).finish();
+    }
 
     public void onBackClick(Context context) {
 

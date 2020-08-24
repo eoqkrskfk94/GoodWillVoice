@@ -6,7 +6,7 @@ import android.view.View;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ActivitySignUp;
 
-public class MenuViewModel {
+public class MenuViewModel extends BaseViewModel{
 
     public void backBtnClick(View view) { ((Activity) view.getContext()).finish(); }
 

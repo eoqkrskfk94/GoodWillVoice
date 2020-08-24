@@ -19,59 +19,65 @@ public class EndViewModel {
         CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.unknown));
     }
 
-    public void familyBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.family) + "으로 등록되어있습니다.");
-        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.family));
-        off(view);
-
-    }
-    public void friendBtnClick(View view, ConstraintLayout cl){
+    public void friendBtnClick(View view, ConstraintLayout cl) {
         ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.friend) + "으로 등록되어있습니다.");
         CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.friend));
         off(view);
     }
-    public void loanBtnClick(View view, ConstraintLayout cl){
+
+    public void loanBtnClick(View view, ConstraintLayout cl) {
         ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.loan) + "으로 등록되어있습니다.");
         CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.loan));
         off(view);
     }
-    public void insuranceBtnClick(View view, ConstraintLayout cl){
+
+    public void researchBtnClick(View view, ConstraintLayout cl) {
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.research) + "으로 등록되어있습니다.");
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.research));
+        off(view);
+    }
+
+    public void insuranceBtnClick(View view, ConstraintLayout cl) {
         ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.insurance) + "으로 등록되어있습니다.");
         CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.insurance));
         off(view);
     }
-    public void adBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.ad) + "으로 등록되어있습니다.");
-        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.ad));
+
+    public void deliveryBtnClick(View view, ConstraintLayout cl) {
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.delivery) + "으로 등록되어있습니다.");
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.delivery));
         off(view);
     }
-    public void parcelBtnClick(View view, ConstraintLayout cl){
+
+    public void parcelBtnClick(View view, ConstraintLayout cl) {
         ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.parcel) + "으로 등록되어있습니다.");
         CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.parcel));
         off(view);
     }
-    public void happyCallBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.happy_call) + "으로 등록되어있습니다.");
-        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.happy_call));
+
+    public void bankBtnClick(View view, ConstraintLayout cl) {
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.bank) + "으로 등록되어있습니다.");
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.bank));
         off(view);
     }
-    public void policeBtnClick(View view, ConstraintLayout cl){
+
+    public void policeBtnClick(View view, ConstraintLayout cl) {
         ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.police) + "으로 등록되어있습니다.");
         CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.police));
         off(view);
     }
-    public void governBtnClick(View view, ConstraintLayout cl){
-        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.government) + "으로 등록되어있습니다.");
-        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.government));
+
+    public void telecomBtnClick(View view, ConstraintLayout cl) {
+        ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.telecom) + "으로 등록되어있습니다.");
+        CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.telecom));
         off(view);
     }
-    public void othersBtnClick(View view, ConstraintLayout cl){
+
+    public void othersBtnClick(View view, ConstraintLayout cl) {
         ScreenManager.printToast(view.getContext(), view.getContext().getString(R.string.others) + "으로 등록되어있습니다.");
         CallBroadcast.callLogInfo.setType(view.getContext().getString(R.string.others));
         off(view);
     }
-
-
     public void off(View view){
         view.getContext().stopService(new Intent(view.getContext(), ServiceEnd.class));
     }

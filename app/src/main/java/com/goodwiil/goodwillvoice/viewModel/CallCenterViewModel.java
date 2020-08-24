@@ -1,4 +1,4 @@
 package com.goodwiil.goodwillvoice.viewModel;
 
-public class CallCenterViewModel {
+public class CallCenterViewModel extends BaseViewModel{
 }

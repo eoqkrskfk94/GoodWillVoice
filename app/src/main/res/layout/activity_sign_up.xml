@@ -16,8 +16,6 @@
     </data>
 
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl"
         android:layout_width="match_parent"

@@ -19,7 +19,6 @@ public class ActivityFaq extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         createBinding();
 
-        mBinding.tv.setText("FAQ");
     }
 
     private ActivityFaqBinding mBinding;
