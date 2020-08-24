@@ -135,17 +135,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_who">
 
                 <TextView
-                    android:id="@+id/tv_family"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:onClick="@{()->viewModel.familyBtnClick(tvFamily, cl)}"
-                    android:textColor="@color/colorNormal"
-                    android:textSize="20sp"
-                    android:layout_marginEnd="30dp"
-                    android:text="@string/family" />
-
-                <TextView
                     android:id="@+id/tv_friend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -155,6 +144,28 @@
                     android:textSize="20sp"
                     android:layout_marginEnd="30dp"
                     android:text="@string/friend" />
+
+                <TextView
+                    android:id="@+id/tv_parcel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{()->viewModel.parcelBtnClick(tvParcel, cl)}"
+                    android:textColor="@color/colorNormal"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="30dp"
+                    android:text="@string/parcel" />
+
+                <TextView
+                    android:id="@+id/tv_telecom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:onClick="@{()->viewModel.telecomBtnClick(tvTelecom, cl)}"
+                    android:textColor="@color/colorNormal"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="30dp"
+                    android:text="@string/telecom" />
 
                 <TextView
                     android:id="@+id/tv_insurance"
@@ -168,25 +179,14 @@
                     android:text="@string/insurance" />
 
                 <TextView
-                    android:id="@+id/tv_loan"
+                    android:id="@+id/tv_police"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:onClick="@{()->viewModel.loanBtnClick(tvLoan, cl)}"
+                    android:onClick="@{()->viewModel.policeBtnClick(tvPolice, cl)}"
                     android:textColor="@color/colorNormal"
                     android:textSize="20sp"
-                    android:layout_marginEnd="30dp"
-                    android:text="@string/loan" />
-
-                <TextView
-                    android:id="@+id/tv_ad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:onClick="@{()->viewModel.adBtnClick(tvAd, cl)}"
-                    android:textColor="@color/colorNormal"
-                    android:textSize="20sp"
-                    android:text="@string/ad" />
+                    android:text="@string/police" />
 
 
 
@@ -204,55 +204,45 @@
                 app:layout_constraintTop_toBottomOf="@+id/ll1">
 
                 <TextView
-                    android:id="@+id/tv_parcel"
+                    android:id="@+id/tv_bank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:onClick="@{()->viewModel.parcelBtnClick(tvFamily, cl)}"
+                    android:onClick="@{()->viewModel.bankBtnClick(tvBank, cl)}"
                     android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:layout_marginEnd="21dp"
-                    android:text="@string/parcel" />
+                    android:text="@string/bank" />
 
                 <TextView
-                    android:id="@+id/tv_happy_call"
+                    android:id="@+id/tv_research"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:onClick="@{()->viewModel.happyCallBtnClick(tvFriend, cl)}"
+                    android:onClick="@{()->viewModel.researchBtnClick(tvResearch, cl)}"
                     android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:layout_marginEnd="21dp"
-                    android:text="@string/happy_call" />
+                    android:text="@string/research" />
 
                 <TextView
-                    android:id="@+id/tv_police"
+                    android:id="@+id/tv_delivery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:onClick="@{()->viewModel.policeBtnClick(tvInsurance, cl)}"
+                    android:onClick="@{()->viewModel.deliveryBtnClick(tvDelivery, cl)}"
                     android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:layout_marginEnd="21dp"
-                    android:text="@string/police" />
+                    android:text="@string/delivery" />
 
-                <TextView
-                    android:id="@+id/tv_govern"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:onClick="@{()->viewModel.governBtnClick(tvLoan, cl)}"
-                    android:textColor="@color/colorNormal"
-                    android:textSize="20sp"
-                    android:layout_marginEnd="21dp"
-                    android:text="@string/government" />
 
                 <TextView
                     android:id="@+id/tv_others"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:onClick="@{()->viewModel.othersBtnClick(tvAd, cl)}"
+                    android:onClick="@{()->viewModel.othersBtnClick(tvOthers, cl)}"
                     android:textColor="@color/colorNormal"
                     android:textSize="20sp"
                     android:text="@string/others" />

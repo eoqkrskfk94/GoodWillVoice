@@ -22,15 +22,15 @@
     <string name="restrict_number">바로 차단하기</string>
     <string name="restrict_zero">차단이력 00건</string>
 
-    <string name="family">가족</string>
-    <string name="insurance">보험</string>
-    <string name="ad">광고</string>
-    <string name="loan">대출</string>
     <string name="friend">지인</string>
     <string name="parcel">택배</string>
-    <string name="happy_call">해피콜</string>
+    <string name="telecom">통신사</string>
+    <string name="insurance">보험</string>
+    <string name="loan">대출</string>
     <string name="police">경찰</string>
-    <string name="government">금감원</string>
+    <string name="research">리서치</string>
+    <string name="delivery">배달</string>
+    <string name="bank">은행</string>
     <string name="others">기타</string>
     <string name="unknown">알수없음</string>
 
