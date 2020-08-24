@@ -15,7 +15,6 @@ public class ActivityCallCenter extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createBinding();
-        mBinding.tv.setText("고객센터");
     }
 
     private ActivityCallCenterBinding mBinding;
