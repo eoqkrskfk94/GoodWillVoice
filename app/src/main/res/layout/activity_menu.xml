@@ -8,6 +8,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:background="@drawable/sample_image"
+            android:id="@+id/ll_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/cl_top_bar"
+            >
+
+        </LinearLayout>
+
+        <LinearLayout
+            app:layout_constraintBottom_toTopOf="@+id/settings_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:background="@color/colorWhite"
+            android:onClick="@{()->viewModel.userBtnClick(llUser)}">
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="20dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/proflie_none" />
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:text="User"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp" />
+        </LinearLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_top_bar"
             android:layout_width="match_parent"
@@ -42,33 +82,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <LinearLayout
-            android:id="@+id/ll_user"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/settings_fragment"
-            android:onClick="@{()->viewModel.userBtnClick(llUser)}">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="20dp"
-                app:srcCompat="@drawable/proflie_none" />
-
-            <TextView
-                android:id="@+id/tv_user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:text="User"
-                android:textColor="@color/colorBlack"
-                android:textSize="20sp" />
-
-        </LinearLayout>
 
 
         <fragment
@@ -76,11 +90,11 @@
             android:name="com.goodwiil.goodwillvoice.view.FragmentMenu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="300dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_top_bar" />
+            app:layout_constraintTop_toBottomOf="@+id/cl_top_bar" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
