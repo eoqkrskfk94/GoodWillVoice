@@ -41,7 +41,7 @@
                 android:id="@+id/tv_warning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="포이스피싱 위험"
+                android:text="보이스피싱 위험"
                 android:textSize="30dp"
                 android:textColor="@color/colorBlack"
                 android:textStyle="bold"
