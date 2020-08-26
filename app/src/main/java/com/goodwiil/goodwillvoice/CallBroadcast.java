@@ -130,6 +130,7 @@ public class CallBroadcast extends BroadcastReceiver {
                             ScreenManager.startService(context, ServiceCall.class, model);
                         }
 
+
                         tt = timerTaskMaker();
                         final Timer timer = new Timer();
                         timer.schedule(tt, 0, 1000);
