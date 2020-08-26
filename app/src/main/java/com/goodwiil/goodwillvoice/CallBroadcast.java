@@ -130,7 +130,6 @@ public class CallBroadcast extends BroadcastReceiver {
                             ScreenManager.startService(context, ServiceCall.class, model);
                         }
 
-
                         tt = timerTaskMaker();
                         final Timer timer = new Timer();
                         timer.schedule(tt, 0, 1000);
@@ -249,9 +248,9 @@ public class CallBroadcast extends BroadcastReceiver {
         } else if (level.equals("강 (1분 마다 진동)")) {
             //call_length[0] = 60;
             //call_length[1] = 180;
-            call_length[0] = 10;
-            call_length[1] = 15;
-            call_length[2] = 20;
+            call_length[0] = 30;
+            call_length[1] = 60;
+            call_length[2] = 90;
         }
 
         if (sec == call_length[0]) {
