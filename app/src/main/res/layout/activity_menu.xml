@@ -26,7 +26,7 @@
             android:orientation="horizontal"
             android:layout_gravity="bottom"
             android:background="@color/colorWhite"
-            android:onClick="@{()->viewModel.userBtnClick(llUser)}">
+            >
 
 
             <ImageView
@@ -46,6 +46,17 @@
                 android:text="User"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlue"
+                android:text="변경하기"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:onClick="@{()->viewModel.userBtnClick(llUser)}"
+                android:layout_marginStart="20dp"/>
+
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
