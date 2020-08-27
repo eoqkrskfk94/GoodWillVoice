@@ -9,12 +9,13 @@ import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 
-public class FragmentMenu extends PreferenceFragment {
+public class FragmentMenu extends PreferenceFragmentCompat {
 
     SharedPreferences prefs;
     ListPreference levelPreference;
