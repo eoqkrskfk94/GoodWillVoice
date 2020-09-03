@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/page_1"
+        android:enabled="true"
+        android:icon="@drawable/call_proflie"
+        android:title="내 분석"/>
+    <item
+        android:id="@+id/page_2"
+        android:enabled="true"
+        android:icon="@drawable/call_proflie"
+        android:title="통화내역"/>
+
+    <item
+        android:id="@+id/page_3"
+        android:enabled="true"
+        android:icon="@drawable/call_proflie"
+        android:title="뉴스레터"/>
+
+    <item
+        android:id="@+id/page_4"
+        android:enabled="true"
+        android:icon="@drawable/call_proflie"
+        android:title="설정"/>
+</menu>
