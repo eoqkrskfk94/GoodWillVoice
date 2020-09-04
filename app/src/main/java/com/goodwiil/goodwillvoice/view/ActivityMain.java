@@ -53,14 +53,14 @@ public class ActivityMain extends AppCompatActivity implements CircleProgressBar
         getData();
 
         //최근기록 불러오기
-        CallLogDataManager.callLogInfos = CallLogDataManager.getCallLog(this);
+        //CallLogDataManager.callLogInfos = CallLogDataManager.getCallLog(this);
 
         //프로그레스 바 세팅
         circleProgressBar = findViewById(R.id.cpb_circlebar);
         circleProgressBar.setProgress(80);
 
 
-        CallLogDataManager.getCallLog(this);
+        //CallLogDataManager.getCallLog(this);
 
         //현재 회원 등록 정보 화면에 출력하기
         getData();

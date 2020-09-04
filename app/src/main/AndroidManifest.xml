@@ -25,7 +25,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".view.ActivityMain2"></activity>
+        <activity
+            android:name=".view.ActivityMain2"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.ActivityPermission" />
         <activity
             android:name=".view.ActivityCallLog"

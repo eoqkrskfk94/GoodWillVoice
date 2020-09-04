@@ -42,7 +42,7 @@ public class SignUpViewModel extends BaseViewModel {
             return;
         }
         String phoneNum = telManager.getLine1Number();
-        if(phoneNum.startsWith("+82")){
+        if(phoneNum != null && phoneNum.startsWith("+82")){
             phoneNum = phoneNum.replace("+82", "0");}
 
         if (year.equals("출생년도") || gender.equals("성별") || career.equals("직업") || creditRating.equals("신용등급")) {
