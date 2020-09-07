@@ -1,20 +1,26 @@
 package com.goodwiil.goodwillvoice.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.model.CardItem;
+import com.goodwiil.goodwillvoice.view.FragmentMyStatFirst;
+import com.goodwiil.goodwillvoice.view.FragmentMyStatSecond;
+import com.goodwiil.goodwillvoice.view.FragmentMyStatThird;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
+public class CardPagerAdapter extends PagerAdapter implements CardAdapter   {
 
     private List<CardView> mViews;
     private List<CardItem> mData;
@@ -54,7 +60,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         View view = LayoutInflater.from(container.getContext())
                 .inflate(R.layout.main_card, container, false);
         container.addView(view);
-        bind(mData.get(position), view);
+        bind(mData.get(position), view, position);
         CardView cardView = (CardView) view.findViewById(R.id.cardView);
 
         if (mBaseElevation == 0) {
@@ -72,11 +78,31 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         mViews.set(position, null);
     }
 
-    private void bind(CardItem item, View view) {
-        TextView titleTextView = (TextView) view.findViewById(R.id.titleTextView);
-        TextView contentTextView = (TextView) view.findViewById(R.id.contentTextView);
-        titleTextView.setText(item.getTitle());
-        contentTextView.setText(item.getText());
+    private void bind(CardItem item, View view, int position) {
+        TextView titleTextView = (TextView) view.findViewById(R.id.tv_sample);
+//        TextView contentTextView = (TextView) view.findViewById(R.id.contentTextView);
+        titleTextView.setText(item.getFragment().toString());
+//        contentTextView.setText(item.getText());
+
+
+
+
+
+        FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.stat_fragment_layout);
+
+
+        item.getFragmentManager()
+                .beginTransaction()
+                .replace(frameLayout.getId(), item.getFragment())
+                .commit();
+
+
+
+
+
+
     }
+
+
 
 }

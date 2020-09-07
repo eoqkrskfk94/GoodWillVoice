@@ -51,6 +51,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.4'
     implementation 'com.google.firebase:firebase-firestore:21.4.2'
 
+    implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
+    implementation 'com.nineoldandroids:library:2.4.0'
+
 
 }
 
