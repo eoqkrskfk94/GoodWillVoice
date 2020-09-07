@@ -24,14 +24,9 @@ public class FragmentMyStat extends Fragment {
 
     private FragmentMyStatBinding mBinding;
 
-    private CardPagerAdapter mCardAdapter;
-    private ShadowTransformer mCardShadowTransformer;
     private FragmentPagerAdapter mFragmentCardAdapter;
     private ShadowTransformer mFragmentCardShadowTransformer;
 
-    private Fragment fragment_first;
-    private Fragment fragment_second;
-    private Fragment fragment_thrid;
 
 
 
@@ -49,18 +44,10 @@ public class FragmentMyStat extends Fragment {
         //mBinding.setViewModel(new SplashViewModel());
         mBinding.setLifecycleOwner(getActivity());
 
-        fragment_first = new FragmentMyStatFirst();
-        fragment_second = new FragmentMyStatSecond();
-        fragment_thrid = new FragmentMyStatThird();
 
-
-        //setCard();
-        mFragmentCardAdapter = new FragmentPagerAdapter(getActivity().getSupportFragmentManager(),
-                dpToPixels(2, getContext()));
+        mFragmentCardAdapter = new FragmentPagerAdapter(getActivity().getSupportFragmentManager(), dpToPixels(2, getContext()));
         mFragmentCardShadowTransformer = new ShadowTransformer(mBinding.viewPager, mFragmentCardAdapter);
         mFragmentCardShadowTransformer.enableScaling(true);
-
-        //mBinding.viewPager.setAdapter(mCardAdapter);
 
         mBinding.viewPager.setAdapter(mFragmentCardAdapter);
         mBinding.viewPager.setPageTransformer(false, mFragmentCardShadowTransformer);
@@ -70,14 +57,6 @@ public class FragmentMyStat extends Fragment {
     }
 
 
-    private void setCard(){
-        mCardAdapter = new CardPagerAdapter();
-        mCardAdapter.addCardItem(new CardItem(getActivity().getSupportFragmentManager(), fragment_first));
-        mCardAdapter.addCardItem(new CardItem(getActivity().getSupportFragmentManager(), fragment_second));
-        mCardAdapter.addCardItem(new CardItem(getActivity().getSupportFragmentManager(), fragment_thrid));
-        //mCardAdapter.addCardItem(new CardItem(getChildFragmentManager(), "second"));
-        //mCardAdapter.addCardItem(new CardItem(getChildFragmentManager(), "third"));
-    }
 
     @Override
     public void onDestroyView() {

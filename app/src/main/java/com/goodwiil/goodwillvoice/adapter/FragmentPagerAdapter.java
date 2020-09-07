@@ -16,7 +16,6 @@ import java.util.List;
 
 public class FragmentPagerAdapter extends FragmentStatePagerAdapter implements CardAdapter {
 
-    private List<Fragment> mFragments;
     private FragmentMyStatFirst fragmentMyStatFirst;
     private FragmentMyStatSecond fragmentMyStatSecond;
     private FragmentMyStatThird fragmentMyStatThird;
@@ -24,16 +23,12 @@ public class FragmentPagerAdapter extends FragmentStatePagerAdapter implements C
 
     public FragmentPagerAdapter(FragmentManager fm, float baseElevation) {
         super(fm);
-        mFragments = new ArrayList<>();
         mBaseElevation = baseElevation;
 
         fragmentMyStatFirst = new FragmentMyStatFirst();
         fragmentMyStatSecond = new FragmentMyStatSecond();
         fragmentMyStatThird = new FragmentMyStatThird();
 
-        addFragment(new FragmentMyStatFirst());
-        addFragment(new FragmentMyStatSecond());
-        addFragment(new FragmentMyStatThird());
     }
 
     @Override
@@ -57,23 +52,32 @@ public class FragmentPagerAdapter extends FragmentStatePagerAdapter implements C
 
     @Override
     public int getCount() {
-        return mFragments.size();
+        return 3;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return mFragments.get(position);
+        switch (position){
+            case 0:
+                return fragmentMyStatFirst;
+            case 1:
+                return fragmentMyStatSecond;
+            case 2:
+                return fragmentMyStatThird;
+            default:
+                return null;
+        }
+
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         Object fragment = super.instantiateItem(container, position);
-        mFragments.set(position, (Fragment) fragment);
+
+
         return fragment;
     }
 
-    public void addFragment(Fragment fragment) {
-        mFragments.add(fragment);
-    }
+
 
 }
