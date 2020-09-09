@@ -68,9 +68,8 @@
                 android:layout_gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_chainStyle="spread"
                 app:layout_constraintEnd_toStartOf="@id/tv_unknown_icon"
-                android:layout_marginStart="40dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 android:layout_marginBottom="150dp" />
 
             <TextView
@@ -80,6 +79,8 @@
                 app:layout_constraintStart_toEndOf="@id/iv_unknown_icon"
                 app:layout_constraintBottom_toBottomOf="@id/iv_unknown_icon"
                 app:layout_constraintTop_toTopOf="@id/iv_unknown_icon"
+                app:layout_constraintEnd_toStartOf="@id/iv_first_icon"
+                android:layout_marginEnd="30dp"
                 android:text="미등록 통화" />
 
             <ImageView
@@ -87,6 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/first_warning_icon"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintStart_toEndOf="@id/tv_unknown_icon"
                 app:layout_constraintTop_toTopOf="@id/tv_unknown_icon"
                 app:layout_constraintEnd_toStartOf="@+id/tv_first_icon"
@@ -99,7 +101,8 @@
                 app:layout_constraintStart_toEndOf="@id/iv_first_icon"
                 app:layout_constraintBottom_toBottomOf="@id/iv_first_icon"
                 app:layout_constraintTop_toTopOf="@id/iv_first_icon"
-
+                app:layout_constraintEnd_toStartOf="@+id/iv_second_icon"
+                android:layout_marginEnd="30dp"
                 android:text="1단계" />
 
             <ImageView
@@ -107,6 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/second_warning_icon"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintStart_toEndOf="@id/tv_first_icon"
                 app:layout_constraintTop_toTopOf="@id/tv_first_icon"
                 app:layout_constraintBottom_toBottomOf="@id/tv_first_icon"
@@ -119,7 +123,8 @@
                 app:layout_constraintStart_toEndOf="@id/iv_second_icon"
                 app:layout_constraintBottom_toBottomOf="@id/iv_second_icon"
                 app:layout_constraintTop_toTopOf="@id/iv_second_icon"
-
+                app:layout_constraintEnd_toStartOf="@+id/iv_third_icon"
+                android:layout_marginEnd="30dp"
                 android:text="2단계" />
 
             <ImageView
@@ -127,10 +132,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/third_warning_icon"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintStart_toEndOf="@id/tv_second_icon"
                 app:layout_constraintTop_toTopOf="@id/tv_second_icon"
                 app:layout_constraintBottom_toBottomOf="@id/tv_second_icon"
-/>
+                app:layout_constraintEnd_toStartOf="@+id/tv_third_icon"/>
 
             <TextView
                 android:id="@+id/tv_third_icon"
@@ -140,7 +146,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_third_icon"
                 app:layout_constraintTop_toTopOf="@id/iv_third_icon"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="40dp"
+
                 android:text="3단계" />
 
 
