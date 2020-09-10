@@ -12,46 +12,137 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         app:cardUseCompatPadding="true">
 
 
-        <FrameLayout
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorBlue">
+            android:layout_height="match_parent">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="24dp">
+                android:text="미등록 통화유형"
+                android:textColor="@color/colorBlack"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.05" />
 
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Card title" />
-
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Etiam eget ligula eu lectus lobortis condimentum." />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="Button" />
-            </LinearLayout>
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/bc_callLog"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/transparent"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-        </FrameLayout>
+
+            <ImageView
+                android:id="@+id/iv_first_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/first_warning_icon"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_1"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toStartOf="@id/tv_first_icon"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                android:layout_marginBottom="100dp" />
+
+
+            <TextView
+                android:id="@+id/tv_first_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/iv_first_icon"
+                app:layout_constraintBottom_toBottomOf="@id/iv_first_icon"
+                app:layout_constraintTop_toTopOf="@id/iv_first_icon"
+                app:layout_constraintEnd_toStartOf="@+id/iv_second_icon"
+                android:layout_marginEnd="10dp"
+                android:text="1단계" />
+
+
+
+            <ImageView
+                android:id="@+id/iv_second_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/second_warning_icon"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintStart_toEndOf="@id/tv_first_icon"
+                app:layout_constraintTop_toTopOf="@id/tv_first_icon"
+                app:layout_constraintBottom_toBottomOf="@id/tv_first_icon"
+                app:layout_constraintEnd_toStartOf="@+id/tv_second_icon"/>
+
+            <TextView
+                android:id="@+id/tv_second_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/iv_second_icon"
+                app:layout_constraintBottom_toBottomOf="@id/iv_second_icon"
+                app:layout_constraintTop_toTopOf="@id/iv_second_icon"
+                app:layout_constraintEnd_toStartOf="@+id/iv_third_icon"
+                android:layout_marginEnd="10dp"
+                android:text="2단계" />
+
+            <ImageView
+                android:id="@+id/iv_third_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/third_warning_icon"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintStart_toEndOf="@id/tv_second_icon"
+                app:layout_constraintTop_toTopOf="@id/tv_second_icon"
+                app:layout_constraintBottom_toBottomOf="@id/tv_second_icon"
+                app:layout_constraintEnd_toStartOf="@+id/tv_third_icon"/>
+
+            <TextView
+                android:id="@+id/tv_third_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/iv_third_icon"
+                app:layout_constraintBottom_toBottomOf="@id/iv_third_icon"
+                app:layout_constraintTop_toTopOf="@id/iv_third_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="3단계" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
     </androidx.cardview.widget.CardView>
 

@@ -15,4 +15,8 @@
     <color name="warning1">#CDDC39</color>
     <color name="warning2">#FF9800</color>
     <color name="warning3">#FA3C00</color>
+
+    <color name="transparent">#00FFFFFF</color>
+
+
 </resources>

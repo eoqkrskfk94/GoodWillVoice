@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -26,6 +27,7 @@ import com.goodwiil.goodwillvoice.adapter.CardPagerAdapter;
 import com.goodwiil.goodwillvoice.databinding.FragmentMyStatBinding;
 import com.goodwiil.goodwillvoice.databinding.FragmentMyStatFirstBinding;
 import com.goodwiil.goodwillvoice.model.CardItem;
+import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.util.ShadowTransformer;
 
 import java.util.ArrayList;
@@ -37,6 +39,7 @@ public class FragmentMyStatFirst extends Fragment {
 
 
     private CardView mCardView;
+    private PieChart pieChart;
 
     @Nullable
     @Override
@@ -44,24 +47,47 @@ public class FragmentMyStatFirst extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_stat_first, container, false);
         mCardView = (CardView) view.findViewById(R.id.cardView);
+        pieChart = (PieChart) view.findViewById(R.id.pc_callLog);
         mCardView.setMaxCardElevation(mCardView.getCardElevation()
                 * CardAdapter.MAX_ELEVATION_FACTOR);
 
-        mBinding = FragmentMyStatFirstBinding.inflate(inflater, container, false);
-        //mBinding.setViewModel(new SplashViewModel());
-        mBinding.setLifecycleOwner(getActivity());
+//        mBinding = FragmentMyStatFirstBinding.inflate(inflater, container, false);
+//        mBinding.setLifecycleOwner(getActivity());
+//        mBinding.cardView.setMaxCardElevation(mBinding.cardView.getCardElevation()
+//                * CardAdapter.MAX_ELEVATION_FACTOR);
+//
+//        mCardView = (CardView) mBinding.getRoot().findViewById(R.id.cardView);
+
+        setPieChard();
 
 
-        mBinding.pcCallLog.getDescription().setEnabled(false);
-        mBinding.pcCallLog.setExtraOffsets(5,0,5,0);
-        mBinding.pcCallLog.setTouchEnabled(false);
-        mBinding.pcCallLog.animateY(1000, Easing.EaseInOutCubic);
+        return view;
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mBinding = null;
+    }
+
+    public CardView getCardView() {
+
+        return mCardView;
+    }
+
+    private void setPieChard(){
+
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(5,0,5,0);
+        pieChart.setTouchEnabled(false);
+        pieChart.animateY(1000, Easing.EaseInOutCubic);
         //mBinding.pcCallLog.setDragDecelerationFrictionCoef(0.95f);
 
-        mBinding.pcCallLog.setDrawHoleEnabled(true);
-        mBinding.pcCallLog.setHoleColor(Color.WHITE);
-        mBinding.pcCallLog.setTransparentCircleRadius(61f);
-        mBinding.pcCallLog.getLegend().setEnabled(false);
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setTransparentCircleRadius(61f);
+        pieChart.getLegend().setEnabled(false);
 
         ArrayList<PieEntry> yValues = new ArrayList<>();
 
@@ -72,28 +98,16 @@ public class FragmentMyStatFirst extends Fragment {
         PieDataSet dataSet = new PieDataSet(yValues, "");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        dataSet.setColors(ScreenManager.PIE_CHART_COLOR);
 
 
         PieData data = new PieData(dataSet);
         data.setValueTextSize(10f);
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextColor(Color.BLACK);
         data.setValueFormatter(new MyValueFormatter());
 
-        mBinding.pcCallLog.setData(data);
-
-
-        return mBinding.getRoot();
+        pieChart.setData(data);
     }
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mBinding = null;
-    }
-
-    public CardView getCardView() { return mCardView; }
 
 
     private class MyValueFormatter extends ValueFormatter {

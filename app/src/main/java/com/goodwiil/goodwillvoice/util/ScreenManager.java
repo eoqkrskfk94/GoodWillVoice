@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
 
+import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
+
 public class ScreenManager {
 
     //Activity 화면 이동 함수
@@ -54,4 +56,13 @@ public class ScreenManager {
     public static String secondsToString(String pTime) {
         return String.format("%02d:%02d", Integer.parseInt(pTime) / 60, Integer.parseInt(pTime) % 60);
     }
+    public static final int[] PIE_CHART_COLOR = {
+            rgb("#ff7d7d"), rgb("#fe9d66"), rgb("#ffe875")
+    };
+
+    public static final int[] BAR_CHART_COLOR = {
+            rgb("#71bbe8"), rgb("#1c84d3"), rgb("#034893")
+    };
+
 }
+

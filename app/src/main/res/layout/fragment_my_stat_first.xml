@@ -16,6 +16,8 @@
         android:layout_gravity="center"
         app:cardUseCompatPadding="true">
 
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -31,29 +33,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.100000024" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2020/8월 내역"
-                android:textColor="@color/colorBlack"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.05"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.01999998" />
+                app:layout_constraintVertical_bias="0.05" />
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pc_callLog"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -64,13 +52,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/unknown_number_icon"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_unknown_icon"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                android:layout_marginBottom="150dp" />
+                android:layout_marginBottom="100dp" />
 
             <TextView
                 android:id="@+id/tv_unknown_icon"
@@ -80,19 +68,33 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_unknown_icon"
                 app:layout_constraintTop_toTopOf="@id/iv_unknown_icon"
                 app:layout_constraintEnd_toStartOf="@id/iv_first_icon"
-                android:layout_marginEnd="30dp"
+                android:layout_marginEnd="10dp"
                 android:text="미등록 통화" />
+
+            <TextView
+                android:id="@+id/tv_unknown_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="25회"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tv_unknown_icon"
+                app:layout_constraintStart_toStartOf="@id/tv_unknown_icon"
+                app:layout_constraintEnd_toEndOf="@id/tv_unknown_icon"/>
+
+
 
             <ImageView
                 android:id="@+id/iv_first_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/first_warning_icon"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="5dp"
                 app:layout_constraintStart_toEndOf="@id/tv_unknown_icon"
                 app:layout_constraintTop_toTopOf="@id/tv_unknown_icon"
                 app:layout_constraintEnd_toStartOf="@+id/tv_first_icon"
                 app:layout_constraintBottom_toBottomOf="@id/tv_unknown_icon"/>
+
 
             <TextView
                 android:id="@+id/tv_first_icon"
@@ -102,15 +104,28 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_first_icon"
                 app:layout_constraintTop_toTopOf="@id/iv_first_icon"
                 app:layout_constraintEnd_toStartOf="@+id/iv_second_icon"
-                android:layout_marginEnd="30dp"
+                android:layout_marginEnd="10dp"
                 android:text="1단계" />
+
+
+            <TextView
+                android:id="@+id/tv_first_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="20회"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tv_first_icon"
+                app:layout_constraintStart_toStartOf="@id/tv_first_icon"
+                app:layout_constraintEnd_toEndOf="@id/tv_first_icon"/>
+
 
             <ImageView
                 android:id="@+id/iv_second_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/second_warning_icon"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="5dp"
                 app:layout_constraintStart_toEndOf="@id/tv_first_icon"
                 app:layout_constraintTop_toTopOf="@id/tv_first_icon"
                 app:layout_constraintBottom_toBottomOf="@id/tv_first_icon"
@@ -124,15 +139,26 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_second_icon"
                 app:layout_constraintTop_toTopOf="@id/iv_second_icon"
                 app:layout_constraintEnd_toStartOf="@+id/iv_third_icon"
-                android:layout_marginEnd="30dp"
+                android:layout_marginEnd="10dp"
                 android:text="2단계" />
+
+            <TextView
+                android:id="@+id/tv_second_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="4회"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tv_second_icon"
+                app:layout_constraintStart_toStartOf="@id/tv_second_icon"
+                app:layout_constraintEnd_toEndOf="@id/tv_second_icon"/>
 
             <ImageView
                 android:id="@+id/iv_third_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/third_warning_icon"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="5dp"
                 app:layout_constraintStart_toEndOf="@id/tv_second_icon"
                 app:layout_constraintTop_toTopOf="@id/tv_second_icon"
                 app:layout_constraintBottom_toBottomOf="@id/tv_second_icon"
@@ -146,8 +172,18 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_third_icon"
                 app:layout_constraintTop_toTopOf="@id/iv_third_icon"
                 app:layout_constraintEnd_toEndOf="parent"
-
                 android:text="3단계" />
+
+            <TextView
+                android:id="@+id/tv_thrid_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="1회"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tv_third_icon"
+                app:layout_constraintStart_toStartOf="@id/tv_third_icon"
+                app:layout_constraintEnd_toEndOf="@id/tv_third_icon"/>
 
 
 
@@ -165,6 +201,8 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 
