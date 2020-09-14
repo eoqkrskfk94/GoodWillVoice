@@ -13,6 +13,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_top_dialog"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/dialog_1"
+            app:layout_constraintTop_toBottomOf="@+id/layout_top_bar">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="등록됮 않은 번호가 n건 있습니다."
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/layout_top_dialog"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_top_dialog"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,9 +46,9 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintHorizontal_bias="0.13"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_top_dialog"
             app:layout_constraintVertical_bias="0.01999998" />
 
         <androidx.viewpager.widget.ViewPager
@@ -33,9 +57,9 @@
             android:layout_height="0dp"
             android:clipToPadding="false"
             android:overScrollMode="never"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:layout_marginTop="15dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_marginTop="60dp"
             android:paddingTop="30dp"
             android:paddingBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -56,7 +56,7 @@ public class FragmentMyStatSecond extends Fragment {
     public CardView getCardView() { return mCardView; }
 
     private void setBarChart(){
-        //barChart.getDescription().setEnabled(false);
+        barChart.getDescription().setEnabled(false);
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(true);
         barChart.setMaxVisibleValueCount(50);
@@ -68,7 +68,7 @@ public class FragmentMyStatSecond extends Fragment {
 
         XAxis xAxis = barChart.getXAxis();
         xAxis.setDrawGridLines(false);
-        xAxis.setDrawLabels(false);
+        //xAxis.setDrawLabels(false);
         xAxis.setDrawAxisLine(false);
 
 
@@ -96,7 +96,7 @@ public class FragmentMyStatSecond extends Fragment {
 
         String[] types = new String[]{"지인", "대출", "광고", "학교", "기타"};
         xAxis.setValueFormatter(new MyXAxisValueFormatter(types));
-        xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
         barChart.setData(data);
 

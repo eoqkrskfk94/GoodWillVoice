@@ -19,6 +19,7 @@ import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.util.DBManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ActivityMain;
+import com.goodwiil.goodwillvoice.view.ActivityMain2;
 
 import static android.content.Context.TELEPHONY_SERVICE;
 
@@ -57,7 +58,7 @@ public class SignUpViewModel extends BaseViewModel {
             }
 
             AppDataManager.setSharedPrefs(AppDataManager.SP_NAME, user);
-            ScreenManager.startActivity(view.getContext(), ActivityMain.class);
+            ScreenManager.startActivity(view.getContext(), ActivityMain2.class);
             ((Activity) view.getContext()).finish();
         }
 

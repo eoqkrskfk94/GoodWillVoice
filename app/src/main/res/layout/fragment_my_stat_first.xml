@@ -39,9 +39,9 @@
                 android:id="@+id/pc_callLog"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="130dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -58,7 +58,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_unknown_icon"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                android:layout_marginBottom="100dp" />
+                android:layout_marginBottom="150dp" />
 
             <TextView
                 android:id="@+id/tv_unknown_icon"
@@ -69,6 +69,7 @@
                 app:layout_constraintTop_toTopOf="@id/iv_unknown_icon"
                 app:layout_constraintEnd_toStartOf="@id/iv_first_icon"
                 android:layout_marginEnd="10dp"
+                android:textSize="12dp"
                 android:text="미등록 통화" />
 
             <TextView
@@ -105,6 +106,7 @@
                 app:layout_constraintTop_toTopOf="@id/iv_first_icon"
                 app:layout_constraintEnd_toStartOf="@+id/iv_second_icon"
                 android:layout_marginEnd="10dp"
+                android:textSize="12dp"
                 android:text="1단계" />
 
 
@@ -140,6 +142,8 @@
                 app:layout_constraintTop_toTopOf="@id/iv_second_icon"
                 app:layout_constraintEnd_toStartOf="@+id/iv_third_icon"
                 android:layout_marginEnd="10dp"
+                android:textSize="12dp"
+
                 android:text="2단계" />
 
             <TextView
@@ -172,6 +176,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_third_icon"
                 app:layout_constraintTop_toTopOf="@id/iv_third_icon"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="12dp"
+
                 android:text="3단계" />
 
             <TextView

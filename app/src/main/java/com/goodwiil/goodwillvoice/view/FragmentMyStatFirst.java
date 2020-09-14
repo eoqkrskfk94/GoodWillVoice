@@ -86,7 +86,7 @@ public class FragmentMyStatFirst extends Fragment {
 
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleColor(Color.WHITE);
-        pieChart.setTransparentCircleRadius(61f);
+        pieChart.setHoleRadius(60);
         pieChart.getLegend().setEnabled(false);
 
         ArrayList<PieEntry> yValues = new ArrayList<>();
