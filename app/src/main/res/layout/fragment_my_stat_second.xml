@@ -42,7 +42,7 @@
                 android:layout_height="0dp"
                 android:background="@color/transparent"
                 android:layout_marginTop="100dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="150dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,13 +50,27 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/warning_box">
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
             <ImageView
                 android:id="@+id/iv_first_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/first_warning_icon"
+                android:src="@drawable/first_blue_icon"
                 android:layout_marginEnd="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_1"
@@ -75,7 +89,7 @@
                 app:layout_constraintTop_toTopOf="@id/iv_first_icon"
                 app:layout_constraintEnd_toStartOf="@+id/iv_second_icon"
                 android:layout_marginEnd="10dp"
-                android:text="1단계" />
+                android:text="나" />
 
 
 
@@ -83,7 +97,7 @@
                 android:id="@+id/iv_second_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/second_warning_icon"
+                android:src="@drawable/second_blue_icon"
                 android:layout_marginEnd="5dp"
                 app:layout_constraintStart_toEndOf="@id/tv_first_icon"
                 app:layout_constraintTop_toTopOf="@id/tv_first_icon"
@@ -99,13 +113,13 @@
                 app:layout_constraintTop_toTopOf="@id/iv_second_icon"
                 app:layout_constraintEnd_toStartOf="@+id/iv_third_icon"
                 android:layout_marginEnd="10dp"
-                android:text="2단계" />
+                android:text="20대" />
 
             <ImageView
                 android:id="@+id/iv_third_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/third_warning_icon"
+                android:src="@drawable/third_blue_icon"
                 android:layout_marginEnd="5dp"
                 app:layout_constraintStart_toEndOf="@id/tv_second_icon"
                 app:layout_constraintTop_toTopOf="@id/tv_second_icon"
@@ -120,7 +134,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_third_icon"
                 app:layout_constraintTop_toTopOf="@id/iv_third_icon"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="3단계" />
+                android:text="대학생" />
 
 
 

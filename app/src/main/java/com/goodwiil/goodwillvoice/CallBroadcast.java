@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.VibrationEffect;
@@ -39,10 +40,12 @@ import java.util.TimerTask;
 import androidx.core.content.ContextCompat;
 
 import static android.content.Context.POWER_SERVICE;
+import static com.goodwiil.goodwillvoice.application.GoodWillApplication.getContext;
 
 public class CallBroadcast extends BroadcastReceiver {
 
     public static CallLogInfo callLogInfo;
+    private AudioManager audioManager;
 
     private String number;
     private Vibrator vibrator;
@@ -70,11 +73,8 @@ public class CallBroadcast extends BroadcastReceiver {
         this.context = context;
         setWakeLock(context);
         setting(context);
+        audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
 
-
-//        AudioManager am = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-//        am.setStreamVolume(AudioManager.STREAM_VOICE_CALL, 0, 0);
-//        am.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
 
         //전화 상태 받아오기
         String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
@@ -113,6 +113,7 @@ public class CallBroadcast extends BroadcastReceiver {
                         model = new IncomingNumber(incomingNumber, incomingName);
 
                         wakeLock.acquire();
+
 
 
                         //날짜 기록
@@ -257,9 +258,21 @@ public class CallBroadcast extends BroadcastReceiver {
             if (vibrate)
                 //vibrator.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1));
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
+
+            if((audioManager.getMode()== AudioManager.MODE_IN_CALL)||(audioManager.getMode()== AudioManager.MODE_IN_COMMUNICATION)) {
+                audioManager.setMicrophoneMute(true);
+            }
+
+
         } else if (sec == call_length[1]) {
             if (vibrate)
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
+
+            if((audioManager.getMode()== AudioManager.MODE_IN_CALL)||(audioManager.getMode()== AudioManager.MODE_IN_COMMUNICATION)) {
+                audioManager.setMicrophoneMute(false);
+            }
+
+
         } else if (sec == call_length[2]) {
             if (vibrate)
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));

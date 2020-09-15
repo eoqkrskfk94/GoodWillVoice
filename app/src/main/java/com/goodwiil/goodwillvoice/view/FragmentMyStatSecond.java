@@ -18,6 +18,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.adapter.CardAdapter;
@@ -57,10 +58,11 @@ public class FragmentMyStatSecond extends Fragment {
 
     private void setBarChart(){
         barChart.getDescription().setEnabled(false);
-        barChart.setDrawBarShadow(false);
-        barChart.setDrawValueAboveBar(true);
-        barChart.setMaxVisibleValueCount(50);
+        //barChart.setDrawBarShadow(false);
+        //barChart.setDrawValueAboveBar(true);
+        //barChart.setMaxVisibleValueCount(50);
         barChart.setPinchZoom(false);
+        //barChart.setTouchEnabled(false);
         //barChart.setBackgroundColor(Color.TRANSPARENT);
         //barChart.setDrawGridBackground(false);
         barChart.animateY(1000, Easing.EaseInOutCubic);
@@ -80,41 +82,64 @@ public class FragmentMyStatSecond extends Fragment {
         YAxis leftAxis = barChart.getAxisLeft();
         leftAxis.setDrawGridLines(false);
 
-        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        ArrayList<BarEntry> barEntries1 = new ArrayList<>();
+        ArrayList<BarEntry> barEntries2 = new ArrayList<>();
+        ArrayList<BarEntry> barEntries3 = new ArrayList<>();
 
-        barEntries.add(new BarEntry(1, 40f));
-        barEntries.add(new BarEntry(2, 50f));
-        barEntries.add(new BarEntry(3, 30f));
-        barEntries.add(new BarEntry(4, 80f));
-        barEntries.add(new BarEntry(5, 20f));
+        barEntries1.add(new BarEntry(1, 13));
+        barEntries1.add(new BarEntry(2, 5));
+        barEntries1.add(new BarEntry(3, 6));
+        barEntries1.add(new BarEntry(4, 2));
+        barEntries1.add(new BarEntry(5, 10));
 
-        BarDataSet barDataSet = new BarDataSet(barEntries, "");
-        barDataSet.setColors(ScreenManager.BAR_CHART_COLOR);
+        barEntries2.add(new BarEntry(1, 15));
+        barEntries2.add(new BarEntry(2, 3));
+        barEntries2.add(new BarEntry(3, 1));
+        barEntries2.add(new BarEntry(4, 11));
+        barEntries2.add(new BarEntry(5, 8));
 
-        BarData data = new BarData(barDataSet);
-        data.setBarWidth(0.5f);
+        barEntries3.add(new BarEntry(1, 4));
+        barEntries3.add(new BarEntry(2, 5));
+        barEntries3.add(new BarEntry(3, 1));
+        barEntries3.add(new BarEntry(4, 9));
+        barEntries3.add(new BarEntry(5, 14));
 
-        String[] types = new String[]{"지인", "대출", "광고", "학교", "기타"};
-        xAxis.setValueFormatter(new MyXAxisValueFormatter(types));
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        BarDataSet barDataSet1 = new BarDataSet(barEntries1, "");
+        barDataSet1.setColor(getContext().getColor(R.color.blue1));
+        BarDataSet barDataSet2 = new BarDataSet(barEntries2, "");
+        barDataSet2.setColor(getContext().getColor(R.color.blue2));
+        BarDataSet barDataSet3 = new BarDataSet(barEntries3, "");
+        barDataSet3.setColor(getContext().getColor(R.color.blue3));
 
+        BarData data = new BarData(barDataSet1, barDataSet2, barDataSet3);
         barChart.setData(data);
 
+        String[] types = new String[]{"지인", "대출", "광고", "학교", "기타"};
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(types));
+        xAxis.setCenterAxisLabels(true);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setGranularity(1);
+        xAxis.setGranularityEnabled(true);
+
+        barChart.setDragEnabled(true);
+        barChart.setVisibleXRangeMaximum(3);
+
+        float barSpace = 0.01f;
+        float groupSpace = 0.05f;
+        data.setBarWidth(0.05f);
+
+        barChart.getXAxis().setAxisMinimum(0);
+        barChart.getXAxis().setAxisMaximum(0+barChart.getBarData().getGroupWidth(groupSpace,barSpace)*5);
+        barChart.getAxisLeft().setAxisMinimum(0);
+
+
+        barChart.groupBars(0,groupSpace,barSpace);
+
+
+        barChart.invalidate();
+
     }
 
-    public class MyXAxisValueFormatter extends ValueFormatter {
-
-        private String[] mValues;
-        public MyXAxisValueFormatter(String[] values){
-            this.mValues = values;
-        }
-
-
-        @Override
-        public String getFormattedValue(float value) {
-            return mValues[(int)value];
-        }
-    }
 
 
 

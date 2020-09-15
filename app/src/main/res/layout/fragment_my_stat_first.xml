@@ -191,6 +191,20 @@
                 app:layout_constraintStart_toStartOf="@id/tv_third_icon"
                 app:layout_constraintEnd_toEndOf="@id/tv_third_icon"/>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/warning_box">
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 

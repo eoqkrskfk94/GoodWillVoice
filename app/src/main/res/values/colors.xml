@@ -18,5 +18,9 @@
 
     <color name="transparent">#00FFFFFF</color>
 
+    <color name="blue1">#71bbe8</color>
+    <color name="blue2">#1c84d3</color>
+    <color name="blue3">#034893</color>
+
 
 </resources>
