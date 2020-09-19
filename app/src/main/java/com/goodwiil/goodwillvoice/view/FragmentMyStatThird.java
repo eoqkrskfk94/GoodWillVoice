@@ -17,10 +17,14 @@ import com.goodwiil.goodwillvoice.adapter.CardAdapter;
 import com.goodwiil.goodwillvoice.adapter.CardPagerAdapter;
 import com.goodwiil.goodwillvoice.databinding.FragmentMyStatFirstBinding;
 import com.goodwiil.goodwillvoice.databinding.FragmentMyStatThirdBinding;
+import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.model.TopMaxCallItem;
+import com.goodwiil.goodwillvoice.util.CallLogDataManager;
+import com.goodwiil.goodwillvoice.util.DurationSort;
 import com.goodwiil.goodwillvoice.util.ShadowTransformer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class FragmentMyStatThird extends Fragment {
@@ -49,21 +53,25 @@ public class FragmentMyStatThird extends Fragment {
 
     public void setRecyclerView(){
 
+        // 사용자 통화내역 기록 가져오기
+        ArrayList<CallLogInfo> callLogList = CallLogDataManager.getCallLog(getActivity());
+        callLogList.sort(new DurationSort().reversed());
+
         topCallLogList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ArrayList<TopMaxCallItem> topMaxCallItems = new ArrayList<>();
-        topMaxCallItems.add(new TopMaxCallItem(1,"054-260-2222","학교", "00:30:12"));
-        topMaxCallItems.add(new TopMaxCallItem(2,"054-260-2222","보험", "00:30:12"));
-        topMaxCallItems.add(new TopMaxCallItem(3,"054-260-2222","경찰", "00:30:12"));
-        topMaxCallItems.add(new TopMaxCallItem(4,"054-260-2222","통신사", "00:30:12"));
-        topMaxCallItems.add(new TopMaxCallItem(5,"054-260-2222","학교", "00:30:12"));
-        topMaxCallItems.add(new TopMaxCallItem(6,"054-260-2222","학교", "00:30:12"));
-        topMaxCallItems.add(new TopMaxCallItem(7,"054-260-2222","학교", "00:30:12"));
-        topMaxCallItems.add(new TopMaxCallItem(8,"054-260-2222","학교", "00:30:12"));
-        topMaxCallItems.add(new TopMaxCallItem(9,"054-260-2222","알수없음", "00:30:12"));
-        topMaxCallItems.add(new TopMaxCallItem(10,"054-260-2222","학교", "00:30:12"));
+//        ArrayList<TopMaxCallItem> topMaxCallItems = new ArrayList<>();
+//        topMaxCallItems.add(new TopMaxCallItem(1,"054-260-2222","학교", "00:30:12"));
+//        topMaxCallItems.add(new TopMaxCallItem(2,"054-260-2222","보험", "00:30:12"));
+//        topMaxCallItems.add(new TopMaxCallItem(3,"054-260-2222","경찰", "00:30:12"));
+//        topMaxCallItems.add(new TopMaxCallItem(4,"054-260-2222","통신사", "00:30:12"));
+//        topMaxCallItems.add(new TopMaxCallItem(5,"054-260-2222","학교", "00:30:12"));
+//        topMaxCallItems.add(new TopMaxCallItem(6,"054-260-2222","학교", "00:30:12"));
+//        topMaxCallItems.add(new TopMaxCallItem(7,"054-260-2222","학교", "00:30:12"));
+//        topMaxCallItems.add(new TopMaxCallItem(8,"054-260-2222","학교", "00:30:12"));
+//        topMaxCallItems.add(new TopMaxCallItem(9,"054-260-2222","알수없음", "00:30:12"));
+//        topMaxCallItems.add(new TopMaxCallItem(10,"054-260-2222","학교", "00:30:12"));
 
-        callRankAdapter = new CallRankAdapter(topMaxCallItems);
+        callRankAdapter = new CallRankAdapter(callLogList.subList(0,10));
         topCallLogList.setAdapter(callRankAdapter);
 
 

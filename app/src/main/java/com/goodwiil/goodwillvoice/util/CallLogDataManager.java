@@ -102,65 +102,74 @@ public class CallLogDataManager {
 
             while (cursor.moveToNext()) {
                 CallLogInfo callLogInfo = new CallLogInfo();
-                categorizeIncomingNumber(cursor.getString(log_number));
-                if(cursor.getString(log_name) == null){
-                    CallLogDataManager.unknownTotal += 1;
-                    callLogInfo.setName("unknown");
 
-                    if((Integer.parseInt(cursor.getString(log_duration)) > 0)){
+                if(cursor.getString(log_number).length()>3){
+                    categorizeIncomingNumber(cursor.getString(log_number));
+                    if(cursor.getString(log_name) == null){
+                        CallLogDataManager.unknownTotal += 1;
+                        callLogInfo.setName("unknown");
 
-                        CallLogDataManager.unknownCallTotalNum += 1;
-                        CallLogDataManager.unknownCallTotal += Integer.parseInt(cursor.getString(log_duration));
+                        if((Integer.parseInt(cursor.getString(log_duration)) > 0)){
+
+                            CallLogDataManager.unknownCallTotalNum += 1;
+                            CallLogDataManager.unknownCallTotal += Integer.parseInt(cursor.getString(log_duration));
 
 
-                        if((Integer.parseInt(cursor.getString(log_duration)) > callAnalysisInfo.getUnknownCallMax())){
-                            callAnalysisInfo.setUnknownCallMax(Integer.parseInt(cursor.getString(log_duration)));
-                            callAnalysisInfo.setUnknownCallMaxNumber(CallLogDataManager.convertNumber(cursor.getString(log_number)));
-                        }
+                            if((Integer.parseInt(cursor.getString(log_duration)) > callAnalysisInfo.getUnknownCallMax())){
+                                callAnalysisInfo.setUnknownCallMax(Integer.parseInt(cursor.getString(log_duration)));
+                                callAnalysisInfo.setUnknownCallMaxNumber(CallLogDataManager.convertNumber(cursor.getString(log_number)));
+                            }
 
-                        if((Integer.parseInt(cursor.getString(log_duration)) < callAnalysisInfo.getUnknownCallMin())){
-                            callAnalysisInfo.setUnknownCallMin(Integer.parseInt(cursor.getString(log_duration)));
-                            callAnalysisInfo.setUnknownCallMinNumber(CallLogDataManager.convertNumber(cursor.getString(log_number)));
+                            if((Integer.parseInt(cursor.getString(log_duration)) < callAnalysisInfo.getUnknownCallMin())){
+                                callAnalysisInfo.setUnknownCallMin(Integer.parseInt(cursor.getString(log_duration)));
+                                callAnalysisInfo.setUnknownCallMinNumber(CallLogDataManager.convertNumber(cursor.getString(log_number)));
+                            }
+
                         }
 
                     }
 
+                    else{
+                        CallLogDataManager.knownTotal += 1;
+                        CallLogDataManager.knownCallTotalNum += 1;
+                        CallLogDataManager.knownCallTotal += Integer.parseInt(cursor.getString(log_duration));
+                        callLogInfo.setName(cursor.getString(log_name));
+                    }
+
+                    callLogInfo.setNumber(cursor.getString(log_number));
+                    callLogInfo.setDate(changeDate(cursor.getString(log_date)));
+                    callLogInfo.setDuration(Integer.parseInt((cursor.getString(log_duration))));
+
+                    String callType = cursor.getString(log_type);
+                    int code = Integer.parseInt(callType);
+                    switch (code) {
+                        case CallLog.Calls.OUTGOING_TYPE:
+                            callLogInfo.setType("OUTGOING");
+                            if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumOutgoing(callAnalysisInfo.getNumOutgoing()+1);
+                            break;
+                        case CallLog.Calls.INCOMING_TYPE:
+                            callLogInfo.setType("INCOMING");
+                            if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumIncoming(callAnalysisInfo.getNumIncoming()+1);
+                            break;
+                        case CallLog.Calls.MISSED_TYPE:
+                            callLogInfo.setType("MISSED");
+                            if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumMissed(callAnalysisInfo.getNumMissed()+1);
+                            break;
+                        case CallLog.Calls.REJECTED_TYPE:
+                            callLogInfo.setType("REJECTED");
+                            if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumRejected(callAnalysisInfo.getNumRejected()+1);
+                            break;
+                    }
+
+                    if(callLogInfo.getDuration() > 0 &&
+                            !callLogInfo.getType().equals("MISSED") &&
+                            !callLogInfo.getType().equals("OUTGOING") &&
+                            !callLogInfo.getType().equals("REJECTED") &&
+                            callLogInfo.getName().equals("unknown")
+                    )
+                    callLogInfos.add(callLogInfo);
                 }
 
-                else{
-                    CallLogDataManager.knownTotal += 1;
-                    CallLogDataManager.knownCallTotalNum += 1;
-                    CallLogDataManager.knownCallTotal += Integer.parseInt(cursor.getString(log_duration));
-                    callLogInfo.setName(cursor.getString(log_name));
-                }
-
-
-                callLogInfo.setNumber(cursor.getString(log_number));
-                callLogInfo.setDate(changeDate(cursor.getString(log_date)));
-                callLogInfo.setDuration(Integer.parseInt((cursor.getString(log_duration))));
-
-                String callType = cursor.getString(log_type);
-                int code = Integer.parseInt(callType);
-                switch (code) {
-                    case CallLog.Calls.OUTGOING_TYPE:
-                        callLogInfo.setType("OUTGOING");
-                        if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumOutgoing(callAnalysisInfo.getNumOutgoing()+1);
-                        break;
-                    case CallLog.Calls.INCOMING_TYPE:
-                        callLogInfo.setType("INCOMING");
-                        if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumIncoming(callAnalysisInfo.getNumIncoming()+1);
-                        break;
-                    case CallLog.Calls.MISSED_TYPE:
-                        callLogInfo.setType("MISSED");
-                        if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumMissed(callAnalysisInfo.getNumMissed()+1);
-                        break;
-                    case CallLog.Calls.REJECTED_TYPE:
-                        callLogInfo.setType("REJECTED");
-                        if(callLogInfo.getName().equals("unknown")) callAnalysisInfo.setNumRejected(callAnalysisInfo.getNumRejected()+1);
-                        break;
-                }
-
-                callLogInfos.add(callLogInfo);
 
             }
 
@@ -271,6 +280,7 @@ public class CallLogDataManager {
 
     // 번호 분류하기
     private static void categorizeIncomingNumber(String number){
+
         String numberKind = number.substring(0,3);
         if(numberKind.equals("010")) numberType.addPhoneNumber();
         else if(numberKind.equals("070"))numberType.addInternetNumber();

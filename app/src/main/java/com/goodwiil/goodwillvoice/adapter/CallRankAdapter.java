@@ -10,15 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.goodwiil.goodwillvoice.R;
+import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.model.TopMaxCallItem;
+import com.goodwiil.goodwillvoice.util.ScreenManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CallRankAdapter extends RecyclerView.Adapter<CallRankAdapter.ItemViewHolder>  {
 
-    private ArrayList<TopMaxCallItem> topMaxCallItems;
+    private List<CallLogInfo> topMaxCallItems;
 
-    public CallRankAdapter(ArrayList<TopMaxCallItem> topMaxCallItems){
+    public CallRankAdapter(List<CallLogInfo> topMaxCallItems){
         this.topMaxCallItems = topMaxCallItems;
     }
 
@@ -35,8 +38,8 @@ public class CallRankAdapter extends RecyclerView.Adapter<CallRankAdapter.ItemVi
 
         holder.itemId.setText(Integer.toString(position+1));
         holder.itemNumber.setText(topMaxCallItems.get(position).getNumber());
-        holder.itemType.setText(topMaxCallItems.get(position).getType());
-        holder.itemLength.setText(topMaxCallItems.get(position).getLength());
+        //holder.itemType.setText(topMaxCallItems.get(position).getType());
+        holder.itemLength.setText(ScreenManager.secondsToString(Integer.toString(topMaxCallItems.get(position).getDuration())));
 
     }
 

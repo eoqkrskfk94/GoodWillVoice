@@ -1,6 +1,8 @@
 package com.goodwiil.goodwillvoice.model;
 
-public class CallLogInfo {
+import java.util.Comparator;
+
+public class CallLogInfo implements Comparator< CallLogInfo > {
 
     private String name;
     private String number;
@@ -66,4 +68,20 @@ public class CallLogInfo {
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
+
+
+    @Override
+    public int compare(CallLogInfo o1, CallLogInfo o2) {
+        int returnVal = 0;
+
+        if(o1.getDuration() < o2.getDuration()){
+            returnVal =  -1;
+        }else if(o1.getDuration() > o2.getDuration()){
+            returnVal =  1;
+        }else if(o1.getDuration() == o1.getDuration()){
+            returnVal =  0;
+        }
+        return returnVal;
+    }
+
 }
