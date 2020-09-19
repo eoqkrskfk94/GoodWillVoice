@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
 
 import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
@@ -32,7 +33,7 @@ public class ScreenManager {
 
     public static void startCountAnimation(int number, final TextView textView) {
         ValueAnimator animator = ValueAnimator.ofInt(0, number);
-        animator.setDuration(2000);
+        animator.setDuration(1000);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
                 textView.setText(animation.getAnimatedValue().toString());
@@ -56,6 +57,21 @@ public class ScreenManager {
     public static String secondsToString(String pTime) {
         return String.format("%02d:%02d", Integer.parseInt(pTime) / 60, Integer.parseInt(pTime) % 60);
     }
+
+    public static class MyValueFormatter extends ValueFormatter {
+
+        public MyValueFormatter() {
+            super();
+        }
+
+        @Override
+        public String getFormattedValue(float value) {
+            return "" + ((int) value);
+        }
+    }
+
+
+
     public static final int[] PIE_CHART_COLOR = {
             rgb("#ff7d7d"), rgb("#fe9d66"), rgb("#ffe875")
     };

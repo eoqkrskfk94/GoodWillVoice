@@ -19,8 +19,10 @@
         <LinearLayout
             android:id="@+id/iv_banner"
             android:background="@drawable/sample_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="150dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -29,19 +31,20 @@
         <LinearLayout
             android:id="@+id/ll_user"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="horizontal"
+            android:layout_height="80dp"
             android:layout_gravity="bottom"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/iv_banner"
-            android:background="@color/colorWhite">
+            tools:layout_editor_absoluteX="0dp">
 
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_marginStart="20dp"
                 android:layout_gravity="center"
+                android:layout_marginStart="20dp"
                 app:srcCompat="@drawable/proflie_none" />
 
             <TextView
@@ -53,16 +56,17 @@
                 android:text="User"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBlue"
-                android:text="변경하기"
-                android:textStyle="bold"
-                android:textSize="20dp"
                 android:layout_gravity="center"
+                android:layout_marginStart="20dp"
                 android:onClick="@{()->viewModel.userBtnClick(llUser)}"
-                android:layout_marginStart="20dp"/>
+                android:text="변경하기"
+                android:textColor="@color/colorBlue"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -70,8 +74,7 @@
             android:id="@+id/settings_fragment"
             android:name="com.goodwiil.goodwillvoice.view.FragmentMenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="300dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

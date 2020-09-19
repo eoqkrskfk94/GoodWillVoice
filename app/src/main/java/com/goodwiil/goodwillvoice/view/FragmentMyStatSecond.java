@@ -18,6 +18,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.goodwiil.goodwillvoice.R;
@@ -121,12 +122,17 @@ public class FragmentMyStatSecond extends Fragment {
         xAxis.setGranularity(1);
         xAxis.setGranularityEnabled(true);
 
-        barChart.setDragEnabled(true);
-        barChart.setVisibleXRangeMaximum(3);
+        //barChart.setDragEnabled(true);
+        barChart.getBarData().setValueTextSize(10);
+        barChart.getBarData().setValueFormatter(new ScreenManager.MyValueFormatter());
+        barChart.setVisibleXRangeMaximum(5);
 
-        float barSpace = 0.01f;
-        float groupSpace = 0.05f;
-        data.setBarWidth(0.05f);
+        // (barWidth + barSpace) * group number + groupSpace = 1.00
+        float barSpace = 0.05f;
+        float groupSpace = 0.19f;
+        float barWidth = 0.22f;
+
+        data.setBarWidth(barWidth);
 
         barChart.getXAxis().setAxisMinimum(0);
         barChart.getXAxis().setAxisMaximum(0+barChart.getBarData().getGroupWidth(groupSpace,barSpace)*5);
@@ -139,9 +145,6 @@ public class FragmentMyStatSecond extends Fragment {
         barChart.invalidate();
 
     }
-
-
-
 
 
 

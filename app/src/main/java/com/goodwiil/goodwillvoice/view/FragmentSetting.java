@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.FragmentCallLogBinding;
 import com.goodwiil.goodwillvoice.databinding.FragmentSettingBinding;
+import com.goodwiil.goodwillvoice.model.User;
+import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.viewModel.SettingViewModel;
 
 
@@ -31,6 +33,9 @@ public class FragmentSetting extends Fragment {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false);
         mBinding.setViewModel(new SettingViewModel());
+
+        User user = AppDataManager.getUserModel();
+        mBinding.tvUserName.setText(user.getNickName());
 
 
 

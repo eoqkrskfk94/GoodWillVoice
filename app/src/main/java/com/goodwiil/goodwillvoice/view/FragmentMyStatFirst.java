@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -41,6 +42,11 @@ public class FragmentMyStatFirst extends Fragment {
     private CardView mCardView;
     private PieChart pieChart;
 
+    private TextView tvUnknownCount;
+    private TextView tvFirstCount;
+    private TextView tvSecondCount;
+    private TextView tvThirdCount;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -57,6 +63,16 @@ public class FragmentMyStatFirst extends Fragment {
 //                * CardAdapter.MAX_ELEVATION_FACTOR);
 //
 //        mCardView = (CardView) mBinding.getRoot().findViewById(R.id.cardView);
+
+        tvUnknownCount = view.findViewById(R.id.tv_unknown_count);
+        tvFirstCount = view.findViewById(R.id.tv_first_count);
+        tvSecondCount = view.findViewById(R.id.tv_second_count);
+        tvThirdCount = view.findViewById(R.id.tv_thrid_count);
+
+        ScreenManager.startCountAnimation(25, tvUnknownCount);
+        ScreenManager.startCountAnimation(19, tvFirstCount);
+        ScreenManager.startCountAnimation(4, tvSecondCount);
+        ScreenManager.startCountAnimation(2, tvThirdCount);
 
         setPieChard();
 
@@ -101,8 +117,9 @@ public class FragmentMyStatFirst extends Fragment {
         dataSet.setColors(ScreenManager.PIE_CHART_COLOR);
 
 
+
         PieData data = new PieData(dataSet);
-        data.setValueTextSize(10f);
+        data.setValueTextSize(15f);
         data.setValueTextColor(Color.BLACK);
         data.setValueFormatter(new MyValueFormatter());
 
@@ -115,7 +132,7 @@ public class FragmentMyStatFirst extends Fragment {
 
         @Override
         public String getFormattedValue(float value) {
-            return super.getFormattedValue(value) + " %";
+            return "" + ((int) value)+ " %";
         }
     }
 
