@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.FragmentCallLogBinding;
 import com.goodwiil.goodwillvoice.databinding.FragmentSettingBinding;
+import com.goodwiil.goodwillvoice.viewModel.SettingViewModel;
 
 
 public class FragmentSetting extends Fragment {
@@ -29,7 +30,7 @@ public class FragmentSetting extends Fragment {
 
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false);
-        //mBinding.setViewModel(new SplashViewModel());
+        mBinding.setViewModel(new SettingViewModel());
 
 
 

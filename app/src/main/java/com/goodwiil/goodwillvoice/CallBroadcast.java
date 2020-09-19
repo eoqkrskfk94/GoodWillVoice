@@ -259,18 +259,14 @@ public class CallBroadcast extends BroadcastReceiver {
                 //vibrator.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1));
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
 
-            if((audioManager.getMode()== AudioManager.MODE_IN_CALL)||(audioManager.getMode()== AudioManager.MODE_IN_COMMUNICATION)) {
-                audioManager.setMicrophoneMute(true);
-            }
+            setMute(true);
 
 
         } else if (sec == call_length[1]) {
             if (vibrate)
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
 
-            if((audioManager.getMode()== AudioManager.MODE_IN_CALL)||(audioManager.getMode()== AudioManager.MODE_IN_COMMUNICATION)) {
-                audioManager.setMicrophoneMute(false);
-            }
+            setMute(false);
 
 
         } else if (sec == call_length[2]) {
@@ -299,4 +295,15 @@ public class CallBroadcast extends BroadcastReceiver {
         public void onProviderDisabled(String provider) {
         }
     };
+
+    private void setMute(Boolean mute){
+        if((audioManager.getMode()== AudioManager.MODE_IN_CALL)||(audioManager.getMode()== AudioManager.MODE_IN_COMMUNICATION)) {
+            audioManager.setMicrophoneMute(mute);
+            if(mute) ScreenManager.printToast(context, "음소거 켜기");
+            else ScreenManager.printToast(context, "음소거 끄기");
+        }
+
+        }
+
+
 }
