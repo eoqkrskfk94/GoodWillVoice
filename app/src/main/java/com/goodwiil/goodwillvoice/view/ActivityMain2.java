@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -15,6 +17,8 @@ import com.goodwiil.goodwillvoice.viewModel.Main2ViewModel;
 import com.goodwiil.goodwillvoice.viewModel.MenuViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import static com.goodwiil.goodwillvoice.application.GoodWillApplication.getContext;
+
 public class ActivityMain2 extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
 
@@ -22,6 +26,10 @@ public class ActivityMain2 extends AppCompatActivity implements BottomNavigation
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+//        AudioManager audioManager;
+//        audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+//        audioManager.setStreamVolume(audioManager.STREAM_VOICE_CALL,0,0);
 
         loadFragment(new FragmentMyStat());
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation);

@@ -9,7 +9,10 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.media.AudioAttributes;
+import android.media.AudioFocusRequest;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.VibrationEffect;
@@ -40,6 +43,7 @@ import java.util.TimerTask;
 import androidx.core.content.ContextCompat;
 
 import static android.content.Context.POWER_SERVICE;
+import static android.media.AudioAttributes.USAGE_VOICE_COMMUNICATION;
 import static com.goodwiil.goodwillvoice.application.GoodWillApplication.getContext;
 
 public class CallBroadcast extends BroadcastReceiver {
@@ -249,7 +253,7 @@ public class CallBroadcast extends BroadcastReceiver {
         } else if (level.equals("강 (1분 마다 진동)")) {
             //call_length[0] = 60;
             //call_length[1] = 180;
-            call_length[0] = 30;
+            call_length[0] = 5;
             call_length[1] = 60;
             call_length[2] = 90;
         }
@@ -299,8 +303,16 @@ public class CallBroadcast extends BroadcastReceiver {
     private void setMute(Boolean mute){
         if((audioManager.getMode()== AudioManager.MODE_IN_CALL)||(audioManager.getMode()== AudioManager.MODE_IN_COMMUNICATION)) {
             audioManager.setMicrophoneMute(mute);
-            if(mute) ScreenManager.printToast(context, "음소거 켜기");
-            else ScreenManager.printToast(context, "음소거 끄기");
+            //audioManager.setStreamVolume(audioManager.STREAM_VOICE_CALL,-100,0);
+            audioManager.adjustStreamVolume(audioManager.STREAM_VOICE_CALL, audioManager.ADJUST_MUTE, 0);
+            System.out.println(audioManager.getStreamVolume(audioManager.STREAM_VOICE_CALL));
+            System.out.println(audioManager.isVolumeFixed());
+
+
+
+//            if(mute) ScreenManager.printToast(context, "음소거 켜기");
+//            else ScreenManager.printToast(context, "음소거 끄기");
+
         }
 
         }
