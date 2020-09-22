@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,26 @@ public class FragmentMyStat extends Fragment {
         mBinding.viewPager.setAdapter(mFragmentCardAdapter);
         mBinding.viewPager.setPageTransformer(false, mFragmentCardShadowTransformer);
         mBinding.viewPager.setOffscreenPageLimit(3);
+        mBinding.idIndicator.setSelectedDotColor(getResources().getColor(R.color.colorBlue));
+        mBinding.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mBinding.idIndicator.setSelectedItem(position, true);
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
         View view = mBinding.getRoot();
         return view;
     }
