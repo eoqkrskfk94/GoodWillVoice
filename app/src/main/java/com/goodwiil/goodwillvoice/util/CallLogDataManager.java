@@ -65,11 +65,18 @@ public class CallLogDataManager {
         final LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            longitude = location.getLongitude();
-            latitude = location.getLatitude();
-            gps.add(longitude);
-            gps.add(latitude);
+            if(lm.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null){
+                Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                longitude = location.getLongitude();
+                latitude = location.getLatitude();
+                gps.add(longitude);
+                gps.add(latitude);
+            }
+            else{
+                gps.add(0.0);
+                gps.add(0.0);
+            }
+
         }
 
         return gps;
