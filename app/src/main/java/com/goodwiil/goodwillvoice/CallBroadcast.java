@@ -213,7 +213,7 @@ public class CallBroadcast extends BroadcastReceiver {
 
                 //통화시간 기록
                 callLogInfo.setDuration(counter);
-                if(counter == 30){
+                if(counter == 5){
                     context.stopService(new Intent(context, ServiceCall.class));
                     ScreenManager.startService(context, ServiceWarning.class, model);
                 }
@@ -254,8 +254,8 @@ public class CallBroadcast extends BroadcastReceiver {
             //call_length[0] = 60;
             //call_length[1] = 180;
             call_length[0] = 5;
-            call_length[1] = 60;
-            call_length[2] = 90;
+            call_length[1] = 10;
+            call_length[2] = 15;
         }
 
         if (sec == call_length[0]) {
@@ -263,6 +263,7 @@ public class CallBroadcast extends BroadcastReceiver {
                 //vibrator.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1));
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
 
+            //ServiceWarning.getInstance().update(1);
             setMute(true);
 
 
@@ -270,12 +271,15 @@ public class CallBroadcast extends BroadcastReceiver {
             if (vibrate)
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
 
+            ServiceWarning.getInstance().update(2);
             setMute(false);
 
 
         } else if (sec == call_length[2]) {
             if (vibrate)
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
+
+            ServiceWarning.getInstance().update(3);
         }
 
     }

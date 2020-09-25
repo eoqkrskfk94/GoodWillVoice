@@ -38,7 +38,7 @@ public class CallRankAdapter extends RecyclerView.Adapter<CallRankAdapter.ItemVi
 
         holder.itemId.setText(Integer.toString(position+1));
         holder.itemNumber.setText(topMaxCallItems.get(position).getNumber());
-        //holder.itemType.setText(topMaxCallItems.get(position).getType());
+        holder.itemType.setText(topMaxCallItems.get(position).getType());
         holder.itemLength.setText(ScreenManager.secondsToString(Integer.toString(topMaxCallItems.get(position).getDuration())));
 
     }

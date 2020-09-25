@@ -208,16 +208,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:autoSizeTextType="uniform"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="10dp"
                     android:gravity="center"
-                    android:layout_marginEnd="5dp"
-                    android:text="“(Yoon)”님의 7월달 피싱노출단계는 평균적으로 ( 양호/주의/위험 )입니다.
-그러나, (1)건의 위험 통화가 있었으며
-(~~)한 이유로 판단되었으므로 보이스피싱에 노출될 가능성이 높습니다. "/>
+                    android:textStyle="bold"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="10dp"
+                    android:text="Yoon님은 7월달 피싱노출단계는 평균적으로 주의입니다.\n한달간, 1건의 위험 통화가 있었으며\n대출
+권유 유형과 통화시간이 15분 이상이므로 위험 통화로 뷴류 되었습니다.\n대출 권유는 보이스피싱일 확률이 높습니다."/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

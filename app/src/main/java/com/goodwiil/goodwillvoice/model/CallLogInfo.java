@@ -12,6 +12,22 @@ public class CallLogInfo implements Comparator< CallLogInfo > {
     private double longitude;
     private double latitude;
 
+    public CallLogInfo() {
+    }
+
+
+
+
+
+    public CallLogInfo(String name, String number, String type, String date, int duration, double longitude, double latitude) {
+        this.name = name;
+        this.number = number;
+        this.type = type;
+        this.date = date;
+        this.duration = duration;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 
     public String getName() {
         return name;

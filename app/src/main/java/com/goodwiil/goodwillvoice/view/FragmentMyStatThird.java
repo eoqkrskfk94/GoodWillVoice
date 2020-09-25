@@ -60,18 +60,21 @@ public class FragmentMyStatThird extends Fragment {
         topCallLogList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 //        ArrayList<TopMaxCallItem> topMaxCallItems = new ArrayList<>();
-//        topMaxCallItems.add(new TopMaxCallItem(1,"054-260-2222","학교", "00:30:12"));
-//        topMaxCallItems.add(new TopMaxCallItem(2,"054-260-2222","보험", "00:30:12"));
-//        topMaxCallItems.add(new TopMaxCallItem(3,"054-260-2222","경찰", "00:30:12"));
-//        topMaxCallItems.add(new TopMaxCallItem(4,"054-260-2222","통신사", "00:30:12"));
-//        topMaxCallItems.add(new TopMaxCallItem(5,"054-260-2222","학교", "00:30:12"));
-//        topMaxCallItems.add(new TopMaxCallItem(6,"054-260-2222","학교", "00:30:12"));
-//        topMaxCallItems.add(new TopMaxCallItem(7,"054-260-2222","학교", "00:30:12"));
-//        topMaxCallItems.add(new TopMaxCallItem(8,"054-260-2222","학교", "00:30:12"));
-//        topMaxCallItems.add(new TopMaxCallItem(9,"054-260-2222","알수없음", "00:30:12"));
-//        topMaxCallItems.add(new TopMaxCallItem(10,"054-260-2222","학교", "00:30:12"));
+        ArrayList<CallLogInfo> callLogInfos = new ArrayList<>();
+        callLogInfos.add(new CallLogInfo("","054-260-222","학교","",3000,0.0,0.0));
+        callLogInfos.add(new CallLogInfo("","010-3906-5345","대출권유","",2544,0.0,0.0));
+        callLogInfos.add(new CallLogInfo("","010-2757-3906","보험광고","",1000,0.0,0.0));
+        callLogInfos.add(new CallLogInfo("","054-260-222","경찰서","",900,0.0,0.0));
+        callLogInfos.add(new CallLogInfo("","070-6644-5567","배달","",765,0.0,0.0));
+        callLogInfos.add(new CallLogInfo("","054-620-7722","은행","",542,0.0,0.0));
+        callLogInfos.add(new CallLogInfo("","02-080-4432","고객센터","",400,0.0,0.0));
+        callLogInfos.add(new CallLogInfo("","010-8501-5544","택배","",150,0.0,0.0));
+        callLogInfos.add(new CallLogInfo("","031-260-3322","광고","",80,0.0,0.0));
+        callLogInfos.add(new CallLogInfo("","064-645-5324","광고","",10,0.0,0.0));
 
-        callRankAdapter = new CallRankAdapter(callLogList.subList(0,10));
+
+
+        callRankAdapter = new CallRankAdapter(callLogInfos.subList(0,10));
         topCallLogList.setAdapter(callRankAdapter);
 
 

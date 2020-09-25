@@ -152,14 +152,22 @@ public class ServiceWarning extends Service{
     }
 
     public void setState(int state){
-        if(state == 0){
-        }
-        else if(state == 1){
+        if(state == 1){
 
         }
         else if(state == 2){
-            mBinding.tvWarning.setText("위험");
-            mBinding.tvWarning.setTextColor(getColor(R.color.warning3));
+            mBinding.cl.setBackground(getDrawable(R.drawable.popup_warning_orange));
+            mBinding.tvWarning.setText("보이스피싱 위험");
+            mBinding.button.setImageResource(R.drawable.ok_btn_orange);
+            mBinding.tvWarning2.setText("공공기관, 금융기관은 통화로\n" +
+                    "개인정보, 금융정보를 묻지 않습니다");
+        }
+        else if(state == 3){
+            mBinding.cl.setBackground(getDrawable(R.drawable.popup_warning_red));
+            mBinding.tvWarning.setText("보이스피싱 매우 위험");
+            mBinding.button.setImageResource(R.drawable.ok_btn_red);
+            mBinding.tvWarning2.setText("통화 중 입금 요구,악성 문자 수신,링크 수신 시\n통화를 끊으시길 바랍니다");
+
 
         }
     }

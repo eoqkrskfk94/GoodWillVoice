@@ -3,6 +3,7 @@ package com.goodwiil.goodwillvoice.view;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -53,7 +54,9 @@ public class FragmentMyStat extends Fragment {
         mBinding.viewPager.setAdapter(mFragmentCardAdapter);
         mBinding.viewPager.setPageTransformer(false, mFragmentCardShadowTransformer);
         mBinding.viewPager.setOffscreenPageLimit(3);
-        mBinding.idIndicator.setSelectedDotColor(getResources().getColor(R.color.colorBlue));
+        mBinding.idIndicator.setSelectedDotColor(ContextCompat.getColor(getContext(),R.color.colorBlue));
+        mBinding.idIndicator.setSelectedDotDiameterDp(6);
+        mBinding.idIndicator.setUnselectedDotDiameterDp(5);
         mBinding.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
 
             @Override

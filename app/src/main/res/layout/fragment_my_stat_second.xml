@@ -67,19 +67,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:autoSizeTextType="uniform"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="10dp"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:layout_marginEnd="5dp"
-                    android:text="주로 ~과 통화했으며, 어쩌구 저쩌구
-ㅇㅇ님과 비슷한 연령대의 사람들은 “ㅇㅇ”에서 전화가 많이오는 반면,
-ㅇㅇ님에게는 “대출” 전화가 많이오는 편입니다.
-대출은 보이스피싱의 주요 수법이므로
-조심할 필요가 있습니다 ~
- "/>
+                    android:layout_marginEnd="10dp"
+                    android:textSize="10dp"
+                    android:text="Yoon님은 주로 지인과 통화했으며\nYoon님과 같은 직업군인 자영업자는\n
+기타에서 전화가 많이 오는 편입니다.\n\nYoon님은 60대 비슷한 연령대 보다\n대출 전화가 많이 오는 편입니다."/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
