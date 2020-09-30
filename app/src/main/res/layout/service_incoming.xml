@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="25dp"
                 android:layout_marginTop="25dp"
-                android:text="@string/restrict_number"
+                android:text="피싱캐처 분석중"
                 android:textColor="@color/colorPurple"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
