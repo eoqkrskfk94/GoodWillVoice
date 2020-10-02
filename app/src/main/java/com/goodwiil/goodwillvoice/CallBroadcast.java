@@ -272,7 +272,7 @@ public class CallBroadcast extends BroadcastReceiver {
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
 
             ServiceWarning.getInstance().update(2);
-            setMute(false);
+            //setMute(false);
 
 
         } else if (sec == call_length[2]) {
