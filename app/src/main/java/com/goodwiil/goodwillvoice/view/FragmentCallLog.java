@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.adapter.SubItemAdapter;
@@ -44,7 +45,7 @@ public class FragmentCallLog extends Fragment {
         mBinding.setLifecycleOwner(getActivity());
 
         if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED){
-            callLogInfos = CallLogDataManager.getCallLog(getContext());
+            callLogInfos = CallLogDataManager.getCallLog(getContext(), 0);
             System.out.println("hello");
         }
 
@@ -53,13 +54,23 @@ public class FragmentCallLog extends Fragment {
 //        else
 //            swipeDownImage.setVisibility(View.GONE);
 
-        System.out.println(callLogInfos.size());
 
         itemAdapter = new SubItemAdapter(getActivity(), callLogInfos);
         mBinding.headerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.headerRecyclerView.setAdapter(itemAdapter);
 
-        mBinding.text.setText("yes");
+        mBinding.phoneSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED){
+                    callLogInfos = CallLogDataManager.getCallLog(getContext(), 0);
+                    itemAdapter = new SubItemAdapter(getActivity(), callLogInfos);
+                    mBinding.headerRecyclerView.setAdapter(itemAdapter);
+                    mBinding.phoneSwipeRefreshLayout.setRefreshing(false);
+                }
+
+            }
+        });
 
 
 

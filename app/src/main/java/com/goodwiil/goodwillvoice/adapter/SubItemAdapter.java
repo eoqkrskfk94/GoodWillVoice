@@ -80,16 +80,16 @@ public class SubItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             subItemViewHolder.date.setText(phoneSubItem.getDate());
             if (phoneSubItem.getType() != null) {
                 if (phoneSubItem.getType().equals("OUTGOING")) {
-                    //subItemViewHolder.callType.setImageResource(R.drawable.outcoming_call);
+                    subItemViewHolder.callType.setImageResource(R.drawable.outcoming_call);
                     subItemViewHolder.date.setTextColor(Color.parseColor("#9C9C9C"));
                 } else if (phoneSubItem.getType().equals("INCOMING")) {
-                    //subItemViewHolder.callType.setImageResource(R.drawable.incoming_call);
+                    subItemViewHolder.callType.setImageResource(R.drawable.incoming_call);
                     subItemViewHolder.date.setTextColor(Color.parseColor("#9C9C9C"));
                 } else if (phoneSubItem.getType().equals("MISSED")) {
-                    //subItemViewHolder.callType.setImageResource(R.drawable.cancel_call);
+                    subItemViewHolder.callType.setImageResource(R.drawable.cancel_call);
                     subItemViewHolder.date.setTextColor(Color.RED);
                 } else if (phoneSubItem.getType().equals("REJECTED")) {
-                    //subItemViewHolder.callType.setImageResource(R.drawable.rejected);
+                    subItemViewHolder.callType.setImageResource(R.drawable.rejected);
                     subItemViewHolder.date.setTextColor(Color.parseColor("#9C9C9C"));
                 }
             }

@@ -84,7 +84,7 @@ public class CallLogDataManager {
 
 
     //최근기록 불러오기
-    public static ArrayList<CallLogInfo> getCallLog(Context context) {
+    public static ArrayList<CallLogInfo> getCallLog(Context context, int type) {
 
         CallLogDataManager.unknownCallTotalNum = 0;
         CallLogDataManager.unknownCallTotal = 0;
@@ -168,13 +168,18 @@ public class CallLogDataManager {
                             break;
                     }
 
-                    if(callLogInfo.getDuration() > 0 &&
-                            !callLogInfo.getType().equals("MISSED") &&
-                            !callLogInfo.getType().equals("OUTGOING") &&
-                            !callLogInfo.getType().equals("REJECTED") &&
-                            callLogInfo.getName().equals("unknown")
-                    )
-                    callLogInfos.add(callLogInfo);
+                    if(type == 0) callLogInfos.add(callLogInfo);
+
+                    else if(type == 1){
+                        if(callLogInfo.getDuration() > 0 &&
+                                !callLogInfo.getType().equals("MISSED") &&
+                                !callLogInfo.getType().equals("OUTGOING") &&
+                                !callLogInfo.getType().equals("REJECTED") &&
+                                callLogInfo.getName().equals("unknown")
+                        )
+                            callLogInfos.add(callLogInfo);
+                    }
+
                 }
 
 

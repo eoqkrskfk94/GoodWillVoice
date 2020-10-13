@@ -258,28 +258,36 @@ public class CallBroadcast extends BroadcastReceiver {
             call_length[2] = 15;
         }
 
-        if (sec == call_length[0]) {
+        //if (sec == call_length[0]) {
+        if (sec == 300) {
             if (vibrate)
                 //vibrator.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1));
-                vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
+                //vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
+                vibrator.vibrate(VibrationEffect.createWaveform(new long[]{500, 500, 500, 500, 500, 500}, -1));
 
             //ServiceWarning.getInstance().update(1);
             setMute(true);
 
 
-        } else if (sec == call_length[1]) {
+        } else if (sec == 480) {
             if (vibrate)
-                vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
+                //vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
+                vibrator.vibrate(VibrationEffect.createWaveform(new long[]{500, 500, 500, 500, 500, 500}, -1));
+
 
             ServiceWarning.getInstance().update(2);
-            //setMute(false);
 
 
-        } else if (sec == call_length[2]) {
+        } else if (sec == 600) {
             if (vibrate)
                 vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
 
             ServiceWarning.getInstance().update(3);
+            setMute(false);
+
+        } else if (sec == 605){
+            setMute(true);
+
         }
 
     }
@@ -309,13 +317,6 @@ public class CallBroadcast extends BroadcastReceiver {
             audioManager.setMicrophoneMute(mute);
             //audioManager.setStreamVolume(audioManager.STREAM_VOICE_CALL,-100,0);
             audioManager.adjustStreamVolume(audioManager.STREAM_VOICE_CALL, audioManager.ADJUST_MUTE, 0);
-            System.out.println(audioManager.getStreamVolume(audioManager.STREAM_VOICE_CALL));
-            System.out.println(audioManager.isVolumeFixed());
-
-
-
-//            if(mute) ScreenManager.printToast(context, "음소거 켜기");
-//            else ScreenManager.printToast(context, "음소거 끄기");
 
         }
 

@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.MenuItem;
 
 import com.goodwiil.goodwillvoice.R;
@@ -26,6 +28,7 @@ public class ActivityMain2 extends AppCompatActivity implements BottomNavigation
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
 
 //        AudioManager audioManager;
 //        audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);

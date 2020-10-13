@@ -54,7 +54,7 @@ public class FragmentMyStatThird extends Fragment {
     public void setRecyclerView(){
 
         // 사용자 통화내역 기록 가져오기
-        ArrayList<CallLogInfo> callLogList = CallLogDataManager.getCallLog(getActivity());
+        ArrayList<CallLogInfo> callLogList = CallLogDataManager.getCallLog(getActivity(), 1);
         callLogList.sort(new DurationSort().reversed());
 
         topCallLogList.setLayoutManager(new LinearLayoutManager(getActivity()));
