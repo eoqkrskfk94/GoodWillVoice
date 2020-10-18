@@ -17,16 +17,19 @@ import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.adapter.SubItemAdapter;
 import com.goodwiil.goodwillvoice.databinding.FragmentCallLogBinding;
 import com.goodwiil.goodwillvoice.databinding.FragmentMyStatBinding;
+import com.goodwiil.goodwillvoice.model.CallLogData;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FragmentCallLog extends Fragment {
     private FragmentCallLogBinding mBinding;
     private ArrayList<CallLogInfo> callLogInfos;
     private SubItemAdapter itemAdapter;
+    private ArrayList<CallLogInfo> callLogInfos100;
 
 
     @Override
@@ -46,7 +49,6 @@ public class FragmentCallLog extends Fragment {
 
         if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED){
             callLogInfos = CallLogDataManager.getCallLog(getContext(), 0);
-            System.out.println("hello");
         }
 
 //        if(callLogInfos.size() == 0)
@@ -54,8 +56,10 @@ public class FragmentCallLog extends Fragment {
 //        else
 //            swipeDownImage.setVisibility(View.GONE);
 
+        if(callLogInfos.size() > 100) callLogInfos100 = new ArrayList<CallLogInfo>(callLogInfos.subList(0,100));
 
-        itemAdapter = new SubItemAdapter(getActivity(), callLogInfos);
+
+        itemAdapter = new SubItemAdapter(getActivity(), callLogInfos100);
         mBinding.headerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.headerRecyclerView.setAdapter(itemAdapter);
 

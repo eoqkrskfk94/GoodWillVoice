@@ -1,5 +1,7 @@
 package com.goodwiil.goodwillvoice.view;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -27,11 +30,18 @@ import com.goodwiil.goodwillvoice.adapter.CardAdapter;
 import com.goodwiil.goodwillvoice.adapter.CardPagerAdapter;
 import com.goodwiil.goodwillvoice.databinding.FragmentMyStatBinding;
 import com.goodwiil.goodwillvoice.databinding.FragmentMyStatFirstBinding;
+import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.model.CardItem;
+import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.util.ShadowTransformer;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 
 public class FragmentMyStatFirst extends Fragment {
@@ -41,6 +51,8 @@ public class FragmentMyStatFirst extends Fragment {
 
     private CardView mCardView;
     private PieChart pieChart;
+    private ArrayList<CallLogInfo> callLogInfos;
+    private ArrayList<CallLogInfo> callLogInfos30Days;
 
     private TextView tvUnknownCount;
     private TextView tvFirstCount;
@@ -69,10 +81,25 @@ public class FragmentMyStatFirst extends Fragment {
         tvSecondCount = view.findViewById(R.id.tv_second_count);
         tvThirdCount = view.findViewById(R.id.tv_thrid_count);
 
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED){
+            callLogInfos = CallLogDataManager.getCallLog(getContext(), 1);
+        }
+
+        System.out.println(callLogInfos.size());
+        try {
+            checkRecentCallLogData();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         ScreenManager.startCountAnimation(25, tvUnknownCount);
         ScreenManager.startCountAnimation(19, tvFirstCount);
         ScreenManager.startCountAnimation(4, tvSecondCount);
         ScreenManager.startCountAnimation(2, tvThirdCount);
+
+
+
 
         setPieChard();
 
@@ -124,6 +151,31 @@ public class FragmentMyStatFirst extends Fragment {
         data.setValueFormatter(new MyValueFormatter());
 
         pieChart.setData(data);
+    }
+
+    private void checkRecentCallLogData() throws ParseException {
+
+        callLogInfos30Days = new ArrayList<>();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.KOREA);
+        Date currentDate = new Date();
+
+
+        for(int i = 0; i < callLogInfos.size(); i++){
+            Date callLogDate = formatter.parse((callLogInfos.get(i).getDate()));
+
+
+            long diffInMillies = Math.abs(currentDate.getTime() - callLogDate.getTime());
+            long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+            if(diffInDays <= 30) {
+                callLogInfos30Days.add(callLogInfos.get(i));
+            }
+
+            else{
+                break;
+            }
+        }
     }
 
 
