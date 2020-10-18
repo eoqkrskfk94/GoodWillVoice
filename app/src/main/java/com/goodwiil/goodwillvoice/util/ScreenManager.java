@@ -73,7 +73,7 @@ public class ScreenManager {
 
 
     public static final int[] PIE_CHART_COLOR = {
-            rgb("#ff7d7d"), rgb("#fe9d66"), rgb("#ffe875")
+            rgb("#ffe875"), rgb("#fe9d66"), rgb("#ff7d7d")
     };
 
     public static final int[] BAR_CHART_COLOR = {

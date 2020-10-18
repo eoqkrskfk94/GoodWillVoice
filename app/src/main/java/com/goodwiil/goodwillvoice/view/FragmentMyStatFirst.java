@@ -59,6 +59,10 @@ public class FragmentMyStatFirst extends Fragment {
     private TextView tvSecondCount;
     private TextView tvThirdCount;
 
+    private int firstWarningCount = 0;
+    private int secondWarningCount = 0;
+    private int thirdWarningCount = 0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -93,14 +97,6 @@ public class FragmentMyStatFirst extends Fragment {
         }
 
 
-        ScreenManager.startCountAnimation(25, tvUnknownCount);
-        ScreenManager.startCountAnimation(19, tvFirstCount);
-        ScreenManager.startCountAnimation(4, tvSecondCount);
-        ScreenManager.startCountAnimation(2, tvThirdCount);
-
-
-
-
         setPieChard();
 
 
@@ -119,6 +115,48 @@ public class FragmentMyStatFirst extends Fragment {
         return mCardView;
     }
 
+
+    private void checkRecentCallLogData() throws ParseException {
+
+        callLogInfos30Days = new ArrayList<>();
+        firstWarningCount = 0;
+        secondWarningCount = 0;
+        thirdWarningCount = 0;
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.KOREA);
+        Date currentDate = new Date();
+
+
+        for(int i = 0; i < callLogInfos.size(); i++){
+            Date callLogDate = formatter.parse((callLogInfos.get(i).getDate()));
+
+
+            long diffInMillies = Math.abs(currentDate.getTime() - callLogDate.getTime());
+            long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+            if(diffInDays <= 30) {
+                callLogInfos30Days.add(callLogInfos.get(i));
+                if(callLogInfos.get(i).getDuration() >= 600) thirdWarningCount++;
+                else if(callLogInfos.get(i).getDuration() >= 480) secondWarningCount++;
+                //else if(callLogInfos.get(i).getDuration() >= 300) firstWarningCount++;
+                else firstWarningCount++;
+            }
+
+            else{
+                break;
+            }
+        }
+
+
+
+        ScreenManager.startCountAnimation(callLogInfos30Days.size(), tvUnknownCount);
+        ScreenManager.startCountAnimation(firstWarningCount, tvFirstCount);
+        ScreenManager.startCountAnimation(secondWarningCount, tvSecondCount);
+        ScreenManager.startCountAnimation(thirdWarningCount, tvThirdCount);
+
+
+    }
+
     private void setPieChard(){
 
         pieChart.getDescription().setEnabled(false);
@@ -134,9 +172,9 @@ public class FragmentMyStatFirst extends Fragment {
 
         ArrayList<PieEntry> yValues = new ArrayList<>();
 
-        yValues.add(new PieEntry(4.0f, ""));
-        yValues.add(new PieEntry(36.0f, ""));
-        yValues.add(new PieEntry(60.0f, ""));
+        if(firstWarningCount > 0) yValues.add(new PieEntry(firstWarningCount/callLogInfos30Days.size(), ""));
+        if(secondWarningCount > 0) yValues.add(new PieEntry(secondWarningCount/callLogInfos30Days.size(), ""));
+        if(thirdWarningCount > 0) yValues.add(new PieEntry(thirdWarningCount/callLogInfos30Days.size(), ""));
 
         PieDataSet dataSet = new PieDataSet(yValues, "");
         dataSet.setSliceSpace(3f);
@@ -153,38 +191,13 @@ public class FragmentMyStatFirst extends Fragment {
         pieChart.setData(data);
     }
 
-    private void checkRecentCallLogData() throws ParseException {
-
-        callLogInfos30Days = new ArrayList<>();
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.KOREA);
-        Date currentDate = new Date();
-
-
-        for(int i = 0; i < callLogInfos.size(); i++){
-            Date callLogDate = formatter.parse((callLogInfos.get(i).getDate()));
-
-
-            long diffInMillies = Math.abs(currentDate.getTime() - callLogDate.getTime());
-            long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-
-            if(diffInDays <= 30) {
-                callLogInfos30Days.add(callLogInfos.get(i));
-            }
-
-            else{
-                break;
-            }
-        }
-    }
-
 
     private class MyValueFormatter extends ValueFormatter {
 
 
         @Override
         public String getFormattedValue(float value) {
-            return "" + ((int) value)+ " %";
+            return "" + ((int) value) * 100 + " %";
         }
     }
 
