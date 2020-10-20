@@ -52,8 +52,8 @@ public class FragmentMenu extends PreferenceFragmentCompat {
 
         //SharedPreference객체를 참조하여 설정상태에 대한 제어 가능..
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        levelPreference.setSummary(prefs.getString("level_list", "약"));
-        prefs.registerOnSharedPreferenceChangeListener(listener);
+        //levelPreference.setSummary(prefs.getString("level_list", "약"));
+        //prefs.registerOnSharedPreferenceChangeListener(listener);
 
         BtnClick(callCenterPreference, ActivityCallCenter.class);
         BtnClick(faqPreference, ActivityFaq.class);

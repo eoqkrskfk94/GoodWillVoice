@@ -9,27 +9,27 @@
         android:title="앱 설정"
         app:iconSpaceReserved="false">
 
-        <ListPreference
-            android:defaultValue="강 (1분 마다 진동)"
-            android:entries="@array/level"
-            android:entryValues="@array/level"
-            android:key="level_list"
-            android:title="탐지 강도 설정"
-            app:iconSpaceReserved="false" />
+<!--        <ListPreference-->
+<!--            android:defaultValue="강 (1분 마다 진동)"-->
+<!--            android:entries="@array/level"-->
+<!--            android:entryValues="@array/level"-->
+<!--            android:key="level_list"-->
+<!--            android:title="탐지 강도 설정"-->
+<!--            app:iconSpaceReserved="false" />-->
 
-        <SwitchPreferenceCompat
-            android:defaultValue="true"
-            android:key="voice_alarm"
-            android:title="경고음성 위험 알림"
-            app:iconSpaceReserved="false" />
+<!--        <SwitchPreferenceCompat-->
+<!--            android:defaultValue="true"-->
+<!--            android:key="voice_alarm"-->
+<!--            android:title="경고음성 위험 알림"-->
+<!--            app:iconSpaceReserved="false" />-->
 
-        <SwitchPreferenceCompat
+<!--        <SwitchPreferenceCompat-->
 
-            android:defaultValue="true"
-            android:key="vibration_alarm"
-            android:title="진동 알림 기능"
-            app:iconSpaceReserved="false"
-            tools:text="진동 알림 기능" />
+<!--            android:defaultValue="true"-->
+<!--            android:key="vibration_alarm"-->
+<!--            android:title="진동 알림 기능"-->
+<!--            app:iconSpaceReserved="false"-->
+<!--            tools:text="진동 알림 기능" />-->
 
     </PreferenceCategory>
 

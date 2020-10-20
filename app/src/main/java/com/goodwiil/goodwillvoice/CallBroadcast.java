@@ -213,7 +213,7 @@ public class CallBroadcast extends BroadcastReceiver {
 
                 //통화시간 기록
                 callLogInfo.setDuration(counter);
-                if(counter == 5){
+                if(counter == 30){
                     context.stopService(new Intent(context, ServiceCall.class));
                     ScreenManager.startService(context, ServiceWarning.class, model);
                 }
@@ -258,35 +258,37 @@ public class CallBroadcast extends BroadcastReceiver {
             call_length[2] = 15;
         }
 
-        //if (sec == call_length[0]) {
-        if (sec == 300) {
+
+        if (sec == 31) {
             if (vibrate)
                 //vibrator.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1));
                 //vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
-                vibrator.vibrate(VibrationEffect.createWaveform(new long[]{500, 500, 500, 500, 500, 500}, -1));
+                vibrator.vibrate(VibrationEffect.createWaveform(new long[]{200, 500, 200, 500, 200, 500}, -1));
 
-            //ServiceWarning.getInstance().update(1);
-            setMute(true);
+            ServiceWarning.getInstance().update(1);
+            //setMute(true);
 
 
-        } else if (sec == 480) {
+        } else if (sec == 300) {
             if (vibrate)
                 //vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
-                vibrator.vibrate(VibrationEffect.createWaveform(new long[]{500, 500, 500, 500, 500, 500}, -1));
-
+                vibrator.vibrate(VibrationEffect.createWaveform(new long[]{200, 500, 200, 500, 200, 500}, -1));
 
             ServiceWarning.getInstance().update(2);
 
 
-        } else if (sec == 600) {
-            if (vibrate)
-                vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
-
-            ServiceWarning.getInstance().update(3);
-            setMute(false);
-
-        } else if (sec == 605){
+        } else if (sec == 480) {
             setMute(true);
+
+            if (vibrate)
+                //vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));
+                vibrator.vibrate(VibrationEffect.createWaveform(new long[]{200, 500, 200, 500, 200, 500}, -1));
+            ServiceWarning.getInstance().update(3);
+
+
+
+        } else if (sec == 485){
+            setMute(false);
 
         }
 
@@ -316,7 +318,7 @@ public class CallBroadcast extends BroadcastReceiver {
         if((audioManager.getMode()== AudioManager.MODE_IN_CALL)||(audioManager.getMode()== AudioManager.MODE_IN_COMMUNICATION)) {
             audioManager.setMicrophoneMute(mute);
             //audioManager.setStreamVolume(audioManager.STREAM_VOICE_CALL,-100,0);
-            audioManager.adjustStreamVolume(audioManager.STREAM_VOICE_CALL, audioManager.ADJUST_MUTE, 0);
+            //audioManager.adjustStreamVolume(audioManager.STREAM_VOICE_CALL, audioManager.ADJUST_MUTE, 0);
 
         }
 

@@ -1,6 +1,7 @@
 package com.goodwiil.goodwillvoice.view;
 
 import android.Manifest;
+import android.animation.ValueAnimator;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ import com.goodwiil.goodwillvoice.databinding.FragmentMyStatBinding;
 import com.goodwiil.goodwillvoice.databinding.FragmentMyStatFirstBinding;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.model.CardItem;
+import com.goodwiil.goodwillvoice.model.User;
+import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.util.ShadowTransformer;
@@ -43,6 +46,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import static com.goodwiil.goodwillvoice.util.ScreenManager.secondsToString;
+
 
 public class FragmentMyStatFirst extends Fragment {
 
@@ -51,6 +56,7 @@ public class FragmentMyStatFirst extends Fragment {
 
     private CardView mCardView;
     private PieChart pieChart;
+    private User user;
     private ArrayList<CallLogInfo> callLogInfos;
     private ArrayList<CallLogInfo> callLogInfos30Days;
 
@@ -58,10 +64,12 @@ public class FragmentMyStatFirst extends Fragment {
     private TextView tvFirstCount;
     private TextView tvSecondCount;
     private TextView tvThirdCount;
+    private TextView tvAverage;
 
     private int firstWarningCount = 0;
     private int secondWarningCount = 0;
     private int thirdWarningCount = 0;
+    private String dangerLevel = "";
 
     @Nullable
     @Override
@@ -72,6 +80,8 @@ public class FragmentMyStatFirst extends Fragment {
         pieChart = (PieChart) view.findViewById(R.id.pc_callLog);
         mCardView.setMaxCardElevation(mCardView.getCardElevation()
                 * CardAdapter.MAX_ELEVATION_FACTOR);
+
+        user = AppDataManager.getUserModel();
 
 //        mBinding = FragmentMyStatFirstBinding.inflate(inflater, container, false);
 //        mBinding.setLifecycleOwner(getActivity());
@@ -84,10 +94,14 @@ public class FragmentMyStatFirst extends Fragment {
         tvFirstCount = view.findViewById(R.id.tv_first_count);
         tvSecondCount = view.findViewById(R.id.tv_second_count);
         tvThirdCount = view.findViewById(R.id.tv_thrid_count);
+        tvAverage = view.findViewById(R.id.tv_average);
+
 
         if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED){
             callLogInfos = CallLogDataManager.getCallLog(getContext(), 1);
         }
+
+
 
         System.out.println(callLogInfos.size());
         try {
@@ -136,8 +150,8 @@ public class FragmentMyStatFirst extends Fragment {
 
             if(diffInDays <= 30) {
                 callLogInfos30Days.add(callLogInfos.get(i));
-                if(callLogInfos.get(i).getDuration() >= 600) thirdWarningCount++;
-                else if(callLogInfos.get(i).getDuration() >= 480) secondWarningCount++;
+                if(callLogInfos.get(i).getDuration() >= 480) thirdWarningCount++;
+                else if(callLogInfos.get(i).getDuration() >= 300) secondWarningCount++;
                 //else if(callLogInfos.get(i).getDuration() >= 300) firstWarningCount++;
                 else firstWarningCount++;
             }
@@ -146,6 +160,24 @@ public class FragmentMyStatFirst extends Fragment {
                 break;
             }
         }
+
+
+        if( firstWarningCount > secondWarningCount && firstWarningCount > thirdWarningCount) dangerLevel = "주의";
+        else if( secondWarningCount > firstWarningCount && secondWarningCount > thirdWarningCount) dangerLevel = "경고";
+        else if( thirdWarningCount > firstWarningCount && thirdWarningCount > secondWarningCount) dangerLevel = "위험";
+        else dangerLevel = "위험";
+
+
+        ValueAnimator animator = ValueAnimator.ofInt(0, CallLogDataManager.unknownCallTotal/CallLogDataManager.unknownCallTotalNum);
+        animator.setDuration(1500);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                String str = String.format(user.getNickName() + "님의 피싱노출단계는 평균적으로 " + dangerLevel +  "입니다. 최근 30일간 " + thirdWarningCount + "건의 위험통화가 있었으며," +
+                        user.getNickName() + "님의 미등록 통화 평균 시간은 약 " + secondsToString(animation.getAnimatedValue().toString()) + "입니다.");
+                tvAverage.setText(str);
+            }
+        });
+        animator.start();
 
 
 

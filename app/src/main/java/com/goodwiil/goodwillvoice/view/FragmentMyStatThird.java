@@ -23,6 +23,7 @@ import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.util.DurationSort;
 import com.goodwiil.goodwillvoice.util.ShadowTransformer;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -32,6 +33,7 @@ public class FragmentMyStatThird extends Fragment {
     private CardView mCardView;
     private CallRankAdapter callRankAdapter;
     private RecyclerView topCallLogList;
+    private ArrayList<CallLogInfo> callLogInfos;
 
     @Nullable
     @Override
@@ -54,6 +56,7 @@ public class FragmentMyStatThird extends Fragment {
     public void setRecyclerView(){
 
         // 사용자 통화내역 기록 가져오기
+        callLogInfos = new ArrayList<>();
         ArrayList<CallLogInfo> callLogList = CallLogDataManager.getCallLog(getActivity(), 1);
         callLogList.sort(new DurationSort().reversed());
 
@@ -71,6 +74,20 @@ public class FragmentMyStatThird extends Fragment {
         callLogInfos.add(new CallLogInfo("","010-8501-5544","택배","",150,0.0,0.0));
         callLogInfos.add(new CallLogInfo("","031-260-3322","광고","",80,0.0,0.0));
         callLogInfos.add(new CallLogInfo("","064-645-5324","광고","",10,0.0,0.0));
+
+//        for(int i = 0; i < callLogList.size(); i++){
+//            if(i == 0) callLogInfos.add(callLogList.get(i));
+//
+//            else{
+//                if(callLogList.get(i).getNumber().equals(callLogList.get(i-1).getNumber())){
+//                    callLogInfos.get(callLogInfos.lastIndexOf()).set
+//                }
+//                else{
+//                    callLogInfos.add(callLogList.get(i));
+//                }
+//            }
+//
+//        }
 
 
 
