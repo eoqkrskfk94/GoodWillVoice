@@ -103,7 +103,6 @@ public class FragmentMyStatFirst extends Fragment {
 
 
 
-        System.out.println(callLogInfos.size());
         try {
             checkRecentCallLogData();
         } catch (ParseException e) {
@@ -140,51 +139,57 @@ public class FragmentMyStatFirst extends Fragment {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.KOREA);
         Date currentDate = new Date();
 
-
-        for(int i = 0; i < callLogInfos.size(); i++){
-            Date callLogDate = formatter.parse((callLogInfos.get(i).getDate()));
+        if(callLogInfos != null){
 
 
-            long diffInMillies = Math.abs(currentDate.getTime() - callLogDate.getTime());
-            long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+            for(int i = 0; i < callLogInfos.size(); i++){
+                Date callLogDate = formatter.parse((callLogInfos.get(i).getDate()));
 
-            if(diffInDays <= 30) {
-                callLogInfos30Days.add(callLogInfos.get(i));
-                if(callLogInfos.get(i).getDuration() >= 480) thirdWarningCount++;
-                else if(callLogInfos.get(i).getDuration() >= 300) secondWarningCount++;
-                //else if(callLogInfos.get(i).getDuration() >= 300) firstWarningCount++;
-                else firstWarningCount++;
+
+                long diffInMillies = Math.abs(currentDate.getTime() - callLogDate.getTime());
+                long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+                if(diffInDays <= 30) {
+                    callLogInfos30Days.add(callLogInfos.get(i));
+                    if(callLogInfos.get(i).getDuration() >= 480) thirdWarningCount++;
+                    else if(callLogInfos.get(i).getDuration() >= 300) secondWarningCount++;
+                        //else if(callLogInfos.get(i).getDuration() >= 300) firstWarningCount++;
+                    else firstWarningCount++;
+                }
+
+                else{
+                    break;
+                }
             }
 
-            else{
-                break;
-            }
+
+            if( firstWarningCount > secondWarningCount && firstWarningCount > thirdWarningCount) dangerLevel = "주의";
+            else if( secondWarningCount > firstWarningCount && secondWarningCount > thirdWarningCount) dangerLevel = "경고";
+            else if( thirdWarningCount > firstWarningCount && thirdWarningCount > secondWarningCount) dangerLevel = "위험";
+            else dangerLevel = "위험";
+
+
+            ValueAnimator animator = ValueAnimator.ofInt(0, CallLogDataManager.unknownCallTotal/CallLogDataManager.unknownCallTotalNum);
+            animator.setDuration(1500);
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    String str = String.format(user.getNickName() + "님의 피싱노출단계는 평균적으로 " + dangerLevel +  "입니다. 최근 30일간 " + thirdWarningCount + "건의 위험통화가 있었으며," +
+                            user.getNickName() + "님의 미등록 통화 평균 시간은 약 " + secondsToString(animation.getAnimatedValue().toString()) + "입니다.");
+                    tvAverage.setText(str);
+                }
+            });
+            animator.start();
+
+
+
+            ScreenManager.startCountAnimation(callLogInfos30Days.size(), tvUnknownCount);
+            ScreenManager.startCountAnimation(firstWarningCount, tvFirstCount);
+            ScreenManager.startCountAnimation(secondWarningCount, tvSecondCount);
+            ScreenManager.startCountAnimation(thirdWarningCount, tvThirdCount);
+
         }
 
 
-        if( firstWarningCount > secondWarningCount && firstWarningCount > thirdWarningCount) dangerLevel = "주의";
-        else if( secondWarningCount > firstWarningCount && secondWarningCount > thirdWarningCount) dangerLevel = "경고";
-        else if( thirdWarningCount > firstWarningCount && thirdWarningCount > secondWarningCount) dangerLevel = "위험";
-        else dangerLevel = "위험";
-
-
-        ValueAnimator animator = ValueAnimator.ofInt(0, CallLogDataManager.unknownCallTotal/CallLogDataManager.unknownCallTotalNum);
-        animator.setDuration(1500);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            public void onAnimationUpdate(ValueAnimator animation) {
-                String str = String.format(user.getNickName() + "님의 피싱노출단계는 평균적으로 " + dangerLevel +  "입니다. 최근 30일간 " + thirdWarningCount + "건의 위험통화가 있었으며," +
-                        user.getNickName() + "님의 미등록 통화 평균 시간은 약 " + secondsToString(animation.getAnimatedValue().toString()) + "입니다.");
-                tvAverage.setText(str);
-            }
-        });
-        animator.start();
-
-
-
-        ScreenManager.startCountAnimation(callLogInfos30Days.size(), tvUnknownCount);
-        ScreenManager.startCountAnimation(firstWarningCount, tvFirstCount);
-        ScreenManager.startCountAnimation(secondWarningCount, tvSecondCount);
-        ScreenManager.startCountAnimation(thirdWarningCount, tvThirdCount);
 
 
     }
