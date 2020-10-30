@@ -47,6 +47,8 @@ public class FragmentCallLog extends Fragment {
         //mBinding.setViewModel(new SplashViewModel());
         mBinding.setLifecycleOwner(getActivity());
 
+        callLogInfos = new ArrayList<>();
+
         if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED){
             callLogInfos = CallLogDataManager.getCallLog(getContext(), 0);
         }
@@ -58,7 +60,11 @@ public class FragmentCallLog extends Fragment {
 
 
         if(callLogInfos != null){
-            if(callLogInfos.size() > 100) callLogInfos100 = new ArrayList<CallLogInfo>(callLogInfos.subList(0,100));
+            if(callLogInfos.size() > 100){
+                callLogInfos100 = new ArrayList<CallLogInfo>(callLogInfos.subList(0,100));
+                callLogInfos100 = callLogInfos;
+            }
+
 
 
             itemAdapter = new SubItemAdapter(getActivity(), callLogInfos100);
@@ -70,7 +76,7 @@ public class FragmentCallLog extends Fragment {
                 public void onRefresh() {
                     if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED){
                         callLogInfos = CallLogDataManager.getCallLog(getContext(), 0);
-                        itemAdapter = new SubItemAdapter(getActivity(), callLogInfos);
+                        itemAdapter = new SubItemAdapter(getActivity(), callLogInfos100);
                         mBinding.headerRecyclerView.setAdapter(itemAdapter);
                         mBinding.phoneSwipeRefreshLayout.setRefreshing(false);
                     }
