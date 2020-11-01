@@ -59,31 +59,31 @@ public class FragmentCallLog extends Fragment {
 //            swipeDownImage.setVisibility(View.GONE);
 
 
-        if(callLogInfos != null){
-            if(callLogInfos.size() > 100){
-                callLogInfos100 = new ArrayList<CallLogInfo>(callLogInfos.subList(0,100));
-                callLogInfos100 = callLogInfos;
-            }
+        if (callLogInfos.size() > 100) {
+            callLogInfos100 = new ArrayList<CallLogInfo>(callLogInfos.subList(0, 100));
+        }
+
+        else{
+            callLogInfos100 = callLogInfos;
+        }
 
 
+        itemAdapter = new SubItemAdapter(getActivity(), callLogInfos100);
+        mBinding.headerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mBinding.headerRecyclerView.setAdapter(itemAdapter);
 
-            itemAdapter = new SubItemAdapter(getActivity(), callLogInfos100);
-            mBinding.headerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mBinding.headerRecyclerView.setAdapter(itemAdapter);
-
-            mBinding.phoneSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED){
-                        callLogInfos = CallLogDataManager.getCallLog(getContext(), 0);
-                        itemAdapter = new SubItemAdapter(getActivity(), callLogInfos100);
-                        mBinding.headerRecyclerView.setAdapter(itemAdapter);
-                        mBinding.phoneSwipeRefreshLayout.setRefreshing(false);
-                    }
+        mBinding.phoneSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED) {
+                    callLogInfos = CallLogDataManager.getCallLog(getContext(), 0);
+                    itemAdapter = new SubItemAdapter(getActivity(), callLogInfos100);
+                    mBinding.headerRecyclerView.setAdapter(itemAdapter);
+                    mBinding.phoneSwipeRefreshLayout.setRefreshing(false);
+                }
 
                 }
             });
-        }
 
 
 
