@@ -5,11 +5,21 @@ public class NewsItem {
     private String thumbnail;
     private String newsTitle;
     private String newsDescription;
+    private String url;
 
-    public NewsItem(String thumbnail, String newsTitle, String newsDescription) {
+    public NewsItem(String thumbnail, String newsTitle, String newsDescription, String url) {
         this.thumbnail = thumbnail;
         this.newsTitle = newsTitle;
         this.newsDescription = newsDescription;
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getThumbnail() {

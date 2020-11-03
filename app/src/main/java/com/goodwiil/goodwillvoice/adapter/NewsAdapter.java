@@ -1,7 +1,10 @@
 package com.goodwiil.goodwillvoice.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
@@ -11,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.goodwiil.goodwillvoice.BR;
 import com.goodwiil.goodwillvoice.databinding.NewsItemBinding;
 import com.goodwiil.goodwillvoice.model.NewsItem;
+import com.goodwiil.goodwillvoice.util.ScreenManager;
+import com.goodwiil.goodwillvoice.view.ActivityNewsLetter;
+import com.goodwiil.goodwillvoice.view.ActivitySignUp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +39,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final NewsAdapter.ViewHolder holder, final int position) {
         NewsItem item = newsItems.get(position);
         holder.bind(item);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.itemView.getContext(), ActivityNewsLetter.class);
+                intent.putExtra("url", newsItems.get(position).getUrl());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -43,8 +43,8 @@ public class FragmentNews extends Fragment {
 
         newsItems = new ObservableArrayList<>();
         newsItems.add(new NewsItem("sample", "반사회적 범죄 ‘보이스피싱’ 척결 종합방안, 어떤 대책 담겼나", "디지털 경제·금융의 신뢰 기반 조성을 위해 ‘보이스피싱 척결 종합방안’ 마련\n" +
-                "\n" +
-                "[보안뉴스 원병철 기자] 중대한 반사회적 민생침해 범죄행위인 보이스피싱을 척결하기 위해, 9개 정부부처 및 기관들이 손잡고 전방위적인 예방·차단시스템 구축, 강력한 단속과 엄정한 처벌, 실효성 있는 피해구제 등을 담은 종합방안을 마련해 시행한다고 밝혔다."));
+                "[보안뉴스 원병철 기자] 중대한 반사회적 민생침해 범죄행위인 보이스피싱을 척결하기 위해, 9개 정부부처 및 기관들이 손잡고 전방위적인 예방·차단시스템 구축, 강력한 단속과 엄정한 처벌, 실효성 있는 피해구제 등을 담은 종합방안을 마련해 시행한다고 밝혔다.",
+                "https://www.boannews.com/media/view.asp?idx=89206&kind=2"));
 
         //System.out.println(newsItems.size());
         mBinding.tvSample.setText(Integer.toString(newsItems.size()));
