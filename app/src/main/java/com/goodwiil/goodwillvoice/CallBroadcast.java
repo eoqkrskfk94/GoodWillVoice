@@ -259,7 +259,7 @@ public class CallBroadcast extends BroadcastReceiver {
         }
 
 
-        if (sec == 31) {
+        if (sec == 35) {
             if (vibrate)
                 //vibrator.vibrate(VibrationEffect.createWaveform(timings, amplitudes, -1));
                 //vibrator.vibrate(VibrationEffect.createOneShot(1500, VibrationEffect.DEFAULT_AMPLITUDE));

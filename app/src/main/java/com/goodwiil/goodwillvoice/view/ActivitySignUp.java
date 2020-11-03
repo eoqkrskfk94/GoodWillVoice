@@ -51,10 +51,10 @@ public class ActivitySignUp extends AppCompatActivity {
 
     String[] permission_list = {
             Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.RECEIVE_SMS,
+//            Manifest.permission.RECEIVE_SMS,
             Manifest.permission.READ_CALL_LOG,
             Manifest.permission.READ_CONTACTS,
-            Manifest.permission.READ_SMS,
+//            Manifest.permission.READ_SMS,
             Manifest.permission.ACCESS_FINE_LOCATION
     };
 
