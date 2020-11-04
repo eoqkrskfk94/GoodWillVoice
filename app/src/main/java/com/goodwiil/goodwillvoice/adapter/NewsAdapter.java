@@ -12,6 +12,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.goodwiil.goodwillvoice.BR;
+import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.NewsItemBinding;
 import com.goodwiil.goodwillvoice.model.NewsItem;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
@@ -91,6 +92,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             mBinding.setVariable(BR.title, title);
             mBinding.setVariable(BR.description, description);
 
+
+            if(item.getThumbnail().equals("sample")) mBinding.ivParcelStat.setImageResource(R.drawable.news_sample_image);
+            else if(item.getThumbnail().equals("sample2")) mBinding.ivParcelStat.setImageResource(R.drawable.news_sample_image2);
+            else if(item.getThumbnail().equals("sample3")) mBinding.ivParcelStat.setImageResource(R.drawable.news_sample_image3);
         }
 
     }

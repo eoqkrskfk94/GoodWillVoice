@@ -27,7 +27,7 @@
         tools:replace="android:allowBackup">
         <activity
             android:name=".view.ActivityNewsLetter"
-            ></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.ActivityMain2"
             android:screenOrientation="portrait"
