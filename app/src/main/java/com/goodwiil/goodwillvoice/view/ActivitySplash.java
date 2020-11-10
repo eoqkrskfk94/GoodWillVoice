@@ -31,6 +31,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ActivitySplash extends AppCompatActivity {
 
@@ -118,18 +119,26 @@ public class ActivitySplash extends AppCompatActivity {
 
 
     //권한 받기
-    public void checkPermission() {
+    public void checkPermission(String[] listPermissionsNeeded) {
 
-        for (String permission : permission_list) {
-            //권한 허용 여부를 확인한다.
-            int chk = checkCallingOrSelfPermission(permission);
 
-            if (chk == PackageManager.PERMISSION_DENIED) {
-                //권한 허용을여부를 확인하는 창을 띄운다
+        ActivityCompat.requestPermissions(
+                this,
+                listPermissionsNeeded,
+                PERMISSION_MULTI_CODE
+        );
 
-                ActivityCompat.requestPermissions(this,permission_list, 0);
-            }
-        }
+
+//        for (String permission : permission_list) {
+//            //권한 허용 여부를 확인한다.
+//            int chk = checkCallingOrSelfPermission(permission);
+//
+//            if (chk == PackageManager.PERMISSION_DENIED) {
+//                //권한 허용을여부를 확인하는 창을 띄운다
+//
+//                ActivityCompat.requestPermissions(this,permission_list, 0);
+//            }
+//        }
     }
 
 
@@ -186,7 +195,15 @@ public class ActivitySplash extends AppCompatActivity {
             }
         }
         if (!listPermissionsNeeded.isEmpty()) {
-            showPermissionInfoDialog(listPermissionsNeeded);
+
+            String[] list = new String[listPermissionsNeeded.size()];
+
+            int i = 0;
+            for (Iterator<String> iterator = listPermissionsNeeded.iterator(); iterator.hasNext(); i++) {
+                list[i] = iterator.next();
+            }
+
+            showPermissionInfoDialog(list);
             return false;
         }
 
@@ -197,7 +214,7 @@ public class ActivitySplash extends AppCompatActivity {
     /**
      * 권한 설정 화면으로 이동할 지를 선택하는 다이얼로그를 보여준다.
      */
-    public void showPermissionInfoDialog(ArrayList<String> listPermissionsNeeded) {
+    public void showPermissionInfoDialog(final String[] listPermissionsNeeded) {
         //before inflating the custom alert dialog layout, we will get the current activity viewgroup
         ViewGroup viewGroup = findViewById(android.R.id.content);
 
@@ -227,7 +244,7 @@ public class ActivitySplash extends AppCompatActivity {
 
                 alertDialog.cancel();
 
-                checkPermission();
+                checkPermission(listPermissionsNeeded);
 
                 //배터리 최적화 권한 받기
                 checkPermissionBattery();
