@@ -1,7 +1,10 @@
 package com.goodwiil.goodwillvoice.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.Network;
 
 import com.goodwiil.goodwillvoice.application.GoodWillApplication;
 import com.goodwiil.goodwillvoice.model.User;
@@ -46,6 +49,25 @@ public class AppDataManager {
     public static User getUserModel() {
         Gson gson = new Gson();
         return (gson.fromJson(getSharedPrefs(SP_NAME).getString(SP_KEY_USER, null), User.class));
+    }
+
+
+    /**
+     * 네트워크 연결 여부를 반환한다.
+     * @param context 컨텍스트
+     * @return 네트워크 연결여부
+     */
+    public static Boolean isConnected(Context context) {
+        try {
+            ConnectivityManager cm = (ConnectivityManager)context.getSystemService(context.CONNECTIVITY_SERVICE);
+            Network info = cm.getActiveNetwork();
+
+            return info != null;
+
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 
 

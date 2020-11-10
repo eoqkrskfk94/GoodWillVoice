@@ -36,5 +36,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="network_not_working">네크워크에 연결되어 있지 않습니다.\n\n확인후 다시 실행해주세요.</string>
+
 
 </resources>

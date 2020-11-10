@@ -29,14 +29,14 @@ public class ActivitySignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         createBinding();
 
-        //전화 상태 권한 받기
-        checkPermission();
-
-        //배터리 최적화 권한 받기
-        checkPermissionBattery();
-
-        //앱 위에 그리기 권한 받기
-        checkPermissionOverlay();
+//        //전화 상태 권한 받기
+//        checkPermission();
+//
+//        //배터리 최적화 권한 받기
+//        checkPermissionBattery();
+//
+//        //앱 위에 그리기 권한 받기
+//        checkPermissionOverlay();
 
         populateSpinner();
         setUserInfo();
