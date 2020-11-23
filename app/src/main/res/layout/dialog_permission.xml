@@ -39,7 +39,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:lineSpacingExtra="4dp"
-        android:text="피싱캐쳐 앱은 모르는 번호를 확인하기 위해 전화,\n등록된 연락처를 확인하기 위해 연락처\n미디어 파일 접근,\n앱 위에 그리기 권한을 필요로 합니다."
+        android:text="피싱캐쳐 앱은 모르는 번호를 확인하기\n위해 통화기록 액세스, 등록된 연락처를 확인하기\n위해 연락처 미디어 파일 접근,\n앱 위에 그리기 권한을 필요로 합니다."
         android:textColor="@color/colorBlack"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
