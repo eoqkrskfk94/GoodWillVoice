@@ -65,6 +65,7 @@ public class FragmentMyStatFirst extends Fragment {
     private TextView tvSecondCount;
     private TextView tvThirdCount;
     private TextView tvAverage;
+    private TextView tvRecentCount;
 
     private int firstWarningCount = 0;
     private int secondWarningCount = 0;
@@ -96,9 +97,14 @@ public class FragmentMyStatFirst extends Fragment {
         tvThirdCount = view.findViewById(R.id.tv_thrid_count);
         tvAverage = view.findViewById(R.id.tv_average);
 
+        //tvRecentCount = getParentFragment().getView().findViewById(R.id.tv_recent_count);
+
+
+
 
         if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED){
             callLogInfos = CallLogDataManager.getCallLog(getContext(), 1);
+            //tvRecentCount.setText(String.valueOf(callLogInfos.size()));
         }
 
 
@@ -143,23 +149,31 @@ public class FragmentMyStatFirst extends Fragment {
 
 
             for(int i = 0; i < callLogInfos.size(); i++){
-                Date callLogDate = formatter.parse((callLogInfos.get(i).getDate()));
+//                Date callLogDate = formatter.parse((callLogInfos.get(i).getDate()));
+//
+//
+//                long diffInMillies = Math.abs(currentDate.getTime() - callLogDate.getTime());
+//                long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+//
+//                if(diffInDays <= 30) {
+//                    callLogInfos30Days.add(callLogInfos.get(i));
+//                    if(callLogInfos.get(i).getDuration() >= 480) thirdWarningCount++;
+//                    else if(callLogInfos.get(i).getDuration() >= 300) secondWarningCount++;
+//                        //else if(callLogInfos.get(i).getDuration() >= 300) firstWarningCount++;
+//                    else firstWarningCount++;
+//                }
+//
+//                else{
+//                    break;
+//                }
+
+                callLogInfos30Days.add(callLogInfos.get(i));
+                if(callLogInfos.get(i).getDuration() >= 480) thirdWarningCount++;
+                else if(callLogInfos.get(i).getDuration() >= 300) secondWarningCount++;
+                //else if(callLogInfos.get(i).getDuration() >= 300) firstWarningCount++;
+                else firstWarningCount++;
 
 
-                long diffInMillies = Math.abs(currentDate.getTime() - callLogDate.getTime());
-                long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-
-                if(diffInDays <= 30) {
-                    callLogInfos30Days.add(callLogInfos.get(i));
-                    if(callLogInfos.get(i).getDuration() >= 480) thirdWarningCount++;
-                    else if(callLogInfos.get(i).getDuration() >= 300) secondWarningCount++;
-                        //else if(callLogInfos.get(i).getDuration() >= 300) firstWarningCount++;
-                    else firstWarningCount++;
-                }
-
-                else{
-                    break;
-                }
             }
 
 
@@ -173,7 +187,7 @@ public class FragmentMyStatFirst extends Fragment {
             animator.setDuration(1500);
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    String str = String.format(user.getNickName() + "님의 피싱노출단계는 평균적으로 " + dangerLevel +  "입니다. 최근 30일간 " + thirdWarningCount + "건의 위험통화가 있었으며," +
+                    String str = String.format(user.getNickName() + "님의 피싱노출단계는 평균적으로 " + dangerLevel +  "입니다. 총 " + callLogInfos30Days.size() + "의 통화기록중 " +   thirdWarningCount + "건의 위험통화가 있었으며," +
                             user.getNickName() + "님의 미등록 통화 평균 시간은 약 " + secondsToString(animation.getAnimatedValue().toString()) + "입니다.");
                     tvAverage.setText(str);
                 }

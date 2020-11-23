@@ -25,9 +25,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
+        <activity android:name=".view.ActivityLogin"></activity>
         <activity
             android:name=".view.ActivityNewsLetter"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.ActivityMain2"
             android:screenOrientation="portrait"

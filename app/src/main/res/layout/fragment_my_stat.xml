@@ -40,9 +40,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
+            android:id="@+id/tv_recent_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="최근 30일"
+            android:text="통화기록 스캔중"
             android:textColor="@color/colorBlack"
             android:textSize="17dp"
             android:textStyle="bold"
