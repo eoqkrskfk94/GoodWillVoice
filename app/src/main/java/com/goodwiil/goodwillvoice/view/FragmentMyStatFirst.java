@@ -77,6 +77,8 @@ public class FragmentMyStatFirst extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_stat_first, container, false);
+
+
         mCardView = (CardView) view.findViewById(R.id.cardView);
         pieChart = (PieChart) view.findViewById(R.id.pc_callLog);
         mCardView.setMaxCardElevation(mCardView.getCardElevation()

@@ -47,7 +47,6 @@ public class ActivityMain extends AppCompatActivity implements CircleProgressBar
         super.onCreate(savedInstanceState);
         createBinding();
 
-
         //현재 회원 등록 정보 화면에 출력하기
         getData();
 
