@@ -20,9 +20,12 @@ import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.viewModel.SignUpViewModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class ActivitySignUp extends AppCompatActivity {
+
+    ArrayList<String> years;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +105,7 @@ public class ActivitySignUp extends AppCompatActivity {
 
 
     private void populateSpinner() {
-        ArrayList<String> years = new ArrayList<String>();
+        years = new ArrayList<String>();
 
         years.add("출생년도");
 
@@ -120,6 +123,17 @@ public class ActivitySignUp extends AppCompatActivity {
 
         if (user != null) {
             mBinding.etNickName.setText(user.getNickName());
+
+
+            String[] careers = getResources().getStringArray(R.array.직업);
+            String[] genders = getResources().getStringArray(R.array.성별);
+            String[] creditRates = getResources().getStringArray(R.array.신용등급);
+
+            mBinding.spYear.setSelection(years.indexOf(user.getYear()));
+            mBinding.spGender.setSelection(Arrays.asList(genders).indexOf(user.getGender()));
+            mBinding.spCareer.setSelection(Arrays.asList(careers).indexOf(user.getCareer()));
+            mBinding.spLevel.setSelection(Arrays.asList(creditRates).indexOf(user.getCreditRating()));
+
         }
     }
 }
