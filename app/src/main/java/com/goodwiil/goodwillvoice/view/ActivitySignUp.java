@@ -51,6 +51,8 @@ public class ActivitySignUp extends AppCompatActivity {
         mBinding.setViewModel(new SignUpViewModel());
         mBinding.setModel(new User());
     }
+    
+    
 
     String[] permission_list = {
             Manifest.permission.READ_PHONE_STATE,
