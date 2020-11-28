@@ -20,6 +20,7 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
@@ -85,7 +86,7 @@ public class CallBroadcast extends BroadcastReceiver {
         number = intent.getExtras().getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
 
         if (number != null) incomingNumber = number;
-        incomingName = "";
+        incomingName = "s";
 
 
         //전화가 울릴때
@@ -94,22 +95,27 @@ public class CallBroadcast extends BroadcastReceiver {
             if (number != null) {
                 lastState = state;
                 incomingName = CallLogDataManager.contactExists(context, number);
-                if (incomingName.equals("unknown"))
+                if (incomingName.equals("unknown")){
                     model = new IncomingNumber(incomingNumber, incomingName);
-                ScreenManager.startService(context, ServiceIncoming.class, model);
-                //ScreenManager.startService(context, VoiceService.class, model);
+                    ScreenManager.startService(context, ServiceIncoming.class, model);
 
-                //전화번호 기록
-                callLogInfo = new CallLogInfo();
-                callLogInfo.setNumber(incomingNumber);
+
+                    //전화번호 기록
+                    callLogInfo = new CallLogInfo();
+                    callLogInfo.setNumber(incomingNumber);
+                }
+
+
             }
         }
 
         //전화를 받았을때, 전화를 걸때
         if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
 
+            incomingName = CallLogDataManager.contactExists(context, number);
+
             //통화 받았을때만
-            if(lastState.equals("RINGING")){
+            if(lastState.equals("RINGING") && incomingName.equals("unknown")){
 
                 context.stopService(new Intent(context, ServiceIncoming.class));
                 if (!(intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL))) {
@@ -152,7 +158,10 @@ public class CallBroadcast extends BroadcastReceiver {
         if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_IDLE)) {
 
             if(wakeLock.isHeld()) wakeLock.release();
-            if(number != null){
+
+            incomingName = CallLogDataManager.contactExists(context, number);
+
+            if(number != null && incomingName.equals("unknown")){
                 model = new IncomingNumber(incomingNumber, incomingName);
 
                 prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
@@ -161,8 +170,6 @@ public class CallBroadcast extends BroadcastReceiver {
                 int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.INTERNET);
 
                 if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-                    if(callLogInfo.getType() != null){
-                    }
 
                     DBManager dbManager = new DBManager();
                     dbManager.insertData(phoneCall);

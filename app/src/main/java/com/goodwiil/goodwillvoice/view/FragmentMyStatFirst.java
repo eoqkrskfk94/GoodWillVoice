@@ -147,7 +147,7 @@ public class FragmentMyStatFirst extends Fragment {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.KOREA);
         Date currentDate = new Date();
 
-        if(callLogInfos != null){
+        if(callLogInfos != null && callLogInfos.size() > 0){
 
 
             for(int i = 0; i < callLogInfos.size(); i++){
