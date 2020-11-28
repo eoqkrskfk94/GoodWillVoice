@@ -102,7 +102,7 @@ public class CallBroadcast extends BroadcastReceiver {
 
                     //전화번호 기록
                     callLogInfo = new CallLogInfo();
-                    callLogInfo.setNumber(incomingNumber);
+                    callLogInfo.setNumber(number);
                 }
 
 
