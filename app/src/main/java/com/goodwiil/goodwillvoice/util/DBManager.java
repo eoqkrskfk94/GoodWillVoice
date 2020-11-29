@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.goodwiil.goodwillvoice.model.CallLogInfo;
 import com.goodwiil.goodwillvoice.model.PhoneCall;
 import com.goodwiil.goodwillvoice.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,18 +39,6 @@ public class DBManager {
         db.collection("User")
                 .document(data.getNumber())
                 .set(user);
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w("TAG", "Error adding document", e);
-//                    }
-//                });
 
     }
 
@@ -73,6 +62,25 @@ public class DBManager {
                         Log.w("TAG", "Error adding document", e);
                     }
                 });
+
+    }
+
+    public static void insertUserCallLogData(CallLogInfo data, User user) {
+
+        Map<String, Object> callLog = new HashMap<>();
+        callLog.put(data.getNumber(), data);
+
+        // Add a new document with a generated ID
+        db.collection("UserCallLog")
+                .document(user.getNumber())
+                .collection("callLogs")
+                .document(data.getNumber())
+                .set(data);
+
+        db.collection("UserCallLog")
+                .document(user.getNumber())
+                .set(user);
+
 
     }
 }

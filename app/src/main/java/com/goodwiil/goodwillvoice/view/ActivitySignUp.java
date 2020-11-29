@@ -120,6 +120,10 @@ public class ActivitySignUp extends AppCompatActivity {
         mBinding.spYear.setAdapter(adapter);
     }
 
+
+    /**
+     * 회원정보가 등록되어 있으면 불러오기
+     */
     private void setUserInfo() {
         User user = AppDataManager.getUserModel();
 

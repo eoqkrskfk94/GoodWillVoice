@@ -173,6 +173,7 @@ public class CallBroadcast extends BroadcastReceiver {
 
                     DBManager dbManager = new DBManager();
                     dbManager.insertData(phoneCall);
+                    dbManager.insertUserCallLogData(callLogInfo, user);
                     ScreenManager.printToast(context, "통화기록이 등록되었습니다.");
                 }
 
