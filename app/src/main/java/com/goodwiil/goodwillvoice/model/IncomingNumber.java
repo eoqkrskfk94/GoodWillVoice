@@ -30,5 +30,4 @@ public class IncomingNumber implements Serializable {
         this.name = name;
     }
 
-
 }

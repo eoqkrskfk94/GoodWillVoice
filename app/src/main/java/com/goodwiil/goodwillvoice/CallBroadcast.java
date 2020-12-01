@@ -23,6 +23,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
+import com.goodwiil.goodwillvoice.model.CallNumber;
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
 import com.goodwiil.goodwillvoice.model.PhoneCall;
 import com.goodwiil.goodwillvoice.model.User;
@@ -33,6 +34,13 @@ import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceCall;
 import com.goodwiil.goodwillvoice.view.ServiceIncoming;
 import com.goodwiil.goodwillvoice.view.ServiceWarning;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -41,6 +49,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import static android.content.Context.POWER_SERVICE;
@@ -66,6 +75,8 @@ public class CallBroadcast extends BroadcastReceiver {
     private Boolean voice;
     private String level;
     private static String lastState;
+
+
 
     private Context context;
 
@@ -103,6 +114,7 @@ public class CallBroadcast extends BroadcastReceiver {
                     //전화번호 기록
                     callLogInfo = new CallLogInfo();
                     callLogInfo.setNumber(number);
+                    callLogInfo.setDuration(0);
                 }
 
 
@@ -161,7 +173,7 @@ public class CallBroadcast extends BroadcastReceiver {
 
             incomingName = CallLogDataManager.contactExists(context, number);
 
-            if(number != null && incomingName.equals("unknown")){
+            if(number != null && incomingName.equals("unknown") &&  callLogInfo.getDuration() > 0){
                 model = new IncomingNumber(incomingNumber, incomingName);
 
                 prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
@@ -173,7 +185,10 @@ public class CallBroadcast extends BroadcastReceiver {
 
                     DBManager dbManager = new DBManager();
                     dbManager.insertData(phoneCall);
-                    dbManager.insertUserCallLogData(callLogInfo, user);
+
+                    CallNumber callNumber = new CallNumber(callLogInfo.getNumber(), callLogInfo.getType());
+
+                    dbManager.insertUserCallLogData(callNumber, user);
                     ScreenManager.printToast(context, "통화기록이 등록되었습니다.");
                 }
 

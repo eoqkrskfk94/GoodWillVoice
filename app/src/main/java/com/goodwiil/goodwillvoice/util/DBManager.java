@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
+import com.goodwiil.goodwillvoice.model.CallNumber;
 import com.goodwiil.goodwillvoice.model.PhoneCall;
 import com.goodwiil.goodwillvoice.model.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -65,7 +66,7 @@ public class DBManager {
 
     }
 
-    public static void insertUserCallLogData(CallLogInfo data, User user) {
+    public static void insertUserCallLogData(CallNumber data, User user) {
 
         Map<String, Object> callLog = new HashMap<>();
         callLog.put(data.getNumber(), data);
@@ -73,7 +74,7 @@ public class DBManager {
         // Add a new document with a generated ID
         db.collection("UserCallLog")
                 .document(user.getNumber())
-                .collection("callLogs")
+                .collection("CallNumbers")
                 .document(data.getNumber())
                 .set(data);
 

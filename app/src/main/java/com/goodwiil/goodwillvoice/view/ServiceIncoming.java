@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,17 +12,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.databinding.ServiceIncomingBinding;
+import com.goodwiil.goodwillvoice.model.CallNumber;
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
+import com.goodwiil.goodwillvoice.model.User;
+import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.viewModel.IncomingViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ServiceIncoming extends Service {
 
     WindowManager wm;
     View mView;
+    IncomingNumber model;
+    CallNumber callNumber;
     WindowManager.LayoutParams params;
+    public static FirebaseFirestore db;
     private float START_Y;                            //움직이기 위해 터치한 시작 점
     private int PREV_Y;                                //움직이기 이전에 뷰가 위치한 점
 
@@ -36,11 +51,36 @@ public class ServiceIncoming extends Service {
         getData(intent);
         addWindowManager();
 
+        db = FirebaseFirestore.getInstance();
+
+        User user = AppDataManager.getUserModel();
+        DocumentReference docRef = db.collection("UserCallLog").document(user.getNumber()).collection("CallNumbers").document(model.getNumber());
+
+
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+                    callNumber = documentSnapshot.toObject(CallNumber.class);
+                    if(callNumber.getType() != "null") mBinding.tvName.setText(callNumber.getType());
+                }
+                else{
+                    mBinding.tvName.setText(getString(R.string.unknown_number));
+                }
+            }
+
+
+        });
+
+
+
+
+
         return super.onStartCommand(intent, flags, startId);
     }
 
     private void getData(Intent intent) {
-        IncomingNumber model = (IncomingNumber) intent.getSerializableExtra("incomingNumber");
+        model = (IncomingNumber) intent.getSerializableExtra("incomingNumber");
         mBinding.getModel().setNumber(model.getNumber());
     }
 

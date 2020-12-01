@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.goodwiil.goodwillvoice.model.CallNumber;
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
 
 import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
