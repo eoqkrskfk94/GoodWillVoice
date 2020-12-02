@@ -24,6 +24,8 @@ public class AppDataManager {
     public static final String PERMISSION_BATTERY = "battery_optimization";
     public static final String PERMISSION_OVERLAY = "overlay_permission";
 
+    public static Boolean incomingCall = false;
+
     //shared preference에 값을 저장하기
     public static void setSharedPrefs(String name, User user) {
         SharedPreferences prefs = GoodWillApplication.getContext().getSharedPreferences(name, Activity.MODE_PRIVATE);

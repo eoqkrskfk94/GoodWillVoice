@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import com.goodwiil.goodwillvoice.CallBroadcast;
 import com.goodwiil.goodwillvoice.databinding.ServiceEndBinding;
 import com.goodwiil.goodwillvoice.model.IncomingNumber;
+import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.viewModel.EndViewModel;
 
 import androidx.annotation.Nullable;
@@ -42,7 +43,7 @@ public class ServiceEnd extends Service {
         addWindowManager();
 
         mBinding.tvDate.setText(CallBroadcast.callLogInfo.getDate());
-        mBinding.tvTime.setText(Integer.toString(CallBroadcast.callLogInfo.getDuration()));
+        mBinding.tvTime.setText(CallLogDataManager.secondsToString(CallBroadcast.callLogInfo.getDuration()));
 
 
         return super.onStartCommand(intent, flags, startId);
@@ -103,7 +104,7 @@ public class ServiceEnd extends Service {
                         | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
                 PixelFormat.TRANSLUCENT);
 
-        params.gravity = Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL;
+        params.gravity = Gravity.CENTER_VERTICAL | Gravity.TOP;
 
         return params;
     }

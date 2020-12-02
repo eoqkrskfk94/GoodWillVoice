@@ -32,6 +32,7 @@ import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 import com.goodwiil.goodwillvoice.util.DBManager;
 import com.goodwiil.goodwillvoice.util.ScreenManager;
 import com.goodwiil.goodwillvoice.view.ServiceCall;
+import com.goodwiil.goodwillvoice.view.ServiceEnd;
 import com.goodwiil.goodwillvoice.view.ServiceIncoming;
 import com.goodwiil.goodwillvoice.view.ServiceWarning;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -72,7 +73,6 @@ public class CallBroadcast extends BroadcastReceiver {
     private PowerManager powerManager;
     static PowerManager.WakeLock wakeLock;
     private Boolean vibrate;
-    private Boolean voice;
     private String level;
     private static String lastState;
 
@@ -93,6 +93,7 @@ public class CallBroadcast extends BroadcastReceiver {
 
 
         //전화 상태 받아오기
+
         String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
         number = intent.getExtras().getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
 
@@ -114,7 +115,7 @@ public class CallBroadcast extends BroadcastReceiver {
                     //전화번호 기록
                     callLogInfo = new CallLogInfo();
                     callLogInfo.setNumber(number);
-                    callLogInfo.setDuration(0);
+                    AppDataManager.incomingCall = true;
                 }
 
 
@@ -127,39 +128,40 @@ public class CallBroadcast extends BroadcastReceiver {
             incomingName = CallLogDataManager.contactExists(context, number);
 
             //통화 받았을때만
-            if(lastState.equals("RINGING") && incomingName.equals("unknown")){
+            if(lastState != null && lastState.equals("RINGING") && incomingName != null){
 
-                context.stopService(new Intent(context, ServiceIncoming.class));
-                if (!(intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL))) {
-                    if (number != null) {
-                        model = new IncomingNumber(incomingNumber, incomingName);
+                if(incomingName.equals("unknown")){
+                    context.stopService(new Intent(context, ServiceIncoming.class));
+                    if (!(intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL))) {
+                        if (number != null) {
+                            model = new IncomingNumber(incomingNumber, incomingName);
 
-                        wakeLock.acquire();
+                            wakeLock.acquire();
 
 
 
-                        //날짜 기록
-                        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                        Date date = new Date();
-                        callLogInfo.setDate(dateFormat.format(date));
+                            //날짜 기록
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                            Date date = new Date();
+                            callLogInfo.setDate(dateFormat.format(date));
 
-                        //전화 받은 위치 기록
-                        ArrayList<Double> gps = CallLogDataManager.getCurrentLoc(context);
-                        callLogInfo.setLongitude(gps.get(0));
-                        callLogInfo.setLatitude(gps.get(1));
+                            //전화 받은 위치 기록
+                            ArrayList<Double> gps = CallLogDataManager.getCurrentLoc(context);
+                            callLogInfo.setLongitude(gps.get(0));
+                            callLogInfo.setLatitude(gps.get(1));
 
-                        //앱 위에 그리기 권한이 있으
-                        if (Settings.canDrawOverlays(context)) {
-                            ScreenManager.startService(context, ServiceCall.class, model);
+                            //앱 위에 그리기 권한이 있으
+                            if (Settings.canDrawOverlays(context)) {
+                                ScreenManager.startService(context, ServiceCall.class, model);
+                            }
+
+                            tt = timerTaskMaker();
+                            final Timer timer = new Timer();
+                            timer.schedule(tt, 0, 1000);
+
                         }
-
-                        tt = timerTaskMaker();
-                        final Timer timer = new Timer();
-                        timer.schedule(tt, 0, 1000);
-
                     }
                 }
-
             }
 
 
@@ -173,30 +175,45 @@ public class CallBroadcast extends BroadcastReceiver {
 
             incomingName = CallLogDataManager.contactExists(context, number);
 
-            if(number != null && incomingName.equals("unknown") &&  callLogInfo.getDuration() > 0){
-                model = new IncomingNumber(incomingNumber, incomingName);
 
-                prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
-                User user = AppDataManager.getUserModel();
-                PhoneCall phoneCall = new PhoneCall(user,callLogInfo);
-                int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.INTERNET);
+            if(number != null && incomingName.equals("unknown") &&  AppDataManager.incomingCall){
+                AppDataManager.incomingCall = false;
 
-                if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
 
-                    DBManager dbManager = new DBManager();
-                    dbManager.insertData(phoneCall);
+                if(callLogInfo.getDuration() > 0){
 
-                    CallNumber callNumber = new CallNumber(callLogInfo.getNumber(), callLogInfo.getType());
 
-                    dbManager.insertUserCallLogData(callNumber, user);
-                    ScreenManager.printToast(context, "통화기록이 등록되었습니다.");
+                    model = new IncomingNumber(incomingNumber, incomingName);
+
+                    prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+                    User user = AppDataManager.getUserModel();
+                    PhoneCall phoneCall = new PhoneCall(user,callLogInfo);
+                    int permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.INTERNET);
+
+                    if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+
+                        if(callLogInfo.getType() != null){
+                            DBManager dbManager = new DBManager();
+                            dbManager.insertData(phoneCall);
+
+                            CallNumber callNumber = new CallNumber(callLogInfo.getNumber(), callLogInfo.getType());
+
+                            dbManager.insertUserCallLogData(callNumber, user);
+                            ScreenManager.printToast(context, "통화기록이 등록되었습니다.");
+                        }
+
+                        else{
+                            if(Settings.canDrawOverlays(context)){
+                                ScreenManager.startService(context, ServiceEnd.class, model);
+                            }
+                        }
+
+
+                    }
+
                 }
 
-//                if(callLogInfo != null && callLogInfo.getType() == null){
-//                    if(Settings.canDrawOverlays(context)){
-//                        ScreenManager.startService(context, ServiceEnd.class, model);
-//                    }
-//                }
+
             }
 
             lastState = state;
@@ -212,7 +229,7 @@ public class CallBroadcast extends BroadcastReceiver {
 
     private void setting(Context context) {
         prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
-        voice = prefs.getBoolean("voice_alarm", false);
+        //voice = prefs.getBoolean("voice_alarm", false);
         vibrate = prefs.getBoolean("vibration_alarm", true);
         level = prefs.getString("level_list", "강 (1분 마다 진동)");
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);

@@ -13,6 +13,7 @@ public class CallLogInfo implements Comparator< CallLogInfo > {
     private double latitude;
 
     public CallLogInfo() {
+        this.duration = 0;
     }
 
 

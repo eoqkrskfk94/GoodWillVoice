@@ -62,7 +62,9 @@ public class ServiceIncoming extends Service {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
                     callNumber = documentSnapshot.toObject(CallNumber.class);
-                    if(callNumber.getType() != "null") mBinding.tvName.setText(callNumber.getType());
+                    System.out.println(callNumber.getType());
+                    if(callNumber.getType() != null) mBinding.tvName.setText(callNumber.getType());
+                    else mBinding.tvName.setText("등록되지 않은 번호");
                 }
                 else{
                     mBinding.tvName.setText(getString(R.string.unknown_number));
