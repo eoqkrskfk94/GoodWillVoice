@@ -107,7 +107,7 @@ public class CallBroadcast extends BroadcastReceiver {
             if (number != null) {
                 lastState = state;
                 incomingName = CallLogDataManager.contactExists(context, number);
-                if (incomingName.equals("unknown")){
+                if (incomingName != null && incomingName.equals("unknown")){
                     model = new IncomingNumber(incomingNumber, incomingName);
                     ScreenManager.startService(context, ServiceIncoming.class, model);
 
