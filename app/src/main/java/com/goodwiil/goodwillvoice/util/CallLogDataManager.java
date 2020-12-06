@@ -9,17 +9,28 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import com.goodwiil.goodwillvoice.model.CallAnalysisInfo;
 import com.goodwiil.goodwillvoice.model.CallLogData;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
+import com.goodwiil.goodwillvoice.model.CallNumber;
 import com.goodwiil.goodwillvoice.model.ContactInfo;
 import com.goodwiil.goodwillvoice.model.NumberType;
+import com.goodwiil.goodwillvoice.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class CallLogDataManager {
     public static final int SEOUL_NUMBER = 0;
@@ -43,7 +54,9 @@ public class CallLogDataManager {
 
     public static CallAnalysisInfo callAnalysisInfo = new CallAnalysisInfo();
     public static ArrayList<CallLogInfo> callLogInfos = new ArrayList<CallLogInfo>();
+    public static HashMap<String, String> callNumbers = new HashMap<String, String>();
     public static NumberType numberType = new NumberType();
+    public static FirebaseFirestore db;
 
     public static int knownTotal = 0;
     public static int unknownTotal = 0;
@@ -80,6 +93,35 @@ public class CallLogDataManager {
         }
 
         return gps;
+    }
+
+    //파이어베이스 등록번호 목록 불러오기
+    public static HashMap<String, String> getFireBaseCallLog(){
+
+        db = FirebaseFirestore.getInstance();
+        User user = AppDataManager.getUserModel();
+        CollectionReference colRef = db.collection("UserCallLog").document(user.getNumber()).collection("CallNumbers");
+
+        colRef.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            int count = 0;
+                            for (DocumentSnapshot document : task.getResult()) {
+                                CallNumber callNumber = document.toObject(CallNumber.class);
+                                callNumbers.put(callNumber.getNumber(), callNumber.getType());
+                            }
+
+
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
+        return callNumbers;
     }
 
 

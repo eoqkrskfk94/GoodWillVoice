@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.goodwiil.goodwillvoice.R;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
+import com.goodwiil.goodwillvoice.model.CallNumber;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SubItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -32,10 +34,11 @@ public class SubItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private static int TYPE_LOG = 2;
 
     private ArrayList<CallLogInfo> callLogInfos;
-    private AdapterView.OnItemClickListener listener;
+    private HashMap<String, String> callNumbers;
 
-    public SubItemAdapter(Activity activity, ArrayList<CallLogInfo> callLogInfos) {
+    public SubItemAdapter(Activity activity, ArrayList<CallLogInfo> callLogInfos, HashMap<String, String> callNumbers) {
         this.callLogInfos = callLogInfos;
+        this.callNumbers = callNumbers;
     }
 
     @NonNull
@@ -67,12 +70,12 @@ public class SubItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         final CallLogInfo phoneSubItem = callLogInfos.get(i);
         if (viewHolder instanceof SubItemViewHolder) {
             SubItemViewHolder subItemViewHolder = (SubItemViewHolder) viewHolder;
-            subItemViewHolder.name.setText(phoneSubItem.getName());
+            //subItemViewHolder.category.setText(phoneSubItem.getName());
             //subItemViewHolder.profile.setImageResource(R.drawable.cirle);
-            subItemViewHolder.name.setTextColor(Color.parseColor("#000000"));
+            subItemViewHolder.category.setTextColor(Color.parseColor("#000000"));
             if (phoneSubItem.getName() == null) {
-                subItemViewHolder.name.setText("등록되지 않은 번호");
-                subItemViewHolder.name.setTextColor(Color.parseColor("#9C9C9C"));
+                //subItemViewHolder.category.setText("등록되지 않은 번호");
+                subItemViewHolder.category.setTextColor(Color.parseColor("#9C9C9C"));
                 //subItemViewHolder.profile.setImageResource(R.drawable.circle_unknown);
             }
 
@@ -81,18 +84,32 @@ public class SubItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if (phoneSubItem.getType() != null) {
                 if (phoneSubItem.getType().equals("OUTGOING")) {
                     subItemViewHolder.callType.setImageResource(R.drawable.outcoming_call);
+                    subItemViewHolder.type.setText("발신");
                     subItemViewHolder.date.setTextColor(Color.parseColor("#9C9C9C"));
                 } else if (phoneSubItem.getType().equals("INCOMING")) {
                     subItemViewHolder.callType.setImageResource(R.drawable.incoming_call);
+                    subItemViewHolder.type.setText("수신");
                     subItemViewHolder.date.setTextColor(Color.parseColor("#9C9C9C"));
                 } else if (phoneSubItem.getType().equals("MISSED")) {
                     subItemViewHolder.callType.setImageResource(R.drawable.cancel_call);
+                    subItemViewHolder.type.setText("부재중");
                     subItemViewHolder.date.setTextColor(Color.RED);
                 } else if (phoneSubItem.getType().equals("REJECTED")) {
                     subItemViewHolder.callType.setImageResource(R.drawable.rejected);
+                    subItemViewHolder.type.setText("거절");
                     subItemViewHolder.date.setTextColor(Color.parseColor("#9C9C9C"));
                 }
             }
+
+            if(callNumbers.containsKey(phoneSubItem.getNumber())){
+                subItemViewHolder.category.setText(callNumbers.get(phoneSubItem.getNumber()));
+            }
+            else{
+                subItemViewHolder.category.setText("등록되지 않은 번호");
+
+            }
+
+
 
 //            subItemViewHolder.layout.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -126,19 +143,22 @@ public class SubItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public static class SubItemViewHolder extends RecyclerView.ViewHolder {
         LinearLayout layout;
-        TextView name;
+        TextView type;
         TextView number;
         TextView date;
+        TextView category;
         ImageView callType;
         ImageView profile;
+
 
 
         SubItemViewHolder(View itemView) {
             super(itemView);
             layout = itemView.findViewById(R.id.layout);
-            name = itemView.findViewById(R.id.nameView);
+            category = itemView.findViewById(R.id.tv_category);
             number = itemView.findViewById(R.id.numberView);
             date = itemView.findViewById(R.id.dateView);
+            type = itemView.findViewById(R.id.tv_type);
             callType = itemView.findViewById(R.id.callTypeView);
             profile = itemView.findViewById(R.id.profileView);
 

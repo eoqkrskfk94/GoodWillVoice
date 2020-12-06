@@ -19,9 +19,11 @@ import com.goodwiil.goodwillvoice.databinding.FragmentCallLogBinding;
 import com.goodwiil.goodwillvoice.databinding.FragmentMyStatBinding;
 import com.goodwiil.goodwillvoice.model.CallLogData;
 import com.goodwiil.goodwillvoice.model.CallLogInfo;
+import com.goodwiil.goodwillvoice.model.CallNumber;
 import com.goodwiil.goodwillvoice.util.CallLogDataManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -30,6 +32,7 @@ public class FragmentCallLog extends Fragment {
     private ArrayList<CallLogInfo> callLogInfos;
     private SubItemAdapter itemAdapter;
     private ArrayList<CallLogInfo> callLogInfos100;
+    private HashMap<String, String> callNumbers;
 
 
     @Override
@@ -50,7 +53,7 @@ public class FragmentCallLog extends Fragment {
         callLogInfos = new ArrayList<>();
 
         if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED){
-            callLogInfos = CallLogDataManager.getCallLog(getContext(), 0);
+            callLogInfos = CallLogDataManager.getCallLog(getContext(), 1);
         }
 
 //        if(callLogInfos.size() == 0)
@@ -67,8 +70,10 @@ public class FragmentCallLog extends Fragment {
             callLogInfos100 = callLogInfos;
         }
 
+        callNumbers = CallLogDataManager.getFireBaseCallLog();
 
-        itemAdapter = new SubItemAdapter(getActivity(), callLogInfos100);
+
+        itemAdapter = new SubItemAdapter(getActivity(), callLogInfos100, callNumbers);
         mBinding.headerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.headerRecyclerView.setAdapter(itemAdapter);
 
@@ -76,8 +81,8 @@ public class FragmentCallLog extends Fragment {
             @Override
             public void onRefresh() {
                 if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED) {
-                    callLogInfos = CallLogDataManager.getCallLog(getContext(), 0);
-                    itemAdapter = new SubItemAdapter(getActivity(), callLogInfos100);
+                    callLogInfos = CallLogDataManager.getCallLog(getContext(), 1);
+                    itemAdapter = new SubItemAdapter(getActivity(), callLogInfos100, callNumbers);
                     mBinding.headerRecyclerView.setAdapter(itemAdapter);
                     mBinding.phoneSwipeRefreshLayout.setRefreshing(false);
                 }
