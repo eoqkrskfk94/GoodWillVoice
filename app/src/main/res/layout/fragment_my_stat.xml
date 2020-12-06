@@ -27,6 +27,7 @@
 
 
             <TextView
+                android:id="@+id/tv_signedNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="등록되지 않은 번호가 n건 있습니다."

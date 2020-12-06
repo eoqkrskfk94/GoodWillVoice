@@ -3,12 +3,14 @@ package com.goodwiil.goodwillvoice.view;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +20,17 @@ import com.goodwiil.goodwillvoice.adapter.CardPagerAdapter;
 import com.goodwiil.goodwillvoice.adapter.FragmentPagerAdapter;
 import com.goodwiil.goodwillvoice.databinding.FragmentMyStatBinding;
 import com.goodwiil.goodwillvoice.model.CardItem;
+import com.goodwiil.goodwillvoice.model.User;
+import com.goodwiil.goodwillvoice.util.AppDataManager;
 import com.goodwiil.goodwillvoice.util.ShadowTransformer;
 import com.goodwiil.goodwillvoice.viewModel.SplashViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 
 public class FragmentMyStat extends Fragment {
@@ -28,6 +39,7 @@ public class FragmentMyStat extends Fragment {
 
     private FragmentPagerAdapter mFragmentCardAdapter;
     private ShadowTransformer mFragmentCardShadowTransformer;
+    public static FirebaseFirestore db;
 
 
 
@@ -45,6 +57,30 @@ public class FragmentMyStat extends Fragment {
         mBinding = FragmentMyStatBinding.inflate(inflater, container, false);
         //mBinding.setViewModel(new SplashViewModel());
         mBinding.setLifecycleOwner(getActivity());
+
+        db = FirebaseFirestore.getInstance();
+        User user = AppDataManager.getUserModel();
+        CollectionReference colRef = db.collection("UserCallLog").document(user.getNumber()).collection("CallNumbers");
+
+        colRef.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            int count = 0;
+                            for (DocumentSnapshot document : task.getResult()) {
+                                count++;
+                            }
+                            String text = "총 " + Integer.toString(count) + "개의 번호가 등록되어있습니다.";
+                            mBinding.tvSignedNumber.setText(text);
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
+
 
 
         mFragmentCardAdapter = new FragmentPagerAdapter(getActivity().getSupportFragmentManager(), dpToPixels(2, getContext()));
